@@ -39,17 +39,19 @@ export function SiteNav() {
     return null
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
+    <header className="sticky inset-x-0 top-0 z-50 pointer-events-none">
       <div
         className={cn(
-          "pointer-events-auto mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pt-3 sm:px-6 sm:pt-4",
+          "pointer-events-auto mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4",
         )}
       >
         {/* Logo - left */}
         <div
           className={cn(
             "rounded-full transition-all duration-300",
-            scrolled ? "bg-background/75 px-2.5 py-1.5 backdrop-blur-xl" : "px-1 py-1",
+            pathname === "/diagnostico"
+              ? "bg-black px-2.5 py-1.5 text-white"
+              : scrolled ? "bg-background/75 px-2.5 py-1.5 backdrop-blur-xl" : "px-1 py-1",
           )}
         >
           <Logo size={24} className="gap-2" />
@@ -58,10 +60,12 @@ export function SiteNav() {
         {/* Compact centered pill nav - desktop */}
         <nav
           className={cn(
-            "absolute left-1/2 top-3 hidden -translate-x-1/2 items-center gap-0.5 rounded-full border border-white/10 px-1.5 py-1 transition-all duration-300 sm:top-4 md:flex",
-            scrolled
-              ? "bg-background/80 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl"
-              : "bg-black/40 backdrop-blur-md",
+            "absolute left-1/2 top-3 hidden -translate-x-1/2 items-center gap-0.5 rounded-full border px-1.5 py-1 transition-all duration-300 sm:top-4 md:flex",
+            pathname === "/diagnostico"
+              ? "border-black/20 bg-black text-white shadow-xl"
+              : scrolled
+                ? "border-white/10 bg-background/80 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+                : "border-white/10 bg-black/40 backdrop-blur-md",
           )}
         >
           {LINKS.map((l) => {
@@ -81,14 +85,12 @@ export function SiteNav() {
               </Link>
             )
           })}
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-0.5 rounded-full bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-white/80 transition-colors hover:bg-white/15 hover:text-white"
+          <Link
+            href="/diagnostico"
+            className="ml-1 rounded-full bg-white text-black px-4 py-1.5 text-[10px] uppercase font-bold tracking-[0.14em] transition-transform hover:scale-105"
           >
             {t.nav.contact}
-          </a>
+          </Link>
           {/* Language Toggle */}
           <button
             type="button"
@@ -108,8 +110,12 @@ export function SiteNav() {
           type="button"
           onClick={() => setOpen((v) => !v)}
           className={cn(
-            "inline-flex size-11 items-center justify-center rounded-full border border-white/10 text-foreground md:hidden",
-            scrolled ? "bg-background/80 backdrop-blur-xl" : "bg-black/40 backdrop-blur-md",
+            "inline-flex size-11 items-center justify-center rounded-full border md:hidden transition-colors",
+            pathname === "/diagnostico"
+              ? "border-black/20 bg-black text-white"
+              : scrolled 
+                ? "border-white/10 bg-background/80 backdrop-blur-xl text-foreground" 
+                : "border-white/10 bg-black/40 backdrop-blur-md text-foreground",
           )}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
@@ -137,15 +143,13 @@ export function SiteNav() {
                 {l.label}
               </Link>
             ))}
-            <a
-              href={WHATSAPP}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/diagnostico"
               onClick={() => setOpen(false)}
-              className="mt-1 rounded-xl bg-white px-3 py-2.5 text-center text-xs font-medium uppercase tracking-[0.12em] text-black"
+              className="mt-2 rounded-xl bg-white px-3 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-black transition-transform hover:scale-105"
             >
               {t.nav.contact}
-            </a>
+            </Link>
             {/* Language Toggle Mobile */}
             <button
               type="button"

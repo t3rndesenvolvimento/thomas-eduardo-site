@@ -6,7 +6,7 @@ export const translations = {
       about: "Sobre",
       projects: "Projetos",
       process: "Processos",
-      contact: "Contato",
+      contact: "Diagnóstico gratuito",
     },
 
     // ─── Footer ───────────────────────────────────────────────────────────────
@@ -16,8 +16,8 @@ export const translations = {
 
     // ─── Hero ─────────────────────────────────────────────────────────────────
     hero: {
-      tagline: "Software Engineer · SP · Desenvolvedor Fullstack",
-      title: "Thomas Eduardo - Full Stack Software Engineer",
+      tagline: "Engenheiro de Produto · Focado em Conversão",
+      title: "Thomas Eduardo - Engenheiro de Produto",
       description:
         "Seu site está custando vendas? Desenvolvo landing pages e sistemas de alta performance focados em conversão, velocidade e lucros reais para o seu negócio.",
       scroll: "scroll",
@@ -206,7 +206,7 @@ export const translations = {
       about: "About",
       projects: "Projects",
       process: "Process",
-      contact: "Contact",
+      contact: "Free Diagnosis",
     },
 
     footer: {
@@ -214,8 +214,8 @@ export const translations = {
     },
 
     hero: {
-      tagline: "Software Engineer · SP · Fullstack Developer",
-      title: "Thomas Eduardo - Full Stack Software Engineer",
+      tagline: "Product Engineer · Conversion Focused",
+      title: "Thomas Eduardo - Product Engineer",
       description:
         "Is your website costing you sales? I build high-performance landing pages and systems focused on conversion, speed, and real revenue for your business.",
       scroll: "scroll",

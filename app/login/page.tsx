@@ -1,25 +1,72 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Lock, ArrowLeft, Briefcase } from "lucide-react"
 import { Shape9, Shape10 } from "@/components/ui/abstract-shapes"
 import { sileo } from "sileo"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { auth } from "@/lib/firebase"
+import { sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth"
 
 export default function LoginPage() {
   const [isFlipped, setIsFlipped] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState("")
+  const [isLinkSent, setIsLinkSent] = useState(false)
+  const router = useRouter()
 
-  const handleLogin = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Check if we are returning from an email link
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      setIsLoading(true)
+      let emailForSignIn = window.localStorage.getItem("emailForSignIn")
+      
+      if (!emailForSignIn) {
+        // Se o usuário abriu em outro dispositivo ou janela anonima
+        emailForSignIn = window.prompt("Por favor, digite seu e-mail para confirmação:")
+      }
+
+      if (emailForSignIn) {
+        signInWithEmailLink(auth, emailForSignIn, window.location.href)
+          .then((result) => {
+            window.localStorage.removeItem("emailForSignIn")
+            document.cookie = "admin-auth=true; path=/; max-age=86400"
+            sileo.success({ title: "Autenticado com sucesso!", position: "top-right" })
+            router.push("/admin/propostas")
+          })
+          .catch((error) => {
+            console.error(error)
+            sileo.error({ title: "Erro", description: "O link expirou ou é inválido.", position: "top-right" })
+            setIsLoading(false)
+          })
+      } else {
+        setIsLoading(false)
+      }
+    }
+  }, [router])
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     
-    // Simulação de login
-    setTimeout(() => {
+    const actionCodeSettings = {
+      url: window.location.origin + "/login",
+      handleCodeInApp: true,
+    }
+    
+    try {
+      await sendSignInLinkToEmail(auth, email, actionCodeSettings)
+      window.localStorage.setItem("emailForSignIn", email)
+      setIsLinkSent(true)
+      sileo.success({ title: "Link enviado!", description: "Verifique sua caixa de entrada.", position: "top-right" })
+    } catch (error: any) {
+      console.error(error)
+      sileo.error({ title: "Erro ao enviar", description: "Verifique o e-mail e tente novamente.", position: "top-right" })
+    } finally {
       setIsLoading(false)
-      sileo.success({ title: "Bem-vindo de volta!", position: "top-right" })
-    }, 1500)
+    }
   }
 
   return (
@@ -108,42 +155,54 @@ export default function LoginPage() {
                 Insira as credenciais fornecidas no onboarding.
               </p>
 
-              <form onSubmit={handleLogin} className="flex flex-col gap-4">
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-medium uppercase tracking-wider text-white/60">E-mail</label>
-                  <input 
-                    type="email" 
-                    required
-                    placeholder="cliente@empresa.com"
-                    className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-white/30 focus:outline-none focus:ring-1 focus:ring-white/30 transition-all"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-medium uppercase tracking-wider text-white/60">Senha de acesso</label>
-                  <input 
-                    type="password" 
-                    required
-                    placeholder="••••••••"
-                    className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-white/30 focus:outline-none focus:ring-1 focus:ring-white/30 transition-all"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="mt-4 flex w-full items-center justify-center rounded-xl bg-white px-5 py-3.5 text-sm font-medium text-black transition-all hover:bg-white/90 disabled:opacity-70"
-                >
-                  {isLoading ? (
-                    <motion.div 
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      className="size-4 rounded-full border-2 border-black/20 border-t-black"
+              {!isLinkSent ? (
+                <form onSubmit={handleLogin} className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs font-medium uppercase tracking-wider text-white/60">E-mail</label>
+                    <input 
+                      type="email" 
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="cliente@empresa.com"
+                      className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-white/30 focus:outline-none focus:ring-1 focus:ring-white/30 transition-all"
                     />
-                  ) : (
-                    "Entrar"
-                  )}
-                </button>
-              </form>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="mt-4 flex w-full items-center justify-center rounded-xl bg-white px-5 py-3.5 text-sm font-medium text-black transition-all hover:bg-white/90 disabled:opacity-70"
+                  >
+                    {isLoading ? (
+                      <motion.div 
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        className="size-4 rounded-full border-2 border-black/20 border-t-black"
+                      />
+                    ) : (
+                      "Receber Link Magico"
+                    )}
+                  </button>
+                </form>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-6 text-center">
+                  <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-white/10 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <h3 className="mb-2 font-display text-lg font-medium text-white">Verifique seu e-mail</h3>
+                  <p className="text-sm font-light text-white/50">
+                    Enviamos um link mágico de acesso para<br />
+                    <strong className="font-medium text-white">{email}</strong>
+                  </p>
+                  <button 
+                    onClick={() => setIsLinkSent(false)} 
+                    className="mt-6 text-xs text-white/40 underline-offset-4 hover:text-white hover:underline transition-all"
+                  >
+                    Tentar outro e-mail
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>

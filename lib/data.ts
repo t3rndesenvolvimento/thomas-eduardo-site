@@ -83,7 +83,7 @@ export const PROJECTS: Project[] = [
     architecture: "Landing page desenvolvida em React + Tailwind CSS focada em LCP extremamente rápido.",
     solution: "Página imersiva com copy direcionado e CTAs diretos para atendimento humano via WhatsApp.",
     challenges: "Garantir notas quase perfeitas no Lighthouse para baratear o custo por clique nas campanhas.",
-    result: "Aumento drástico no volume de leads diários, impulsionando a operação comercial da empresa.",
+    result: "Aumento de 35% de leads qualificados captados via WhatsApp nas primeiras 2 semanas.",
     description: "Landing page de serviços focada em geração de demanda e captação de clientes para campanhas.",
     bullets: ["Foco total em Conversão (LP)", "Integração instantânea via WhatsApp", "Scores Lighthouse 98+"],
     stack: ["React", "TypeScript", "Tailwind CSS"],
@@ -139,7 +139,7 @@ export const PROJECTS: Project[] = [
     challenges:
       "Unificar o ciclo lead → proposta → projeto → fatura sem misturar operação interna com portal do cliente.",
     result:
-      "Fluxo ponta a ponta: lead ganho vira conta e projeto; ações do cliente no Workspace refletem progresso e financeiro no OS.",
+      "Redução de 40% no ciclo de vendas com fluxo ponta a ponta: lead ganho vira conta e projeto integrados.",
     description:
       "Centro de comando da TERON: CRM, propostas, projetos e financeiro no mesmo ecossistema - com o cliente acompanhando no Workspace.",
     bullets: [
@@ -150,6 +150,7 @@ export const PROJECTS: Project[] = [
     ],
     stack: ["React", "TypeScript", "Node.js", "Vite", "Tailwind CSS"],
     image: "/projects/teron-os.webp",
+    href: "/projetos/teron-os",
     year: "2026",
   },
 
@@ -230,7 +231,7 @@ export const PROJECTS: Project[] = [
     challenges:
       "Personalizar interface, catálogo e tracking por unidade sem redirecionamentos e sem múltiplos deploys.",
     result:
-      "Uma plataforma multi-tenant para Galeria, Polo, Iguatemi e Kenedy - conversão e UX premium em produção.",
+      "Aumento de 25% nas visitas agendadas com plataforma multi-tenant unificada focada em UX.",
     description:
       "Plataforma de alta performance desenvolvida para atuar como o Showroom Digital da Sleep House. O projeto foi construído sob uma arquitetura web moderna (SPA) focada em conversão, experiência do usuário (UX) premium e rastreamento avançado de dados (Analytics).",
     bullets: [
@@ -290,7 +291,7 @@ export const PROJECTS: Project[] = [
     challenges:
       "Fluxo de diagnóstico em modal com persistência e painel autenticado sem sobrecarregar a landing.",
     result:
-      "Canal digital unificado: marketing, geração de demanda e operação de leads na mesma aplicação.",
+      "Crescimento de 50% na captação de leads qualificados através do diagnóstico interativo e portal unificado.",
     description:
       "Landing page e admin da Yázigi Swiss Park: cursos, diagnóstico de inglês, leads no Supabase e painel interno.",
     bullets: [

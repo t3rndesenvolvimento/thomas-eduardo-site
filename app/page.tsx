@@ -35,9 +35,9 @@ const OliverParallax = dynamic(
 )
 
 export const metadata: Metadata = {
-  title: "Thomas Eduardo | Engenheiro de Produto | Sistemas que Geram Resultado",
+  title: "Thomas Eduardo | Engenheiro de Produto focado em Conversão",
   description:
-    "Thomas Eduardo - Software Engineer Full Stack em São Paulo. Chega de perder vendas por sites lentos e sistemas travados. Transformo gargalos da sua operação em soluções digitais que convertem e escalam o seu negócio. Next.js, TypeScript e performance premium.",
+    "Thomas Eduardo - Engenheiro de Produto focado em Conversão em São Paulo. Chega de perder vendas por sites lentos e sistemas travados. Transformo gargalos da sua operação em soluções digitais que convertem e escalam o seu negócio.",
   alternates: { canonical: "/" },
 }
 

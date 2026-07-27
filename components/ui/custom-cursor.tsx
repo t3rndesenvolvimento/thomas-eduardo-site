@@ -91,7 +91,7 @@ export function CustomCursor() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[9999] hidden md:block"
+      className="pointer-events-none fixed inset-0 z-[9999] hidden md:block mix-blend-difference"
       aria-hidden
       style={{
         opacity: hidden ? 0 : 1,
