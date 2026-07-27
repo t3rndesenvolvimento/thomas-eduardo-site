@@ -145,19 +145,15 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`dark ${inter.variable} ${mono.variable} ${display.variable} ${signature.variable} bg-background`}
+      className={`dark ${inter.variable} ${mono.variable} ${display.variable} ${signature.variable} bg-background loader-boot loader-active`}
       suppressHydrationWarning
     >
+      <head>
+        <noscript>
+          <style>{`html.loader-boot::before { display: none !important; }`}</style>
+        </noscript>
+      </head>
       <body className="font-sans font-light antialiased overflow-x-hidden" suppressHydrationWarning={true}>
-        {/* Loader class injection — must run before React paints anything */}
-        <Script
-          id="loader-boot"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.add('loader-boot','loader-active')`,
-          }}
-        />
-
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
@@ -220,7 +216,7 @@ posthog.init('phc_wNUQSvKvfSVPCDCh7DTHk7hzkSc7A4agRv6LLAWWr2qn',{api_host:'https
           <SmoothScroll>
           <PageLoader />
           <CustomCursor />
-          <Toaster position="top-right" />
+          <Toaster position="top-right" theme="dark" />
           <SiteNav />
           <PageTransition>
             <main>{children}</main>

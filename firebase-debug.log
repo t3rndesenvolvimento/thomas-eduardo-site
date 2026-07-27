@@ -1,0 +1,27 @@
+[debug] [2026-07-27T18:56:41.065Z] ----------------------------------------------------------------------
+[debug] [2026-07-27T18:56:41.067Z] Command:       /home/thomas/.nvm/versions/node/v22.22.3/bin/node /home/thomas/.nvm/versions/node/v22.22.3/bin/firebase init
+[debug] [2026-07-27T18:56:41.067Z] CLI Version:   15.24.0
+[debug] [2026-07-27T18:56:41.068Z] Platform:      linux
+[debug] [2026-07-27T18:56:41.068Z] Node Version:  v22.22.3
+[debug] [2026-07-27T18:56:41.068Z] Detected Agent: unknown
+[debug] [2026-07-27T18:56:41.068Z] Time:          Mon Jul 27 2026 15:56:41 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2026-07-27T18:56:41.068Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-07-27T18:56:41.076Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /mnt/storage/dev/workspace/personal/thomas-eduardo-site-1
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+
+[debug] [2026-07-27T18:56:42.612Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-07-27T18:56:42.612Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}

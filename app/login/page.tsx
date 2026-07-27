@@ -34,7 +34,7 @@ export default function LoginPage() {
             window.localStorage.removeItem("emailForSignIn")
             document.cookie = "admin-auth=true; path=/; max-age=86400"
             sileo.success({ title: "Autenticado com sucesso!", position: "top-right" })
-            router.push("/admin/propostas")
+            router.push("/admin")
           })
           .catch((error) => {
             console.error(error)
