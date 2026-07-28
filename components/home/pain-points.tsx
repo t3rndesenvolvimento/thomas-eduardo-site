@@ -45,14 +45,14 @@ export function PainPoints() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white tracking-tight"
+            className="text-xl sm:text-3xl md:text-4xl font-display font-bold text-white tracking-tight"
           >
             {t.painPoints.heading}
           </motion.h2>
         </div>
 
         {/* Pain point cards - 100% Identical to Benefits & Testimonials */}
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-5">
           {t.painPoints.items.map((item, index) => {
             const Icon = ICONS[index % ICONS.length]
             const num = String(index + 1).padStart(2, "0")
@@ -69,26 +69,26 @@ export function PainPoints() {
                   delay: index * 0.06,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#0d0e14] p-4 sm:p-6 text-white transition-all duration-300 hover:border-white/20 hover:bg-[#131522] shadow-lg"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-[#0d0e14] p-3 sm:p-6 text-white transition-all duration-300 hover:border-white/20 hover:bg-[#131522] shadow-lg"
               >
                 <div>
                   <div className="mb-2 sm:mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="flex size-8 items-center justify-center rounded-xl bg-white text-black shadow-sm">
-                        <Icon className="size-4 text-black" strokeWidth={2} />
+                      <div className="flex size-6 sm:size-8 items-center justify-center rounded-lg sm:rounded-xl bg-white text-black shadow-sm">
+                        <Icon className="size-3 sm:size-4 text-black" strokeWidth={2} />
                       </div>
-                      <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/40">
+                      <span className="font-mono text-[9px] sm:text-[11px] font-bold uppercase tracking-widest text-white/40">
                         {num}
                       </span>
                     </div>
                   </div>
-                  <p className="mb-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-white/40">
+                  <p className="mb-1 sm:mb-1.5 font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.15em] text-white/40">
                     {accent}
                   </p>
-                  <h3 className="mb-2 font-display text-base sm:text-lg font-bold leading-snug tracking-tight text-white">
+                  <h3 className="mb-1 sm:mb-2 font-display text-sm sm:text-lg font-bold leading-snug tracking-tight text-white">
                     {item.headline}
                   </h3>
-                  <p className="text-xs leading-relaxed text-white/80 sm:text-sm">
+                  <p className="text-[10px] sm:text-sm leading-relaxed text-white/80 line-clamp-3 sm:line-clamp-none">
                     {item.copy}
                   </p>
                 </div>

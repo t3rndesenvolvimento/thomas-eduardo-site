@@ -77,7 +77,7 @@ export function ProjectsStack({
             {projects.map((project, i) => (
               <div
                 key={project.title}
-                className="w-[82vw] flex-shrink-0 sm:w-[540px] lg:w-[720px]"
+                className="w-[92vw] flex-shrink-0 sm:w-[540px] lg:w-[720px]"
               >
                 <ProjectCard project={project} index={i} />
               </div>

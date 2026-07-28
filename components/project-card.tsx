@@ -26,7 +26,7 @@ export function ProjectCard({
           ? `Fechar detalhes de ${project.title}`
           : `Ver detalhes de ${project.title}`
       }
-      className="relative h-[55vw] w-full cursor-pointer [perspective:1200px] sm:h-[400px] lg:h-[460px]"
+      className="relative h-[60vh] w-full cursor-pointer [perspective:1200px] sm:h-[400px] lg:h-[460px]"
       onClick={() => setFlipped((v) => !v)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {

@@ -102,7 +102,7 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative flex min-h-[85vh] w-full items-start pt-16 sm:pt-24 pb-12 overflow-hidden bg-black text-white"
+      className="relative flex min-h-[100dvh] sm:min-h-[85vh] w-full items-center overflow-hidden bg-black text-white"
       data-hero-container
     >
       {/* Cursor customizado + trilha */}
@@ -175,12 +175,12 @@ export function Hero() {
         )}
       </motion.div>
 
-      <div className="site-shell relative z-10 w-full pb-[max(3rem,env(safe-area-inset-bottom)+2rem)] pt-10 sm:pt-14 md:pt-16 flex flex-col items-center text-center">
+      <div className="site-shell relative z-10 w-full py-20 sm:py-14 md:py-16 flex flex-col items-center text-center">
         <motion.p
           initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ delay: 0.25, duration: 0.7, ease: EASE_OUT }}
-          className="mb-3 text-[11px] font-light uppercase tracking-widest text-white/70 text-center"
+          className="mb-2 sm:mb-3 text-[10px] sm:text-[11px] font-light uppercase tracking-widest text-white/70 text-center"
         >
           {t.hero.tagline}
         </motion.p>
@@ -189,7 +189,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
-          className="max-w-5xl text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-[1.08] tracking-tight text-center"
+          className="max-w-5xl text-[1.75rem] sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-[1.1] tracking-tight text-center"
         >
           {t.hero.title.replace("Engenheiro de Software", "Engenheiro\u00A0de\u00A0Software").replace("Software Engineer", "Software\u00A0Engineer")}
         </motion.h1>
@@ -198,7 +198,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.65, duration: 0.6 }}
-          className="mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed text-white/70 text-center"
+          className="mt-4 sm:mt-6 max-w-2xl text-sm sm:text-xl leading-relaxed text-white/70 text-center"
         >
           {t.hero.description}
         </motion.p>
@@ -207,17 +207,17 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.85, duration: 0.6 }}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+          className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto"
         >
           <Link 
             href="/diagnostico" 
-            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[13px] font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-white/10"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 sm:px-8 sm:py-4 text-[11px] sm:text-[13px] font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-white/10"
           >
             {t.hero.ctaPrimary} <ArrowRight className="size-4" />
           </Link>
           <Link 
             href="#projetos" 
-            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-[13px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10 hover:border-white/40 active:scale-95"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 sm:px-8 sm:py-4 text-[11px] sm:text-[13px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10 hover:border-white/40 active:scale-95"
           >
             <PlayCircle className="size-4" /> {t.hero.ctaSecondary}
           </Link>
@@ -227,11 +227,11 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.0, duration: 0.6 }}
-          className="mt-8 flex items-center justify-center gap-3 text-sm text-white/50 font-mono"
+          className="mt-5 sm:mt-8 flex items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm text-white/50 font-mono"
         >
           <div className="flex -space-x-2">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="size-8 rounded-full border-2 border-background bg-gray-800" />
+              <div key={i} className="size-6 sm:size-8 rounded-full border-2 border-background bg-gray-800" />
             ))}
           </div>
           <p>{t.hero.socialProof}</p>

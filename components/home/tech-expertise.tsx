@@ -61,7 +61,7 @@ export function TechExpertise() {
   return (
     <section
       id="expertise"
-      className="relative overflow-hidden border-t border-black/10 bg-white text-black py-12 sm:py-16 md:py-20"
+      className="relative overflow-hidden border-t border-black/10 bg-white text-black py-8 sm:py-16 md:py-20"
     >
       <motion.div
         className="pointer-events-none absolute left-10 top-1/3 z-0 w-32 opacity-10 sm:w-40"
