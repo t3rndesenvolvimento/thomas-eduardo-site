@@ -5,29 +5,23 @@ import localFont from "next/font/local"
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { SiteNav } from "@/components/site-nav"
-import { SiteFooter } from "@/components/site-footer"
-import { SmoothScroll } from "@/components/smooth-scroll"
-import { FloatingWhatsApp } from "@/components/floating-whatsapp"
-import { CustomCursor } from "@/components/ui/custom-cursor"
-import { PageLoader } from "@/components/ui/page-loader"
-import { PageTransition } from "@/components/page-transition"
-import { Toaster } from "sileo"
-import { I18nProvider } from "@/lib/i18n/context"
+import { LayoutShell } from "@/components/layout-shell"
 import "./globals.css"
 
-// nik.co vibe: Suisse Int'l → Inter (body), Heathergreen → Syne (display)
+/* ─── Fonts ──────────────────────────────────────────────────────────────── */
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-geist",
   weight: ["300", "400", "500", "600", "700"],
 })
-// Display: Syne (statement type, closest free feel to Heathergreen energy)
+
 const display = Syne({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["500", "600", "700", "800"],
 })
+
 const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
@@ -40,45 +34,48 @@ const signature = localFont({
   display: "swap",
 })
 
+/* ─── Constants ──────────────────────────────────────────────────────────── */
+
 const SITE_URL = "https://thomaseduardo.com.br"
+const SITE_TITLE = "Thomas Eduardo | Copywriter & Estrategista Digital"
+const SITE_DESCRIPTION =
+  "Especialista em copywriting de alta conversão para negócios digitais. Aumente suas vendas com textos que vendem. São Paulo, Brasil."
+
+/* ─── Metadata ───────────────────────────────────────────────────────────── */
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Thomas Eduardo | Full Stack Software Engineer | São Paulo",
-    template: "%s | Thomas Eduardo | Full Stack Engineer",
+    default: SITE_TITLE,
+    template: "%s | Thomas Eduardo",
   },
-  description:
-    "Thomas Eduardo | Engenheiro de Software Full Stack em São Paulo. Especialista em Next.js, TypeScript, React e soluções digitais modernas, performáticas e escaláveis. Portfólio com projetos reais, processo de engenharia estruturado e resultados comprovados.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "Thomas Eduardo",
+    "Copywriter São Paulo",
+    "Estrategista Digital",
+    "Copywriting de Alta Conversão",
+    "Landing Page",
+    "Funil de Vendas",
+    "Textos que Vendem",
     "Desenvolvedor Full Stack São Paulo",
-    "Engenheiro de Software",
-    "Full Stack Developer Brazil",
     "Next.js Developer",
-    "TypeScript Engineer",
     "React Developer São Paulo",
-    "Software Engineer",
-    "Desenvolvedor Web São Paulo",
-    "Criação de Sites Profissionais",
-    "Portfólio Desenvolvedor Full Stack",
-    "TERON OS",
     "Soluções Digitais Escaláveis",
   ],
-  authors: [{ name: "Thomas Eduardo R. Nascimento", url: SITE_URL }],
-  creator: "Thomas Eduardo R. Nascimento",
+  authors: [{ name: "Thomas Eduardo", url: SITE_URL }],
+  creator: "Thomas Eduardo",
   openGraph: {
-    title: "Thomas Eduardo | Full Stack Software Engineer | São Paulo",
-    description:
-      "Engenheiro de Software Full Stack em São Paulo. Construindo soluções digitais modernas, performáticas e escaláveis com Next.js, TypeScript e arquitetura limpa.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     url: SITE_URL,
-    siteName: "Thomas Eduardo | Full Stack Engineer",
+    siteName: "Thomas Eduardo",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Thomas Eduardo | Full Stack Software Engineer - Portfólio Profissional",
+        alt: "Thomas Eduardo - Copywriter & Estrategista Digital",
       },
     ],
     locale: "pt_BR",
@@ -86,9 +83,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Thomas Eduardo | Full Stack Software Engineer | São Paulo",
-    description:
-      "Desenvolvedor Full Stack em São Paulo. Next.js, TypeScript, React e soluções digitais escaláveis.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -104,25 +100,40 @@ export const metadata: Metadata = {
   },
 }
 
+/* ─── Structured Data (JSON-LD) ──────────────────────────────────────────── */
+
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Thomas Eduardo R. Nascimento",
-  url: SITE_URL,
-  jobTitle: "Desenvolvedor Full Stack | Engenheiro de Software",
-  description:
-    "Engenheiro de Software Full Stack em São Paulo especializado em aplicações web modernas, portais, dashboards, APIs e landing pages com Next.js, TypeScript e arquitetura escalável.",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "São Paulo",
-    addressCountry: "BR",
-  },
-  sameAs: [
-    "https://github.com/devthomaseduardo",
-    "https://www.linkedin.com/in/devthomaseduardo",
-    "https://www.thomaseduardo.com.br",
+  "@graph": [
+    {
+      "@type": "Person",
+      name: "Thomas Eduardo",
+      url: SITE_URL,
+      jobTitle: "Copywriter & Estrategista Digital",
+      description: SITE_DESCRIPTION,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "São Paulo",
+        addressCountry: "BR",
+      },
+      sameAs: [
+        "https://github.com/devthomaseduardo",
+        "https://www.linkedin.com/in/devthomaseduardo",
+        "https://www.thomaseduardo.com.br",
+      ],
+    },
+    {
+      "@type": "Service",
+      name: "Copywriting de Alta Conversão",
+      provider: { "@type": "Person", name: "Thomas Eduardo" },
+      description:
+        "Copy baseada em dados comportamentais que aumenta a taxa de conversão.",
+      areaServed: { "@type": "Country", name: "BR" },
+    },
   ],
 }
+
+/* ─── Viewport & Icons ───────────────────────────────────────────────────── */
 
 export const viewport: Viewport = {
   themeColor: "#000000",
@@ -137,15 +148,19 @@ export const icons = {
   apple: "/favicon.png",
 }
 
+/* ─── Root Layout ────────────────────────────────────────────────────────── */
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const fontVars = `${inter.variable} ${mono.variable} ${display.variable} ${signature.variable}`
+
   return (
     <html
       lang="pt-BR"
-      className={`dark ${inter.variable} ${mono.variable} ${display.variable} ${signature.variable} bg-background loader-boot loader-active`}
+      className={`dark ${fontVars} bg-background loader-boot loader-active`}
       suppressHydrationWarning
     >
       <head>
@@ -153,8 +168,11 @@ export default function RootLayout({
           <style>{`html.loader-boot::before { display: none !important; }`}</style>
         </noscript>
       </head>
-      <body className="font-sans font-light antialiased overflow-x-hidden" suppressHydrationWarning={true}>
-        {/* Google Tag Manager (noscript) */}
+      <body
+        className="font-sans font-light antialiased overflow-x-hidden"
+        suppressHydrationWarning
+      >
+        {/* Google Tag Manager (noscript fallback) */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-T9K46BCS"
@@ -163,7 +181,6 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        {/* End Google Tag Manager (noscript) */}
 
         {/* JSON-LD Structured Data */}
         <Script
@@ -186,7 +203,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
 
-        {/* Google tag (gtag.js) - GA4 */}
+        {/* Google Analytics (GA4) */}
         <Script
           id="gtag-src"
           strategy="afterInteractive"
@@ -203,7 +220,7 @@ gtag('config', 'G-V95BP4VGFX');`,
           }}
         />
 
-        {/* PostHog */}
+        {/* PostHog Analytics */}
         <Script
           id="posthog"
           strategy="afterInteractive"
@@ -212,21 +229,13 @@ gtag('config', 'G-V95BP4VGFX');`,
 posthog.init('phc_wNUQSvKvfSVPCDCh7DTHk7hzkSc7A4agRv6LLAWWr2qn',{api_host:'https://www.thomaseduardo.com.br',ui_host:'https://us.posthog.com',defaults:'2026-05-30',person_profiles:'identified_only'});`,
           }}
         />
-        <I18nProvider>
-          <SmoothScroll>
-          <PageLoader />
-          <CustomCursor />
-          <Toaster position="top-right" theme="dark" />
-          <SiteNav />
-          <PageTransition>
-            <main>{children}</main>
-          </PageTransition>
-          <FloatingWhatsApp />
-          <SiteFooter />
-          <Analytics />
-          <SpeedInsights />
-          </SmoothScroll>
-        </I18nProvider>
+
+        {/* App Shell (conditionally renders site chrome vs clean layout) */}
+        <LayoutShell>{children}</LayoutShell>
+
+        {/* Vercel Analytics & Speed Insights */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

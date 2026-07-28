@@ -1,113 +1,102 @@
 import connectToDatabase from "@/lib/db"
 import Lead from "@/models/Lead"
 import Link from "next/link"
-import { ArrowLeft, Copy } from "lucide-react"
+import { ArrowLeft, User, Building, Phone, Mail, Target, Wallet, Briefcase } from "lucide-react"
 import { notFound } from "next/navigation"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
+import { ProposalForm } from "./proposal-form"
 
-export default async function PropostaPage({ params }: { params: { id: string } }) {
+export default async function PropostaPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
   await connectToDatabase()
-  
+  const { id } = await params
+
   let lead = null
   try {
-    lead = await Lead.findById(params.id)
-  } catch (e) {
+    lead = await Lead.findById(id).lean()
+  } catch {
     return notFound()
   }
-
   if (!lead) return notFound()
 
-  // Atualiza o status automaticamente para proposta se for novo
-  if (lead.status === "novo") {
-    lead.status = "proposta"
-    await lead.save()
+  // Serialize for client component
+  const serializedLead = {
+    _id: (lead as any)._id.toString(),
+    name: (lead as any).name ?? "",
+    company: (lead as any).company ?? "",
+    phone: (lead as any).phone ?? "",
+    email: (lead as any).email ?? "",
+    painPoint: (lead as any).painPoint ?? "",
+    budget: (lead as any).budget ?? "",
+    service: (lead as any).service ?? "",
+    role: (lead as any).role ?? "",
+    proposal: (lead as any).proposal ?? null,
   }
-
-  // Lógica simples para gerar o escopo baseado na dor
-  let escopo = ""
-  if (lead.painPoint.includes("lento")) {
-    escopo = "Auditoria de Performance, Refatoração de Código Base, Otimização de Imagens e Setup de CDN/Cache."
-  } else if (lead.painPoint.includes("conversão")) {
-    escopo = "Análise de UX/UI, Redesign Focado em Conversão (CRO), Testes A/B e Implementação de Funil."
-  } else if (lead.painPoint.includes("desatualizado")) {
-    escopo = "Redesign Completo da Interface, Migração para Stack Moderna (Next.js), e Criação de Design System."
-  } else if (lead.painPoint.includes("interno")) {
-    escopo = "Mapeamento de Processos, Desenvolvimento de Dashboard Administrativo Customizado e Integração de APIs."
-  } else {
-    escopo = "Discovery do Projeto, Definição de Arquitetura, Design UI/UX e Desenvolvimento Full-Stack."
-  }
-
-  const propostaText = `Olá ${lead.name.split(" ")[0]}! Tudo bem?
-  
-Analisei as informações que você deixou no diagnóstico da *${lead.company}*. 
-
-Vi que o maior desafio atual de vocês é *"${lead.painPoint}"* e que buscam uma solução dentro do orçamento de *${lead.budget}*.
-
-Como Engenheiro de Produto, acredito que a melhor abordagem para o seu caso envolva:
-✅ ${escopo}
-
-Nesse cenário, consigo desenhar um plano de ação exato dentro do seu orçamento previsto. 
-Podemos agendar um bate-papo rápido de 15 minutos amanhã para eu te mostrar como isso funcionaria na prática?
-
-Fico no aguardo!`
 
   return (
-    <div>
-      <Link href="/admin" className="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-gray-500 hover:text-black mb-8">
-        <ArrowLeft className="size-4" /> Voltar para leads
-      </Link>
-      
-      <div className="grid md:grid-cols-3 gap-8">
-        <div className="md:col-span-1 space-y-6">
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-            <h2 className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-4">Dados do Cliente</h2>
-            <div className="space-y-4">
-              <div>
-                <div className="text-xs text-gray-500">Nome</div>
-                <div className="font-bold">{lead.name}</div>
-              </div>
-              <div>
-                <div className="text-xs text-gray-500">Empresa / Cargo</div>
-                <div className="font-bold">{lead.company} • {lead.role}</div>
-              </div>
-              <div>
-                <div className="text-xs text-gray-500">WhatsApp</div>
-                <div className="font-bold text-blue-600">{lead.phone}</div>
-              </div>
-              <div>
-                <div className="text-xs text-gray-500">Desafio Principal</div>
-                <div className="font-bold">{lead.painPoint}</div>
-              </div>
-              <div>
-                <div className="text-xs text-gray-500">Orçamento</div>
-                <div className="font-bold">{lead.budget}</div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="mx-auto max-w-5xl space-y-6">
+      {/* ─── Header ──────────────────────────────────────────── */}
+      <div className="flex flex-wrap items-center gap-4">
+        <Link
+          href="/admin"
+          className="inline-flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2 text-[12px] font-medium text-neutral-400 transition-colors hover:bg-white/[0.06] hover:text-white"
+        >
+          <ArrowLeft className="size-3.5" /> Voltar
+        </Link>
+        <div className="flex-1" />
+        <span className="text-[11px] text-neutral-600">
+          Lead criado em{" "}
+          {format(new Date((lead as any).createdAt), "dd MMM yyyy, HH:mm", {
+            locale: ptBR,
+          })}
+        </span>
+      </div>
 
-        <div className="md:col-span-2">
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm h-full">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xs uppercase tracking-widest font-bold text-gray-400">Rascunho de Proposta</h2>
-            </div>
-            
-            <div className="bg-gray-50 p-6 rounded-xl font-mono text-sm text-gray-800 whitespace-pre-wrap leading-relaxed border border-gray-200">
-              {propostaText}
-            </div>
-
-            <div className="mt-6 flex justify-end">
-              <a 
-                href={`https://wa.me/${lead.phone.replace(/\D/g, '')}?text=${encodeURIComponent(propostaText)}`}
-                target="_blank"
-                rel="noreferrer"
-                className="bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#25D366]/20 hover:scale-105 transition-transform flex items-center gap-2"
-              >
-                Enviar via WhatsApp
-              </a>
-            </div>
-          </div>
+      {/* ─── Lead Summary ────────────────────────────────────── */}
+      <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+        <div className="flex flex-wrap items-start gap-x-8 gap-y-4">
+          <InfoPill icon={User} label="Nome" value={(lead as any).name} />
+          <InfoPill icon={Building} label="Empresa" value={(lead as any).company} />
+          <InfoPill icon={Phone} label="Telefone" value={(lead as any).phone} accent="text-emerald-400" />
+          <InfoPill icon={Mail} label="E-mail" value={(lead as any).email} accent="text-blue-400" />
+          <InfoPill icon={Briefcase} label="Serviço" value={(lead as any).service} />
+          <InfoPill icon={Target} label="Desafio" value={(lead as any).painPoint} />
+          <InfoPill icon={Wallet} label="Orçamento" value={(lead as any).budget} />
         </div>
       </div>
+
+      {/* ─── Proposal Form ───────────────────────────────────── */}
+      <ProposalForm lead={serializedLead} />
+    </div>
+  )
+}
+
+function InfoPill({
+  icon: Icon,
+  label,
+  value,
+  accent,
+}: {
+  icon: React.ElementType
+  label: string
+  value: string
+  accent?: string
+}) {
+  return (
+    <div className="flex items-center gap-2 min-w-0">
+      <Icon className="size-3.5 shrink-0 text-neutral-600" />
+      <span className="text-[10px] font-bold uppercase tracking-[0.08em] text-neutral-600">
+        {label}:
+      </span>
+      <span
+        className={`text-[13px] font-medium truncate ${accent ?? "text-neutral-300"}`}
+      >
+        {value || "—"}
+      </span>
     </div>
   )
 }

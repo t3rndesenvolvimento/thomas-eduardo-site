@@ -37,7 +37,13 @@ const NAV_SECTIONS: { id: Section; label: string }[] = [
   { id: "next", label: "Próximos passos" },
 ]
 
-export function ProposalPortal({ proposal }: { proposal: ProposalData }) {
+export function ProposalPortal({
+  proposal,
+  proposalId,
+}: {
+  proposal: ProposalData
+  proposalId?: string
+}) {
   const [started, setStarted] = useState(false)
   const [activeSection, setActiveSection] = useState<Section>("welcome")
 
@@ -77,7 +83,7 @@ export function ProposalPortal({ proposal }: { proposal: ProposalData }) {
         <TransparencySection proposal={proposal} />
         <ScheduleSection proposal={proposal} />
         <InvestmentSection proposal={proposal} />
-        <NextStepsSection proposal={proposal} />
+        <NextStepsSection proposal={proposal} proposalId={proposalId} />
       </div>
     </div>
   )
@@ -352,12 +358,55 @@ function InvestmentSection({ proposal }: { proposal: ProposalData }) {
 }
 
 /* ── NEXT STEPS ── */
-function NextStepsSection({ proposal }: { proposal: ProposalData }) {
+function NextStepsSection({ proposal, proposalId }: { proposal: ProposalData, proposalId?: string }) {
+  const [signatureName, setSignatureName] = useState("")
+  const [isSigning, setIsSigning] = useState(false)
+  const [isSigned, setIsSigned] = useState(proposal.status === "aprovada")
+  
+  const isPaymentUrl = proposal.paymentLink?.startsWith("http")
+  const fiftyPercent = proposal.totalValue
+    ? `R$ ${(parseFloat(proposal.totalValue.replace(/[R$\s.]/g, "").replace(",", ".")) / 2).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    : "50%"
+
+  const [copied, setCopied] = useState(false)
+
+  async function handleSign(e: React.FormEvent) {
+    e.preventDefault()
+    if (!signatureName.trim() || !proposalId) return
+    setIsSigning(true)
+    
+    try {
+      const res = await fetch(`/api/propostas/${proposalId}/sign`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ signatureName }),
+      })
+      
+      if (res.ok) {
+        setIsSigned(true)
+      } else {
+        alert("Erro ao assinar proposta.")
+      }
+    } catch (err) {
+      alert("Erro de conexão.")
+    } finally {
+      setIsSigning(false)
+    }
+  }
+
+  function copyPix() {
+    if (!proposal.paymentLink) return
+    navigator.clipboard.writeText(proposal.paymentLink)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
   const steps = [
     "Aprovação desta proposta",
-    "Formalização do contrato",
+    "Pagamento do sinal (50%)",
     "Início do desenvolvimento",
   ]
+  
   return (
     <Section id="next" label="09" title="Vamos começar?">
       <div className="mb-10 space-y-3">
@@ -377,24 +426,106 @@ function NextStepsSection({ proposal }: { proposal: ProposalData }) {
           </motion.div>
         ))}
       </div>
-      <div className="flex flex-col gap-4 sm:flex-row">
-        <a
-          href={CONTACT.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex flex-1 items-center justify-center gap-3 rounded-2xl bg-foreground px-8 py-4 text-base font-semibold text-background transition-transform hover:scale-105"
-        >
-          <MessageCircle className="size-5" />
-          Aprovar proposta
-          <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
-        </a>
-        <a
-          href={`mailto:${CONTACT.email}`}
-          className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-border/50 bg-card/30 px-8 py-4 text-base font-medium text-foreground transition-colors hover:bg-card/60"
-        >
-          Enviar e-mail
-        </a>
-      </div>
+
+      {!isSigned ? (
+        <MotionCard>
+          <div className="mb-6">
+            <h3 className="font-display text-xl font-semibold text-foreground">Assinatura Digital</h3>
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+              Ao assinar abaixo, você aprova os termos e o escopo desta proposta comercial, 
+              dando início à próxima etapa do projeto.
+            </p>
+          </div>
+          
+          <form onSubmit={handleSign} className="space-y-4">
+            <div>
+              <label className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60">
+                Seu nome completo
+              </label>
+              <input
+                type="text"
+                required
+                value={signatureName}
+                onChange={(e) => setSignatureName(e.target.value)}
+                placeholder="Ex: João da Silva"
+                className="w-full rounded-xl border border-border/50 bg-background px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground/40 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 transition-all"
+                disabled={isSigning || !proposalId}
+              />
+            </div>
+            
+            <button
+              type="submit"
+              disabled={isSigning || !signatureName.trim() || !proposalId}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-6 py-4 text-sm font-semibold text-background transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
+            >
+              {isSigning ? (
+                <span className="animate-pulse">Assinando...</span>
+              ) : (
+                <>
+                  Assinar e Aprovar Proposta
+                  <ArrowRight className="size-4" />
+                </>
+              )}
+            </button>
+            {!proposalId && (
+              <p className="text-center text-xs text-amber-500 mt-2">Esta é uma proposta de demonstração e não pode ser assinada.</p>
+            )}
+          </form>
+        </MotionCard>
+      ) : (
+        <MotionCard>
+          <div className="flex flex-col items-center text-center">
+            <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500">
+              <CheckCircle2 className="size-6" />
+            </div>
+            <h3 className="font-display text-xl font-semibold text-foreground">Proposta Aprovada!</h3>
+            <p className="mt-2 text-sm text-muted-foreground mb-6">
+              Assinada digitalmente por {proposal.signature?.name || signatureName}.
+            </p>
+
+            <div className="w-full rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-left">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-500/80 mb-2">Próximo Passo</p>
+              <p className="text-sm text-foreground/80 mb-6">
+                Para darmos início imediato ao projeto, realize o pagamento do sinal ({fiftyPercent}) através do método abaixo.
+              </p>
+
+              {proposal.paymentLink ? (
+                isPaymentUrl ? (
+                  <a
+                    href={proposal.paymentLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-4 text-sm font-bold text-black transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    Pagar {fiftyPercent} Agora
+                    <ArrowRight className="size-4" />
+                  </a>
+                ) : (
+                  <div className="space-y-3">
+                    <p className="text-xs text-muted-foreground">Chave PIX:</p>
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 rounded-lg border border-border/50 bg-black/40 px-4 py-3 font-mono text-sm text-foreground truncate select-all">
+                        {proposal.paymentLink}
+                      </div>
+                      <button
+                        onClick={copyPix}
+                        className="flex items-center gap-1.5 rounded-lg bg-foreground px-4 py-3 text-sm font-bold text-background transition-colors hover:bg-foreground/80 shrink-0"
+                      >
+                        {copied ? "Copiado!" : "Copiar PIX"}
+                      </button>
+                    </div>
+                  </div>
+                )
+              ) : (
+                <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4 text-sm text-amber-500/80">
+                  Nenhum método de pagamento configurado. Entre em contato pelo WhatsApp.
+                </div>
+              )}
+            </div>
+          </div>
+        </MotionCard>
+      )}
+
       <p className="mt-8 text-center font-mono text-xs text-muted-foreground/50">
         {CONTACT.email} · {CONTACT.phone} · CNPJ {CONTACT.cnpj}
       </p>

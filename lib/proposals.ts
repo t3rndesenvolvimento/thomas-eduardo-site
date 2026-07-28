@@ -32,6 +32,13 @@ export type ProposalData = {
 
   // Sobre o Thomas para aquele cliente
   personalNote: string
+
+  paymentLink?: string
+  status?: "pending" | "aprovada"
+  signature?: {
+    name: string
+    date: Date
+  }
 }
 
 // Banco de propostas por slug

@@ -13,7 +13,9 @@ import {
 import TextPressure from "@/components/ui/text-pressure"
 import { AnimeGridBackground } from "@/components/ui/anime-grid-background"
 import Image from "next/image"
+import Link from "next/link"
 import { useI18n } from "@/lib/i18n/context"
+import { ArrowRight, PlayCircle } from "lucide-react"
 
 // Springs nomeadas por "peso" — evita repetir { stiffness, damping, mass } em cada motion value
 const TILT_SPRING: SpringOptions = { stiffness: 120, damping: 22, mass: 0.4 }
@@ -201,27 +203,57 @@ export function Hero() {
           {t.hero.tagline}
         </motion.p>
 
-        <h1 className="sr-only">{t.hero.title}</h1>
-
-        <motion.div
-          className="max-w-[min(100%,42rem)]"
-          initial={reduceMotion ? false : { opacity: 0, y: 28, rotateX: 12 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
-          style={{ transformPerspective: 800, transformStyle: "preserve-3d" }}
+          className="max-w-3xl text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white leading-[1.1] tracking-tight"
         >
-          <TextPressure text="Thomas" textColor="#ffffff" />
-          <TextPressure text="Eduardo" textColor="rgba(255,255,255,0.75)" />
-        </motion.div>
+          {t.hero.title}
+        </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.65, duration: 0.6 }}
-          className="mt-5 max-w-sm text-sm leading-relaxed text-white/55"
+          className="mt-6 max-w-xl text-lg sm:text-xl leading-relaxed text-white/70"
         >
           {t.hero.description}
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.85, duration: 0.6 }}
+          className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
+        >
+          <Link 
+            href="/diagnostico" 
+            className="flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[13px] font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 active:scale-95"
+          >
+            {t.hero.ctaPrimary} <ArrowRight className="size-4" />
+          </Link>
+          <Link 
+            href="#projetos" 
+            className="flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-[13px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10 hover:border-white/40 active:scale-95"
+          >
+            <PlayCircle className="size-4" /> {t.hero.ctaSecondary}
+          </Link>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.0, duration: 0.6 }}
+          className="mt-8 flex items-center gap-3 text-sm text-white/50 font-mono"
+        >
+          <div className="flex -space-x-2">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="size-8 rounded-full border-2 border-background bg-gray-800" />
+            ))}
+          </div>
+          <p>{t.hero.socialProof}</p>
+        </motion.div>
       </div>
 
       <motion.div

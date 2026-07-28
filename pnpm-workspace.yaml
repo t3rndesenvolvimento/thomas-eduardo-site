@@ -1,9 +1,13 @@
 allowBuilds:
-  '@firebase/util': set this to true or false
-  core-js: true
-  msw: true
-  protobufjs: set this to true or false
-  sharp: true
-  unrs-resolver: true
-minimumReleaseAgeExclude:
-  - posthog-js@1.404.1
+  core-js: set this to true or false
+  msw: set this to true or false
+  sharp: set this to true or false
+  unrs-resolver: set this to true or false
+onlyBuiltDependencies:
+  - msw
+  - sharp
+  - unrs-resolver
+  - "@firebase/util"
+  - protobufjs
+overrides:
+  hono: "4.12.25"

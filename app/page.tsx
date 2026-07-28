@@ -35,9 +35,9 @@ const OliverParallax = dynamic(
 )
 
 export const metadata: Metadata = {
-  title: "Thomas Eduardo | Engenheiro de Produto focado em Conversão",
+  title: "Copywriter & Estrategista Digital | Thomas Eduardo",
   description:
-    "Thomas Eduardo - Engenheiro de Produto focado em Conversão em São Paulo. Chega de perder vendas por sites lentos e sistemas travados. Transformo gargalos da sua operação em soluções digitais que convertem e escalam o seu negócio.",
+    "Especialista em copywriting de alta conversão para negócios digitais. Aumente suas vendas com textos que vendem. Solicite um orçamento.",
   alternates: { canonical: "/" },
 }
 

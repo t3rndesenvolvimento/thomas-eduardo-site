@@ -2,7 +2,7 @@
   "name": "my-project",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@11.10.0",
+  "packageManager": "pnpm@9.15.4",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -57,7 +57,10 @@
     "onlyBuiltDependencies": [
       "msw",
       "sharp",
-      "unrs-resolver"
+      "unrs-resolver",
+      "@firebase/util",
+      "protobufjs",
+      "core-js"
     ]
   }
 }
