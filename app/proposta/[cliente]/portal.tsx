@@ -124,10 +124,28 @@ function WelcomeScreen({ proposal, onStart }: { proposal: ProposalData; onStart:
         <h1 className="font-display text-4xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
           {proposal.greeting}
         </h1>
-        <p className="mt-5 text-xl text-white/70 leading-relaxed">
+        
+        <p className="mt-5 text-xl text-white/70 leading-relaxed max-w-2xl mx-auto">
           Preparei uma proposta personalizada para o{" "}
           <span className="font-medium text-white">{proposal.projectTitle}</span>.
         </p>
+
+        {proposal.clientName && (
+          <div className="mt-8 flex flex-col items-center justify-center">
+            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-emerald-500/80 mb-2">
+              Preparado Exclusivamente Para
+            </span>
+            <div className="flex flex-col items-center">
+              <span className="text-lg font-medium text-white">{proposal.clientName}</span>
+              {proposal.clientCompany && (
+                <>
+                  <span className="sr-only">, </span>
+                  <span className="text-sm text-neutral-400 mt-0.5">{proposal.clientCompany}</span>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="mt-8 flex items-center justify-center gap-6">
           <div className="flex items-center gap-2 text-sm text-white/60">

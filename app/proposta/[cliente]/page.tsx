@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"
 import type { Metadata } from "next"
 import connectToDatabase from "@/lib/db"
 import Lead from "@/models/Lead"
@@ -28,8 +29,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // Fallback to static proposals
   const proposal = getProposal(cliente)
+  
+  if (!proposal) {
+    return {
+      title: "Proposta não encontrada",
+      description: "Documento indisponível.",
+      robots: { index: false, follow: false },
+    }
+  }
+
   return {
-    title: proposal ? `Proposta - ${proposal.projectTitle}` : "Proposta Comercial",
+    title: `Proposta - ${proposal.projectTitle}`,
     description: "Proposta comercial personalizada - documento privado.",
     robots: { index: false, follow: false },
   }

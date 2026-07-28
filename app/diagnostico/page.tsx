@@ -77,24 +77,13 @@ export default function DiagnosticoPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       })
+      setStep(6) // Step 6 will be our success state
     } catch (error) {
       console.error("Erro ao salvar lead:", error)
+      alert("Houve um erro ao enviar seu diagnóstico. Tente novamente.")
+    } finally {
+      setIsSubmitting(false)
     }
-    
-    // Format message for WhatsApp
-    const text = `Olá Thomas! Acabei de preencher o diagnóstico.
-    
-*Nome:* ${formData.name}
-*E-mail:* ${formData.email}
-*Empresa:* ${formData.company}
-*Serviço de Interesse:* ${formData.service}
-*Principal Desafio:* ${formData.painPoint}
-*Orçamento Previsto:* ${formData.budget}`
-
-    const encodedText = encodeURIComponent(text)
-    const baseUrl = CONTACT.whatsapp_real || "https://wa.me/5511977070209"
-    window.location.href = `${baseUrl}?text=${encodedText}`
-    setIsSubmitting(false)
   }
 
   const currentPainPoints = formData.service ? PAIN_POINTS[formData.service] || PAIN_POINTS["Sites e Landing Pages"] : []

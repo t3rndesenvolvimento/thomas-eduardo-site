@@ -433,6 +433,22 @@ export function ProposalForm({ lead }: { lead: LeadData }) {
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
+                <Label>Nome do Cliente</Label>
+                <Input
+                  value={form.clientName}
+                  onChange={(v) => update("clientName", v)}
+                  placeholder="Nome do solicitante"
+                />
+              </div>
+              <div>
+                <Label>Empresa (Opcional)</Label>
+                <Input
+                  value={form.clientCompany || ""}
+                  onChange={(v) => update("clientCompany", v)}
+                  placeholder="Nome da empresa"
+                />
+              </div>
+              <div>
                 <Label>Título do Projeto</Label>
                 <Input
                   value={form.projectTitle}

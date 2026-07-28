@@ -81,5 +81,6 @@ const PROPOSALS: Record<string, ProposalData> = {
 }
 
 export function getProposal(slug: string): ProposalData | null {
-  return PROPOSALS[slug] ?? PROPOSALS["demo"] ?? null
+  if (slug === "demo") return PROPOSALS["demo"]
+  return PROPOSALS[slug] ?? null
 }

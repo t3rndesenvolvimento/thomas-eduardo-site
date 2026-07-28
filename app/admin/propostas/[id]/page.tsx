@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"
 import connectToDatabase from "@/lib/db"
 import Lead from "@/models/Lead"
 import Link from "next/link"
