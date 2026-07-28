@@ -20,16 +20,17 @@ if (!cached) {
 }
 
 async function connectToDatabase() {
-  if (cached.conn) {
+  // Check if we have a live active connection
+  if (cached.conn && mongoose.connection.readyState === 1) {
     return cached.conn
   }
 
-  if (!cached.promise) {
+  if (!cached.promise || mongoose.connection.readyState === 0) {
     const opts = {
-      bufferCommands: false,
+      bufferCommands: true,
+      maxPoolSize: 10,
     }
 
-    // Force string type as we already checked for its presence
     cached.promise = mongoose.connect(MONGODB_URI as string, opts).then((mongooseInstance) => {
       return mongooseInstance.connection
     })
@@ -39,6 +40,7 @@ async function connectToDatabase() {
     cached.conn = await cached.promise
   } catch (e) {
     cached.promise = null
+    cached.conn = null
     throw e
   }
 

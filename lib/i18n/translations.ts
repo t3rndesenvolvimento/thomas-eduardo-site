@@ -1,3 +1,6 @@
+export type Locale = "pt-BR" | "en-US"
+export type Translations = typeof translations["pt-BR"]
+
 export const translations = {
   "pt-BR": {
     // ─── Nav ──────────────────────────────────────────────────────────────────
@@ -5,7 +8,7 @@ export const translations = {
       home: "Início",
       about: "Sobre",
       projects: "Projetos",
-      process: "Processos",
+      process: "Processo",
       contact: "Diagnóstico gratuito",
     },
 
@@ -16,33 +19,36 @@ export const translations = {
 
     // ─── Hero ─────────────────────────────────────────────────────────────────
     hero: {
-      tagline: "Engenheiro de Produto · Focado em Conversão",
-      title: "Thomas Eduardo - Engenheiro de Produto",
+      tagline: "Engenheiro de Software, Foco em Resultados",
+      title: "Thomas Eduardo, Engenheiro de Software",
       description:
-        "Seu site está custando vendas? Desenvolvo landing pages e sistemas de alta performance focados em conversão, velocidade e lucros reais para o seu negócio.",
-      scroll: "scroll",
+        "Desenvolvo landing pages de alta conversão e sistemas sob medida, com foco em velocidade, lucro e resultado real.",
+      ctaPrimary: "Fazer Diagnóstico Grátis",
+      ctaSecondary: "Ver Projetos",
+      socialProof: "Sistemas e páginas em produção gerando receita",
+      scroll: "rolar",
     },
 
     // ─── Pain Points ──────────────────────────────────────────────────────────
     painPoints: {
-      kicker: "Reconhece isso?",
-      heading: "Sua operação está perdendo tempo e dinheiro.",
+      kicker: "Gargalos reais",
+      heading: "Sua empresa está perdendo tempo e vendas?",
       items: [
         {
-          headline: "Você está perdendo vendas por lentidão",
-          copy: "Cada segundo que seu site ou sistema demora para carregar afasta o lead. Uma estrutura genérica ou pesada joga o orçamento da sua campanha direto no lixo e manda clientes para a concorrência.",
+          headline: "Lentidão que mata vendas",
+          copy: "Cada segundo de espera afasta clientes. Páginas pesadas desperdiçam o seu orçamento de tráfego pago.",
         },
         {
-          headline: "Projetos que viram um ralo de dinheiro",
-          copy: "A agência ou o dev freelancer promete para 30 dias e demora 6 meses. O código fica uma bagunça, o escopo estoura e você gasta o triplo do orçamento original para ter algo que mal funciona.",
+          headline: "Atrasos e estouro de orçamento",
+          copy: "Promessas de 30 dias que viram 6 meses. Código confuso e custos que dobram no meio do caminho.",
         },
         {
-          headline: "Sistemas que não escalam",
-          copy: "Sua operação cresceu, mas o seu sistema travou? Processos manuais e plataformas engessadas matam a sua produtividade diária. O seu gargalo não é a equipe, é a falta de tecnologia de verdade.",
+          headline: "Sistemas que travam no crescimento",
+          copy: "Processos manuais e plataformas engessadas geram gargalos que travam a produtividade da sua equipe.",
         },
         {
-          headline: "O tráfego sobe, o site cai",
-          copy: "Basta lançar uma campanha forte para o site sair do ar ou os leads sumirem no meio do caminho. Falta de confiabilidade na infraestrutura destrói completamente o ROI da sua publicidade.",
+          headline: "Quedas nos picos de tráfego",
+          copy: "Campanhas fortes que derrubam o site. Falta de estabilidade destrói o retorno do seu investimento.",
         },
       ],
     },
@@ -50,28 +56,28 @@ export const translations = {
     // ─── Benefits ─────────────────────────────────────────────────────────────
     benefits: {
       kicker: "A solução",
-      heading: "Minha Engenharia de Produto entrega:",
-      cta: "Falar comigo",
+      heading: "Engenharia focada em resultados:",
+      cta: "Fazer diagnóstico",
       items: [
         {
-          headline: "Crescimento Acelerado e Inovação Contínua",
-          copy: "Desenvolvo sistemas modernos e escaláveis que permitem ao seu negócio crescer sem limites, adaptando-se rapidamente às demandas do mercado e superando a concorrência.",
-          accent: "Crescimento sem teto",
+          headline: "Velocidade e Conversão",
+          copy: "Páginas carregando em menos de 1 segundo para converter mais visitantes em clientes pagantes.",
+          accent: "Alta velocidade",
         },
         {
-          headline: "Previsibilidade e Controle de Projetos",
-          copy: "Com uma abordagem pragmática e processos claros, garanto entregas dentro do prazo e do orçamento, transformando a complexidade técnica em resultados de negócio concretos.",
-          accent: "Prazos respeitados",
+          headline: "Entregas no Prazo",
+          copy: "Cronograma claro, escopo fechado e comunicação constante do primeiro dia à entrega final.",
+          accent: "Sem surpresas",
         },
         {
-          headline: "Produtos Digitais que Geram Valor",
-          copy: "Transformo suas ideias em aplicações web, sistemas internos e produtos SaaS intuitivos e eficientes, que resolvem problemas reais e encantam seus usuários.",
-          accent: "Da ideia ao produto",
+          headline: "Sistemas Sob Medida",
+          copy: "Softwares intuitivos e automatizados que eliminam tarefas manuais e organizam sua operação.",
+          accent: "Eficiência total",
         },
         {
-          headline: "Confiança e Estabilidade Operacional",
-          copy: "Construo softwares robustos, testados e observáveis, minimizando falhas e garantindo a estabilidade que seu negócio precisa para operar com tranquilidade.",
-          accent: "Zero surpresas",
+          headline: "Estabilidade Garantida",
+          copy: "Infraestrutura moderna que suporta picos de tráfego e vendas sem sair do ar.",
+          accent: "Disponibilidade 24/7",
         },
       ],
     },
@@ -93,25 +99,25 @@ export const translations = {
     // ─── About ────────────────────────────────────────────────────────────────
     about: {
       kicker: "Perfil",
-      headingLine1: "Produto.",
-      headingLine2: "Engenharia.",
-      headingLine3: "Confiança.",
-      cta: "Pare de perder dinheiro com software. Fale comigo.",
-      ctaMobile: "Pare de perder dinheiro com software",
-      p1: "Um negócio estagnado digitalmente perde muito dinheiro. Minha missão é acabar com sistemas ineficientes e páginas lentas. Não vendo apenas código, entrego verdadeiras máquinas de conversão para colocar o seu faturamento em outro patamar.",
-      p2: "Abordagem pragmática e consultiva: entendo o problema antes de qualquer linha de código, projeto com clareza e entrego com previsibilidade. Porque uma arquitetura sólida não é custo, é investimento.",
+      headingLine1: "Clareza.",
+      headingLine2: "Performance.",
+      headingLine3: "Resultado.",
+      cta: "Falar com Thomas no WhatsApp",
+      ctaMobile: "Falar no WhatsApp",
+      p1: "Desenvolvo aplicações web e sistemas completos desde 2023, do banco de dados à interface gráfica.",
+      p2: "Entendo o problema do seu negócio antes de escrever código. O objetivo é criar soluções simples, rápidas e lucrativas.",
       pillars: [
         {
           title: "Produto",
-          text: "Decisões técnicas guiadas pelo impacto real no usuário e no resultado do negócio.",
+          text: "Decisões orientadas ao resultado e ao retorno financeiro do cliente.",
         },
         {
           title: "Engenharia",
-          text: "Sistemas escaláveis, código limpo e arquiteturas que crescem junto com sua empresa.",
+          text: "Código limpo, arquitetura sólida e sistemas fáceis de manter.",
         },
         {
-          title: "Confiança",
-          text: "Sem dores de cabeça com atrasos. Projetos escaláveis, focados em gerar receita desde o primeiro dia de lançamento.",
+          title: "Previsibilidade",
+          text: "Prazos cumpridos à risca e comunicação direta em cada etapa.",
         },
       ],
     },
@@ -119,81 +125,80 @@ export const translations = {
     // ─── Tech Expertise ───────────────────────────────────────────────────────
     techExpertise: {
       kicker: "Stack",
-      headingMobile: "Stack.",
-      headingDesktop: "Ferramentas & tecnologias.",
-      subtitle: "Stack moderna, em uso em projetos reais.",
+      headingMobile: "Tecnologias.",
+      headingDesktop: "Tecnologias & Ferramentas.",
+      subtitle: "Stack moderna utilizada em projetos reais de alta escala.",
       groups: [
         {
           category: "Frontend",
-          description: "Interfaces modernas e de alta performance.",
+          description: "Interfaces rápidas e responsivas.",
         },
         {
           category: "Backend",
-          description: "APIs robustas e lógica de negócio escalável.",
+          description: "APIs seguras e arquitetura escalável.",
         },
         {
           category: "Banco de Dados",
-          description: "Modelagem com ORMs modernos.",
+          description: "Modelagem otimizada de dados.",
         },
         {
           category: "Infraestrutura",
-          description: "Deploy e pipelines em produção.",
+          description: "Deploy contínuo e computação na nuvem.",
         },
       ],
     },
 
     // ─── Engineering Approach ─────────────────────────────────────────────────
     engineering: {
-      kicker: "Sem surpresas durante o projeto",
-      heading: "Um processo transparente do primeiro contato até a entrega.",
-      body: "Você acompanha cada etapa do desenvolvimento e sabe exatamente o que está sendo construído. Cronograma definido, escopo documentado, aprovação em cada etapa e código entregue ao final.",
+      kicker: "Processo direto",
+      heading: "Transparência do primeiro contato até a entrega.",
+      body: "Acompanhe cada passo com prazos claros, alinhamentos constantes e entregas funcionais.",
       steps: [
         {
-          title: "Descoberta",
+          title: "1. Diagnóstico",
           description:
-            "Imersão profunda nos requisitos de negócio, necessidades do usuário e restrições técnicas antes de qualquer linha de código.",
-          detail: "Design de sistema, modelagem de domínio e análise de viabilidade técnica.",
+            "Entendimento das necessidades do negócio e definição da melhor solução.",
+          detail: "Escopo, arquitetura inicial e estimativa.",
         },
         {
-          title: "Arquitetura",
-          description: "Projetar sistemas escaláveis e resilientes utilizando paradigmas modernos.",
-          detail: "Microsserviços, Monorepos, Serverless e arquiteturas orientadas a eventos.",
+          title: "2. Arquitetura",
+          description: "Projetar interfaces rápidas e estruturas de dados eficientes.",
+          detail: "Design limpo e banco otimizado.",
         },
         {
-          title: "Desenvolvimento",
+          title: "3. Desenvolvimento",
           description:
-            "Escrever código limpo, de fácil manutenção e type-safe com foco nos princípios SOLID.",
-          detail: "Frontend component-first, backend RESTful e queries de banco otimizadas.",
+            "Construção com tecnologias modernas e foco em segurança.",
+          detail: "Frontend intuitivo e backend escalável.",
         },
         {
-          title: "Testes",
+          title: "4. Testes",
           description:
-            "Garantir confiabilidade e prevenir regressões por meio de testes automatizados.",
-          detail: "Testes unitários, de integração e fluxos end-to-end (E2E).",
+            "Garantia de funcionamento correto em todos os dispositivos.",
+          detail: "Testes de velocidade, links e formulários.",
         },
         {
-          title: "Deploy",
-          description: "Pipelines de entrega automatizadas garantindo releases sem downtime.",
-          detail: "CI/CD, containerização com Docker, AWS e edge networks Vercel.",
+          title: "5. Publicação",
+          description: "Deploy em servidores de alta disponibilidade sem quedas.",
+          detail: "Publicação na nuvem e configuração.",
         },
         {
-          title: "Melhoria Contínua",
+          title: "6. Acompanhamento",
           description:
-            "Monitorar, perfilar e iterar com base em dados reais de usuário e métricas.",
-          detail:
-            "Observabilidade, logging, otimização de performance e redução de dívida técnica.",
+            "Suporte pós-lançamento e acompanhamento de resultados.",
+          detail: "Garantia contínua e ajustes.",
         },
       ],
     },
 
     // ─── Home CTA ─────────────────────────────────────────────────────────────
     homeCta: {
-      kicker: "Próximo passo",
-      line1: "O próximo sistema da",
-      line2: "sua empresa pode começar hoje.",
-      body: "Solicite uma análise gratuita do seu projeto. Em até 24 horas você recebe um plano inicial com escopo, prazo e estimativa de investimento.",
-      ctaPrimary: "Solicitar análise gratuita",
-      ctaSecondary: "Ver todos os projetos",
+      kicker: "Vamos conversar?",
+      line1: "Pronto para escalar o seu",
+      line2: "projeto com tecnologia de ponta?",
+      body: "Faça um diagnóstico gratuito. Em menos de 24 horas envio um plano inicial com escopo, prazo e estimativa.",
+      ctaPrimary: "Fazer Diagnóstico Grátis",
+      ctaSecondary: "Ver Todos os Projetos",
     },
   },
 
@@ -214,60 +219,63 @@ export const translations = {
     },
 
     hero: {
-      tagline: "Product Engineer · Conversion Focused",
-      title: "Thomas Eduardo - Product Engineer",
+      tagline: "Software Engineer, Results Driven",
+      title: "Thomas Eduardo - Software Engineer",
       description:
-        "Is your website costing you sales? I build high-performance landing pages and systems focused on conversion, speed, and real revenue for your business.",
+        "I build high-converting landing pages and custom web applications focused on speed, profitability, and business impact.",
+      ctaPrimary: "Get Free Diagnosis",
+      ctaSecondary: "View Projects",
+      socialProof: "Production systems and pages generating revenue",
       scroll: "scroll",
     },
 
     painPoints: {
-      kicker: "Sounds familiar?",
-      heading: "Your operation is losing time and money.",
+      kicker: "Real bottlenecks",
+      heading: "Is your business losing sales and time?",
       items: [
         {
-          headline: "You're losing sales because of slow load times",
-          copy: "Every second your site or system takes to load drives leads away. A generic or bloated setup burns your ad budget and sends customers straight to competitors.",
+          headline: "Slow load times killing conversion",
+          copy: "Every extra second drives users away. Heavy sites waste your ad budget.",
         },
         {
-          headline: "Projects that turn into a money pit",
-          copy: "The agency or freelancer promises 30 days and delivers in 6 months. The code is a mess, scope explodes, and you spend triple the original budget for something that barely works.",
+          headline: "Project delays & budget blowouts",
+          copy: "30-day promises turning into 6 months. Unclear code doubling costs.",
         },
         {
-          headline: "Systems that can't scale",
-          copy: "Your operation grew, but your system froze? Manual processes and rigid platforms kill your daily productivity. Your bottleneck isn't the team — it's the lack of real technology.",
+          headline: "Systems freezing under growth",
+          copy: "Manual tasks and rigid platforms blocking your team's daily productivity.",
         },
         {
-          headline: "Traffic spikes, website crashes",
-          copy: "Launch one strong campaign and your site goes down or leads vanish halfway through. Unreliable infrastructure completely destroys your advertising ROI.",
+          headline: "Traffic spikes crashing your site",
+          copy: "Strong ad campaigns taking down your site, destroying marketing ROI.",
         },
       ],
     },
 
     benefits: {
       kicker: "The solution",
-      heading: "My Product Engineering delivers:",
-      cta: "Talk to me",
+      heading: "Engineering focused on results:",
+      cta: "Get free diagnosis",
       items: [
         {
-          headline: "Accelerated Growth & Continuous Innovation",
-          copy: "I build modern, scalable systems that let your business grow without limits, adapting quickly to market demands and staying ahead of the competition.",
-          accent: "Limitless growth",
+          headline: "Speed and Conversion",
+          copy: "Pages loading under 1 second to convert more visitors into paying customers.",
+          accent: "Lightning fast",
         },
         {
-          headline: "Predictability & Project Control",
-          copy: "With a pragmatic approach and clear processes, I ensure on-time, on-budget delivery — turning technical complexity into concrete business results.",
-          accent: "Deadlines respected",
+          headline: "On-Time Delivery",
+          copy: "Clear timeline, locked scope, and constant updates from day one.",
+          accent: "No surprises",
         },
         {
-          headline: "Digital Products That Generate Value",
-          copy: "I turn your ideas into intuitive, efficient web apps, internal systems, and SaaS products that solve real problems and delight your users.",
-          accent: "From idea to product",
+          headline: "Custom Web Software",
+          copy: "Automated and intuitive platforms that eliminate manual tasks.",
+          accent: "Full efficiency",
         },
         {
-          headline: "Reliability & Operational Stability",
-          copy: "I build robust, tested, and observable software — minimizing failures and ensuring the stability your business needs to operate with confidence.",
-          accent: "Zero surprises",
+          headline: "Guaranteed Stability",
+          copy: "Modern architecture that handles traffic spikes without downtime.",
+          accent: "24/7 uptime",
         },
       ],
     },
@@ -281,110 +289,104 @@ export const translations = {
 
     testimonials: {
       kicker: "Testimonials",
-      heading: "What clients say.",
+      heading: "Client feedback.",
     },
 
     about: {
       kicker: "Profile",
-      headingLine1: "Product.",
-      headingLine2: "Engineering.",
-      headingLine3: "Trust.",
-      cta: "Stop losing money on software. Let's talk.",
-      ctaMobile: "Stop losing money on software",
-      p1: "A digitally stagnant business loses a lot of money. My mission is to eliminate inefficient systems and slow pages. I don't just sell code — I deliver real conversion machines to take your revenue to another level.",
-      p2: "Pragmatic and consultative approach: I understand the problem before writing a single line of code, design with clarity, and deliver with predictability. Because solid architecture isn't a cost — it's an investment.",
+      headingLine1: "Clarity.",
+      headingLine2: "Performance.",
+      headingLine3: "Results.",
+      cta: "Talk with Thomas on WhatsApp",
+      ctaMobile: "Talk on WhatsApp",
+      p1: "Building full-stack web applications and software systems since 2023.",
+      p2: "I analyze your business problem before writing any code. The goal is simple, fast, and profitable solutions.",
       pillars: [
         {
           title: "Product",
-          text: "Technical decisions guided by real user impact and business outcomes.",
+          text: "Technical decisions driven by business outcome and financial return.",
         },
         {
           title: "Engineering",
-          text: "Scalable systems, clean code, and architectures that grow with your company.",
+          text: "Clean code, solid architecture, and easy to maintain systems.",
         },
         {
-          title: "Trust",
-          text: "No headaches with delays. Scalable projects focused on generating revenue from day one.",
+          title: "Predictability",
+          text: "Strict deadlines met with direct communication at every step.",
         },
       ],
     },
 
     techExpertise: {
       kicker: "Stack",
-      headingMobile: "Stack.",
-      headingDesktop: "Tools & technologies.",
-      subtitle: "Modern stack, used in real-world projects.",
+      headingMobile: "Technologies.",
+      headingDesktop: "Technologies & Tools.",
+      subtitle: "Modern stack used in real production projects.",
       groups: [
         {
           category: "Frontend",
-          description: "Modern, high-performance interfaces.",
+          description: "Fast, responsive web interfaces.",
         },
         {
           category: "Backend",
-          description: "Robust APIs and scalable business logic.",
+          description: "Secure APIs and scalable architecture.",
         },
         {
           category: "Database",
-          description: "Modeling with modern ORMs.",
+          description: "Optimized data modeling.",
         },
         {
           category: "Infrastructure",
-          description: "Deploy and pipelines in production.",
+          description: "Continuous deployment and cloud setups.",
         },
       ],
     },
 
     engineering: {
-      kicker: "No surprises during the project",
-      heading: "A transparent process from first contact to delivery.",
-      body: "You follow every step of development and know exactly what is being built. Defined schedule, documented scope, sign-off at each stage, and code delivered at the end.",
+      kicker: "Direct process",
+      heading: "Full transparency from first call to deployment.",
+      body: "Track every step with clear timelines, frequent updates, and working software.",
       steps: [
         {
-          title: "Discovery",
-          description:
-            "Deep immersion into business requirements, user needs, and technical constraints before writing a single line of code.",
-          detail: "System design, domain modeling, and technical feasibility analysis.",
+          title: "1. Diagnosis",
+          description: "Understanding requirements and defining the best technical approach.",
+          detail: "Scope, architecture, and timeline.",
         },
         {
-          title: "Architecture",
-          description: "Designing scalable and resilient systems using modern paradigms.",
-          detail: "Microservices, Monorepos, Serverless, and event-driven architectures.",
+          title: "2. Architecture",
+          description: "Designing fast interfaces and efficient database structures.",
+          detail: "Clean design and database tuning.",
         },
         {
-          title: "Development",
-          description:
-            "Writing clean, maintainable, type-safe code focused on SOLID principles.",
-          detail: "Component-first frontend, RESTful backend, and optimized database queries.",
+          title: "3. Development",
+          description: "Building with modern tools and security best practices.",
+          detail: "Intuitive frontend and scalable backend.",
         },
         {
-          title: "Testing",
-          description: "Ensuring reliability and preventing regressions through automated tests.",
-          detail: "Unit, integration, and end-to-end (E2E) test flows.",
+          title: "4. Testing",
+          description: "Validating performance and responsiveness on all devices.",
+          detail: "Speed, link, and form checks.",
         },
         {
-          title: "Deployment",
-          description: "Automated delivery pipelines ensuring zero-downtime releases.",
-          detail: "CI/CD, Docker containerization, AWS, and Vercel edge networks.",
+          title: "5. Deployment",
+          description: "Zero-downtime deployment on cloud servers.",
+          detail: "Domain and cloud configuration.",
         },
         {
-          title: "Continuous Improvement",
-          description: "Monitor, profile, and iterate based on real user data and metrics.",
-          detail:
-            "Observability, logging, performance optimization, and technical debt reduction.",
+          title: "6. Support",
+          description: "Post-launch support and ongoing performance checks.",
+          detail: "Maintenance and continuous improvements.",
         },
       ],
     },
 
     homeCta: {
-      kicker: "Next step",
-      line1: "Your company's next system",
-      line2: "can start today.",
-      body: "Request a free project analysis. Within 24 hours you'll receive an initial plan with scope, timeline, and investment estimate.",
-      ctaPrimary: "Request free analysis",
-      ctaSecondary: "View all projects",
+      kicker: "Let's talk?",
+      line1: "Ready to scale your business",
+      line2: "with high-end software?",
+      body: "Request a free diagnosis. Get a clear plan with scope and timeline within 24 hours.",
+      ctaPrimary: "Get Free Diagnosis",
+      ctaSecondary: "View All Projects",
     },
   },
-} as const
-
-export type Locale = keyof typeof translations
-export type Translations = (typeof translations)[Locale]
+}

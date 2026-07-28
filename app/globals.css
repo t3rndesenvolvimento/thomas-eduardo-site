@@ -40,33 +40,33 @@
   color-scheme: dark;
 
   --background: #000000;
-  --foreground: #FFFFFF;
+  --foreground: #0A0A0C;
 
-  --card: #000000;
-  --card-foreground: #FFFFFF;
+  --card: #1e1d1d;
+  --card-foreground: #0A0A0C;
 
-  --popover: #000000;
-  --popover-foreground: #FFFFFF;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A0A0C;
 
-  --primary: #FFFFFF;
-  --primary-foreground: #000000;
+  --primary: #0A0A0C;
+  --primary-foreground: #FFFFFF;
 
-  --secondary: #000000;
-  --secondary-foreground: #FFFFFF;
+  --secondary: #F1F1F4;
+  --secondary-foreground: #0A0A0C;
 
-  --muted: #000000;
-  --muted-foreground: #C2C2C2;
+  --muted: #F4F4F6;
+  --muted-foreground: #52525B;
 
-  --accent: #111111;
-  --accent-foreground: #FFFFFF;
+  --accent: #E4E4E7;
+  --accent-foreground: #0A0A0C;
 
-  --border: #111111;
-  --input: #000000;
-  --ring: #FFFFFF;
+  --border: #E4E4E7;
+  --input: #F4F4F6;
+  --ring: #0A0A0C;
 
-  --success: #22C55E;
-  --warning: #F59E0B;
-  --danger: #EF4444;
+  --success: #16A34A;
+  --warning: #D97706;
+  --danger: #DC2626;
 
   --radius: 0.5rem;
 }
@@ -659,8 +659,8 @@
 .hero-frame {
   border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 50px 140px -30px rgba(0, 0, 0, 0.85),
-    inset 0 0 80px rgba(255, 255, 255, 0.04);
+  box-shadow: 0 50px 140px -30px rgb(0, 0, 0),
+    inset 0 0 80px rgba(0, 0, 0, 0.04);
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   transform-style: preserve-3d;
 }

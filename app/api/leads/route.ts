@@ -3,32 +3,28 @@ import connectToDatabase from "@/lib/db"
 import Lead from "@/models/Lead"
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 export async function POST(req: Request) {
   try {
     const body = await req.json()
     const { name, email, phone, company, role, service, painPoint, budget } = body
 
-    if (!name || !email || !phone || !company || !role || !service || !painPoint || !budget) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
-    }
-
     await connectToDatabase()
 
     const lead = await Lead.create({
-      name,
-      email,
-      phone,
-      company,
-      role,
-      service,
-      painPoint,
-      budget,
+      name: (name && String(name).trim()) || "Lead sem nome",
+      email: (email && String(email).trim()) || "contato@cliente.com",
+      phone: (phone && String(phone).trim()) || "Não informado",
+      company: (company && String(company).trim()) || "Não informada",
+      role: (role && String(role).trim()) || "Não informado",
+      service: (service && String(service).trim()) || "Geral",
+      painPoint: (painPoint && String(painPoint).trim()) || "Não especificado",
+      budget: (budget && String(budget).trim()) || "A combinar",
     })
 
     // Enviar e-mail de proposta com Resend
-    if (process.env.RESEND_API_KEY) {
+    if (resend) {
       try {
         await resend.emails.send({
           from: "Thomas Eduardo <contato@thomaseduardo.com.br>",

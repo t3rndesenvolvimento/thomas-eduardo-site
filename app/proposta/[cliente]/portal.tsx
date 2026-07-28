@@ -380,6 +380,7 @@ function NextStepsSection({ proposal, proposalId }: { proposal: ProposalData, pr
   const [signatureName, setSignatureName] = useState("")
   const [isSigning, setIsSigning] = useState(false)
   const [isSigned, setIsSigned] = useState(proposal.status === "aprovada")
+  const [signError, setSignError] = useState<string | null>(null)
   
   const isPaymentUrl = proposal.paymentLink?.startsWith("http")
   const fiftyPercent = proposal.totalValue
@@ -387,11 +388,36 @@ function NextStepsSection({ proposal, proposalId }: { proposal: ProposalData, pr
     : "50%"
 
   const [copied, setCopied] = useState(false)
+  const [isGeneratingMp, setIsGeneratingMp] = useState(false)
+  const [mpError, setMpError] = useState<string | null>(null)
+
+  async function handleDirectMpCheckout() {
+    setIsGeneratingMp(true)
+    setMpError(null)
+    try {
+      const res = await fetch("/api/mercadopago/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ proposalId }),
+      })
+      const data = await res.json()
+      if (res.ok && data.init_point) {
+        window.location.href = data.init_point
+      } else {
+        setMpError(data.error || "Erro ao gerar checkout no Mercado Pago")
+      }
+    } catch (e) {
+      setMpError("Erro de conexão ao redirecionar para o pagamento.")
+    } finally {
+      setIsGeneratingMp(false)
+    }
+  }
 
   async function handleSign(e: React.FormEvent) {
     e.preventDefault()
     if (!signatureName.trim() || !proposalId) return
     setIsSigning(true)
+    setSignError(null)
     
     try {
       const res = await fetch(`/api/propostas/${proposalId}/sign`, {
@@ -403,10 +429,10 @@ function NextStepsSection({ proposal, proposalId }: { proposal: ProposalData, pr
       if (res.ok) {
         setIsSigned(true)
       } else {
-        alert("Erro ao assinar proposta.")
+        setSignError("Não foi possível confirmar a assinatura. Tente novamente.")
       }
     } catch (err) {
-      alert("Erro de conexão.")
+      setSignError("Erro de conexão ao assinar. Verifique a internet e tente novamente.")
     } finally {
       setIsSigning(false)
     }
@@ -447,6 +473,11 @@ function NextStepsSection({ proposal, proposalId }: { proposal: ProposalData, pr
 
       {!isSigned ? (
         <MotionCard>
+          {signError && (
+            <div className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-xs text-red-400 font-medium">
+              {signError}
+            </div>
+          )}
           <div className="mb-6">
             <h3 className="font-display text-xl font-semibold text-foreground">Assinatura Digital</h3>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
@@ -507,37 +538,59 @@ function NextStepsSection({ proposal, proposalId }: { proposal: ProposalData, pr
                 Para darmos início imediato ao projeto, realize o pagamento do sinal ({fiftyPercent}) através do método abaixo.
               </p>
 
+              {mpError && (
+                <div className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3.5 text-xs text-red-400">
+                  {mpError}
+                </div>
+              )}
+
               {proposal.paymentLink ? (
                 isPaymentUrl ? (
                   <a
                     href={proposal.paymentLink}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-4 text-sm font-bold text-black transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-4 text-sm font-bold text-black shadow-lg shadow-emerald-500/20 transition-transform hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    Pagar {fiftyPercent} Agora
+                    Pagar Sinal ({fiftyPercent}) via Mercado Pago (PIX ou Cartão)
                     <ArrowRight className="size-4" />
                   </a>
                 ) : (
-                  <div className="space-y-3">
-                    <p className="text-xs text-muted-foreground">Chave PIX:</p>
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 rounded-lg border border-border/50 bg-black/40 px-4 py-3 font-mono text-sm text-foreground truncate select-all">
-                        {proposal.paymentLink}
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <p className="text-xs text-muted-foreground">Chave PIX:</p>
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 rounded-lg border border-border/50 bg-black/40 px-4 py-3 font-mono text-sm text-foreground truncate select-all">
+                          {proposal.paymentLink}
+                        </div>
+                        <button
+                          onClick={copyPix}
+                          className="flex items-center gap-1.5 rounded-lg bg-foreground px-4 py-3 text-sm font-bold text-background transition-colors hover:bg-foreground/80 shrink-0"
+                        >
+                          {copied ? "Copiado!" : "Copiar PIX"}
+                        </button>
                       </div>
-                      <button
-                        onClick={copyPix}
-                        className="flex items-center gap-1.5 rounded-lg bg-foreground px-4 py-3 text-sm font-bold text-background transition-colors hover:bg-foreground/80 shrink-0"
-                      >
-                        {copied ? "Copiado!" : "Copiar PIX"}
-                      </button>
                     </div>
+
+                    <button
+                      onClick={handleDirectMpCheckout}
+                      disabled={isGeneratingMp}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-sky-500/30 bg-sky-500/10 px-6 py-3.5 text-sm font-bold text-sky-400 hover:bg-sky-500/20 transition-all disabled:opacity-50"
+                    >
+                      {isGeneratingMp ? "Gerando Checkout Mercado Pago..." : `Pagar ${fiftyPercent} via Cartão / PIX (Mercado Pago)`}
+                      <ArrowRight className="size-4" />
+                    </button>
                   </div>
                 )
               ) : (
-                <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4 text-sm text-amber-500/80">
-                  Nenhum método de pagamento configurado. Entre em contato pelo WhatsApp.
-                </div>
+                <button
+                  onClick={handleDirectMpCheckout}
+                  disabled={isGeneratingMp}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-4 text-sm font-bold text-black shadow-lg shadow-emerald-500/20 transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
+                >
+                  {isGeneratingMp ? "Gerando Checkout Mercado Pago..." : `Pagar Sinal (${fiftyPercent}) via Mercado Pago`}
+                  <ArrowRight className="size-4" />
+                </button>
               )}
             </div>
           </div>

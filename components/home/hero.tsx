@@ -12,6 +12,7 @@ import {
 } from "framer-motion"
 import TextPressure from "@/components/ui/text-pressure"
 import { AnimeGridBackground } from "@/components/ui/anime-grid-background"
+import { VantaCloudsBackground } from "@/components/ui/vanta-clouds"
 import Image from "next/image"
 import Link from "next/link"
 import { useI18n } from "@/lib/i18n/context"
@@ -58,7 +59,7 @@ export function Hero() {
   const glareY = useTransform(springY, (v) => `${v * 100}%`)
   const lightX = useTransform(springX, [0, 1], ["18%", "82%"])
   const lightY = useTransform(springY, [0, 1], ["12%", "72%"])
-  const glareBg = useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.22) 0%, transparent 55%)`
+  const glareBg = useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, rgba(0, 0, 0, 0.22) 0%, transparent 55%)`
 
   const handlePointerMove = useCallback(
     (e: PointerEvent) => {
@@ -101,7 +102,7 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative flex h-[100svh] min-h-[32rem] w-full items-end overflow-hidden bg-background [perspective:1400px]"
+      className="relative flex min-h-[85vh] w-full items-start pt-16 sm:pt-24 pb-12 overflow-hidden bg-black text-white"
       data-hero-container
     >
       {/* Cursor customizado + trilha */}
@@ -148,41 +149,22 @@ export function Hero() {
             x: "-50%",
             y: "-50%",
             background:
-              "radial-gradient(circle, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)",
+              "radial-gradient(circle, rgba(0, 0, 0, 0.14) 0%, rgba(2, 2, 2, 0.04) 40%, transparent 70%)",
           }}
           animate={{ opacity: showCursorFx ? 1 : 0.5 }}
           transition={{ duration: 0.4 }}
         />
       )}
 
-      {/* Frame 3D de fundo */}
+      {/* Frame de fundo estável */}
       <motion.div
-        className="absolute inset-0 z-0 overflow-hidden"
-        style={
-          reduceMotion
-            ? undefined
-            : {
-              rotateX,
-              rotateY,
-              transformStyle: "preserve-3d",
-              transformOrigin: "center center",
-            }
-        }
-        initial={reduceMotion ? false : { opacity: 0, scale: 1.06, y: 24 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
+        className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1.1, ease: EASE_OUT }}
       >
-        <Image
-          src="/herofundo.jpg"
-          alt="Hero Background"
-          fill
-          priority
-          className="object-cover opacity-60"
-        />
-        <AnimeGridBackground />
-
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background via-background/35 to-transparent" />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-background/40 via-transparent to-transparent" />
+        <VantaCloudsBackground />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black via-transparent to-black/30" />
 
         {!reduceMotion && (
           <motion.div
@@ -193,12 +175,12 @@ export function Hero() {
         )}
       </motion.div>
 
-      <div className="site-shell relative z-10 w-full pb-[max(4.5rem,env(safe-area-inset-bottom)+3.25rem)] pt-24">
+      <div className="site-shell relative z-10 w-full pb-[max(3rem,env(safe-area-inset-bottom)+2rem)] pt-10 sm:pt-14 md:pt-16 flex flex-col items-center text-center">
         <motion.p
           initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ delay: 0.25, duration: 0.7, ease: EASE_OUT }}
-          className="mb-3 text-[11px] font-light uppercase tracking-widest text-white/70"
+          className="mb-3 text-[11px] font-light uppercase tracking-widest text-white/70 text-center"
         >
           {t.hero.tagline}
         </motion.p>
@@ -207,16 +189,16 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
-          className="max-w-3xl text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white leading-[1.1] tracking-tight"
+          className="max-w-5xl text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-[1.08] tracking-tight text-center"
         >
-          {t.hero.title}
+          {t.hero.title.replace("Engenheiro de Software", "Engenheiro\u00A0de\u00A0Software").replace("Software Engineer", "Software\u00A0Engineer")}
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.65, duration: 0.6 }}
-          className="mt-6 max-w-xl text-lg sm:text-xl leading-relaxed text-white/70"
+          className="mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed text-white/70 text-center"
         >
           {t.hero.description}
         </motion.p>
@@ -225,17 +207,17 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.85, duration: 0.6 }}
-          className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
+          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
         >
           <Link 
             href="/diagnostico" 
-            className="flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[13px] font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 active:scale-95"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[13px] font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-white/10"
           >
             {t.hero.ctaPrimary} <ArrowRight className="size-4" />
           </Link>
           <Link 
             href="#projetos" 
-            className="flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-[13px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10 hover:border-white/40 active:scale-95"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-[13px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10 hover:border-white/40 active:scale-95"
           >
             <PlayCircle className="size-4" /> {t.hero.ctaSecondary}
           </Link>
@@ -245,7 +227,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.0, duration: 0.6 }}
-          className="mt-8 flex items-center gap-3 text-sm text-white/50 font-mono"
+          className="mt-8 flex items-center justify-center gap-3 text-sm text-white/50 font-mono"
         >
           <div className="flex -space-x-2">
             {[1, 2, 3, 4].map((i) => (
@@ -256,26 +238,6 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <motion.div
-        aria-hidden
-        className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-      >
-        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/35">
-          {t.hero.scroll}
-        </span>
-        <motion.span
-          className="h-8 w-px origin-top bg-gradient-to-b from-white/50 to-transparent"
-          animate={
-            reduceMotion
-              ? undefined
-              : { scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.8, 0.3] }
-          }
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </motion.div>
     </section>
   )
 }

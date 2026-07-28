@@ -46,6 +46,7 @@ type LeadData = {
   budget: string
   service: string
   role: string
+  internalNotes?: string
   proposal?: ProposalFormData
 }
 
@@ -143,7 +144,7 @@ function Input({
   placeholder,
   className,
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & {
+}: Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> & {
   value: string
   onChange: (v: string) => void
   className?: string
@@ -287,6 +288,7 @@ export function ProposalForm({ lead }: { lead: LeadData }) {
     },
   )
 
+  const [internalNotes, setInternalNotes] = useState(lead.internalNotes || "")
   const [step, setStep] = useState<StepId>("basics")
   const [saving, setSaving] = useState(false)
   const [savedLink, setSavedLink] = useState<string | null>(
@@ -299,6 +301,49 @@ export function ProposalForm({ lead }: { lead: LeadData }) {
   const [hourlyRate, setHourlyRate] = useState(150)
   const [estimatedHours, setEstimatedHours] = useState(20)
   const [urgencyMult, setUrgencyMult] = useState(1)
+  const [isGeneratingMp, setIsGeneratingMp] = useState(false)
+
+  async function generateMercadoPagoLink() {
+    setIsGeneratingMp(true)
+    try {
+      const res = await fetch("/api/mercadopago/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          proposalId: lead._id,
+          title: `Sinal do Projeto - ${form.clientName || lead.name}`,
+        }),
+      })
+      const data = await res.json()
+      if (res.ok && data.init_point) {
+        update("paymentLink", data.init_point)
+      } else {
+        alert(data.error || "Erro ao gerar link no Mercado Pago")
+      }
+    } catch (e) {
+      alert("Erro de conexão com Mercado Pago")
+    } finally {
+      setIsGeneratingMp(false)
+    }
+  }
+
+  useEffect(() => {
+    async function loadGlobalConfig() {
+      try {
+        const res = await fetch("/api/config")
+        const data = await res.json()
+        if (data.success && data.config) {
+          if (data.config.hourlyRate) setHourlyRate(data.config.hourlyRate)
+          if (data.config.pixKey && !form.paymentLink) {
+            update("paymentLink", `Chave PIX: ${data.config.pixKey}`)
+          }
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    loadGlobalConfig()
+  }, [])
 
   useEffect(() => {
     if (calcMode) {
@@ -346,7 +391,7 @@ export function ProposalForm({ lead }: { lead: LeadData }) {
       const res = await fetch(`/api/propostas/${lead._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ proposal: form }),
+        body: JSON.stringify({ proposal: form, internalNotes }),
       })
       const data = await res.json()
       if (data.success) {
@@ -473,13 +518,23 @@ export function ProposalForm({ lead }: { lead: LeadData }) {
                 />
               </div>
               <div>
-                <Label>Tempo de Leitura</Label>
+                <Label>Tempo de Leitura Estimado</Label>
                 <Input
                   value={form.readingTime}
                   onChange={(v) => update("readingTime", v)}
                   placeholder="5 min"
                 />
               </div>
+            </div>
+
+            <div className="pt-2 border-t border-white/[0.06]">
+              <Label>Anotações Internas do Lead (CRM Privado)</Label>
+              <Textarea
+                value={internalNotes}
+                onChange={(v) => setInternalNotes(v)}
+                placeholder="Anotações privadas para você (ex: 'Cliente prefere reuniões à tarde', 'Pediu desconto de 5%')..."
+                rows={2}
+              />
             </div>
           </div>
         )}
@@ -689,11 +744,26 @@ export function ProposalForm({ lead }: { lead: LeadData }) {
               </div>
             </div>
             <div>
-              <Label>Link de Pagamento (Checkout ou Chave PIX) - Opcional</Label>
+              <div className="flex items-center justify-between gap-2 mb-1.5">
+                <Label>Link de Pagamento (Checkout ou Chave PIX)</Label>
+                <button
+                  type="button"
+                  onClick={generateMercadoPagoLink}
+                  disabled={isGeneratingMp}
+                  className="flex items-center gap-1.5 rounded-lg border border-sky-500/30 bg-sky-500/10 px-3 py-1.5 text-xs font-bold text-sky-400 hover:bg-sky-500/20 transition-colors disabled:opacity-50"
+                >
+                  {isGeneratingMp ? (
+                    <Loader2 className="size-3.5 animate-spin" />
+                  ) : (
+                    <Zap className="size-3.5 text-sky-400" />
+                  )}
+                  Gerar Mercado Pago
+                </button>
+              </div>
               <Input
                 value={form.paymentLink || ""}
                 onChange={(v) => update("paymentLink", v)}
-                placeholder="Ex: https://pay.kiwify.com.br/... ou chave PIX"
+                placeholder="Ex: https://www.mercadopago.com.br/checkout/... ou chave PIX"
                 className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-[13px] text-white placeholder:text-neutral-600 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/10 transition-colors mb-4"
               />
             </div>

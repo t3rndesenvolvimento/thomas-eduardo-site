@@ -73,6 +73,7 @@ export interface ILead extends Document {
   painPoint: string
   budget: string
   status: "novo" | "contatado" | "proposta"
+  internalNotes?: string
   proposal?: IProposal
   createdAt: Date
 }
@@ -86,6 +87,7 @@ const LeadSchema: Schema = new Schema({
   service: { type: String, required: true },
   painPoint: { type: String, required: true },
   budget: { type: String, required: true },
+  internalNotes: { type: String, default: "" },
   status: {
     type: String,
     default: "novo",

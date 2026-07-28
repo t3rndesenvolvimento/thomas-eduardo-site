@@ -25,10 +25,12 @@ const IMAGES = PROJECTS.map((project) => ({
 
 export function OliverParallax() {
   return (
-    <section className="relative overflow-hidden border-t border-border/15 bg-background py-10 sm:py-14 md:py-16">
-      <div className="site-shell mb-5 sm:mb-8">
-        <span className="label-kicker mb-2 block sm:mb-3">Galeria</span>
-        <h2 className="text-h2 max-w-xl text-foreground">
+    <section className="relative overflow-hidden border-t border-white/10 bg-black text-white py-12 sm:py-16 md:py-20">
+      <div className="site-shell relative z-10 max-w-5xl mx-auto mb-4 sm:mb-10">
+        <span className="text-xs font-mono font-semibold uppercase tracking-widest text-white/60 mb-2 block">
+          Galeria
+        </span>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight text-white">
           <span className="sm:hidden">Galeria visual.</span>
           <span className="hidden sm:inline">Interface e arquitetura em profundidade.</span>
         </h2>
@@ -114,7 +116,7 @@ const Carousel_001 = ({
         {images.map((image, index) => (
           <SwiperSlide
             key={index}
-            className="!h-[200px] w-full overflow-hidden rounded-xl border border-white/10 bg-card sm:!h-[280px] md:!h-[320px]"
+            className="!h-[200px] w-full overflow-hidden rounded-2xl border border-white/10 bg-card shadow-xl sm:!h-[280px] md:!h-[340px]"
           >
             <Image
               className="h-full w-full object-cover"
@@ -127,10 +129,10 @@ const Carousel_001 = ({
         ))}
         {showNavigation && (
           <div className="hidden sm:block">
-            <div className="swiper-button-next after:hidden !right-3 flex !h-10 !w-10 items-center justify-center rounded-full border border-white/10 bg-background/50 backdrop-blur-md">
+            <div className="swiper-button-next after:hidden !right-3 flex !h-10 !w-10 items-center justify-center rounded-full border border-white/15 bg-black/80 shadow-md backdrop-blur-md transition-transform hover:scale-110">
               <ChevronRightIcon className="h-5 w-5 text-white" />
             </div>
-            <div className="swiper-button-prev after:hidden !left-3 flex !h-10 !w-10 items-center justify-center rounded-full border border-white/10 bg-background/50 backdrop-blur-md">
+            <div className="swiper-button-prev after:hidden !left-3 flex !h-10 !w-10 items-center justify-center rounded-full border border-white/15 bg-black/80 shadow-md backdrop-blur-md transition-transform hover:scale-110">
               <ChevronLeftIcon className="h-5 w-5 text-white" />
             </div>
           </div>

@@ -8,9 +8,9 @@ const ALL_CLIENTS = [...CLIENTS, ...CLIENTS]
 
 export function ClientsCarousel({
   title = "Marcas & parceiros",
-  titleClassName = "label-kicker text-muted-foreground/50",
-  className = "relative overflow-hidden border-y border-border/40 py-6 sm:py-9",
-  fadeClassName = "from-background",
+  titleClassName = "label-kicker text-white/50",
+  className = "relative overflow-hidden border-y border-white/10 bg-black text-white py-6 sm:py-9",
+  fadeClassName = "from-black",
 }: {
   title?: string
   titleClassName?: string
@@ -35,11 +35,11 @@ export function ClientsCarousel({
           {ALL_CLIENTS.map((client, i) => (
             <motion.div
               key={`${client.name}-${i}`}
-              className="flex h-8 shrink-0 items-center px-1.5 opacity-40 transition-opacity duration-300 hover:opacity-90 sm:h-10 sm:px-2"
+              className="flex h-8 shrink-0 items-center px-1.5 opacity-50 transition-opacity duration-300 hover:opacity-100 sm:h-10 sm:px-2"
               whileHover={{ scale: 1.08, y: -2 }}
               transition={{ type: "spring", stiffness: 400, damping: 22 }}
             >
-              <span className="font-display whitespace-nowrap text-base font-semibold uppercase tracking-[0.04em] text-foreground/80 sm:text-xl md:text-2xl">
+              <span className="font-display whitespace-nowrap text-base font-semibold uppercase tracking-[0.04em] text-white/90 sm:text-xl md:text-2xl">
                 {client.name}
               </span>
             </motion.div>

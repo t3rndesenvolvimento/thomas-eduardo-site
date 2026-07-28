@@ -9,6 +9,7 @@ import { Testimonials } from "@/components/home/testimonials"
 import { About } from "@/components/home/about"
 import { PageAnimator } from "@/components/page-animator"
 import { HomeCta } from "@/components/home/home-cta"
+import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section"
 
 const TechExpertise = dynamic(
   () =>
@@ -35,62 +36,68 @@ const OliverParallax = dynamic(
 )
 
 export const metadata: Metadata = {
-  title: "Copywriter & Estrategista Digital | Thomas Eduardo",
+  title: "Engenheiro de Software & Produto | Thomas Eduardo",
   description:
-    "Especialista em copywriting de alta conversão para negócios digitais. Aumente suas vendas com textos que vendem. Solicite um orçamento.",
+    "Desenvolvimento de landing pages e sistemas web de alta performance focados em conversão, velocidade e receita real para empresas.",
   alternates: { canonical: "/" },
 }
 
-/**
- * Estrutura de funil de vendas:
- * 1. Hero           - Atenção + proposta de valor + CTA primário
- * 2. ClientsCarousel - Prova social imediata (logos de clientes)
- * 3. PainPoints     - Agitação da dor do público-alvo
- * 4. Benefits       - Solução: o que minha engenharia entrega
- * 5. ProjectsStack  - Portfólio: prova de capacidade
- * 6. About          - Humanização + perfil
- * 7. TechExpertise  - Stack técnica
- * 8. EngineeringApproach - Processo: transparência e confiança
- * 9. OliverParallax - Galeria visual dos projetos
- * 10. HomeCta       - CTA final de conversão
- */
 export default function HomePage() {
   return (
     <>
       <PageAnimator />
 
-      {/* 1. Hero: Atenção e proposta de valor */}
+      {/* 1. Hero */}
       <Hero />
 
-      {/* 2. Prova social imediata */}
+      {/* 2. Marcas & Parceiros (Social Proof) */}
       <ClientsCarousel />
 
-      {/* 3. Agitação da dor */}
-      <PainPoints />
+      {/* Sticky Stacking Cards Scroll Reveal após Marcas & Parceiros */}
+      <div className="relative z-10 flex flex-col space-y-[-2rem] sm:space-y-[-3rem]">
+        {/* 3. Agitação da dor */}
+        <ScrollRevealSection index={0}>
+          <PainPoints />
+        </ScrollRevealSection>
 
-      {/* 4. Solução e benefícios */}
-      <Benefits />
+        {/* 4. Portfólio / Projetos */}
+        <ProjectsStack />
 
-      {/* 5. Portfólio / Projetos */}
-      <ProjectsStack />
+        {/* 5. Solução e benefícios */}
+        <ScrollRevealSection index={1}>
+          <Benefits />
+        </ScrollRevealSection>
 
-      {/* 6. Depoimentos / Prova Social */}
-      <Testimonials />
+        {/* 6. Depoimentos */}
+        <ScrollRevealSection index={2}>
+          <Testimonials />
+        </ScrollRevealSection>
 
-      {/* 7. Sobre / Humanização */}
-      <About />
+        {/* 7. Sobre */}
+        <ScrollRevealSection index={3}>
+          <About />
+        </ScrollRevealSection>
 
-      {/* 7. Stack técnica */}
-      <TechExpertise />
+        {/* 8. Processo de trabalho */}
+        <ScrollRevealSection index={4}>
+          <EngineeringApproach />
+        </ScrollRevealSection>
 
-      {/* 8. Processo de trabalho */}
-      <EngineeringApproach />
+        {/* 9. Stack técnica */}
+        <ScrollRevealSection index={5}>
+          <TechExpertise />
+        </ScrollRevealSection>
 
-      {/* 9. Galeria visual */}
-      <OliverParallax />
+        {/* 10. Galeria visual */}
+        <ScrollRevealSection index={6}>
+          <OliverParallax />
+        </ScrollRevealSection>
 
-      {/* 10. CTA Final */}
-      <HomeCta />
+        {/* 11. CTA Final */}
+        <ScrollRevealSection index={7}>
+          <HomeCta />
+        </ScrollRevealSection>
+      </div>
     </>
   )
 }

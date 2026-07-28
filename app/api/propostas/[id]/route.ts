@@ -22,6 +22,7 @@ export async function PUT(
       {
         $set: {
           proposal: body.proposal,
+          internalNotes: body.internalNotes !== undefined ? body.internalNotes : lead.internalNotes,
           status: "proposta",
         },
       },

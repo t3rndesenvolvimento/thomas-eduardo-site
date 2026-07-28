@@ -5,7 +5,7 @@ import Link from "next/link"
 import { PROJECTS } from "@/lib/data"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ProjectCard } from "@/components/project-card"
-import { ArrowDown, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { useI18n } from "@/lib/i18n/context"
 
 export function ProjectsStack({
@@ -20,43 +20,34 @@ export function ProjectsStack({
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
+    offset: ["start start", "end end"],
   })
 
-  // Extra end slot (arrow) needs a bit more horizontal travel
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-65%"])
-
-  const scrollToNextSection = () => {
-    const section = containerRef.current
-    if (!section) return
-    const next = section.nextElementSibling as HTMLElement | null
-    if (next) {
-      next.scrollIntoView({ behavior: "smooth", block: "start" })
-      return
-    }
-    window.scrollBy({ top: window.innerHeight * 0.85, behavior: "smooth" })
-  }
+  // Smooth pinned horizontal scroll travel from 0% to end card
+  const x = useTransform(scrollYProgress, [0.05, 0.92], ["0%", "-78%"])
 
   return (
-    <section ref={containerRef} id="projects" className="relative h-[450vh] w-full sm:h-[300vh]">
-      <div className="sticky top-0 flex h-[100dvh] flex-col justify-center overflow-hidden bg-background">
+    <section ref={containerRef} id="projects" className="relative h-[200vh] w-full sm:h-[350vh]">
+      <div className="sticky top-0 flex h-[100dvh] w-full flex-col justify-between overflow-hidden rounded-t-[2rem] sm:rounded-t-[3.5rem] border-t border-black/10 shadow-[0_-20px_50px_rgba(0,0,0,0.06)] bg-white text-black py-3 sm:py-8">
+        {/* Section Header - Non-overlapping layout at the top */}
         {!hideHeader && (
-          <div className="site-shell pointer-events-none absolute left-0 right-0 top-6 z-10 sm:top-12 md:top-20">
-            <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-               <div>
+          <div className="site-shell z-20 w-full shrink-0 pt-1 sm:pt-12 md:pt-14 pb-1">
+            <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
                 <motion.p
                   initial={{ opacity: 0, y: 8 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="label-kicker mb-2 sm:mb-3"
+                  className="text-xs font-mono font-semibold uppercase tracking-widest text-black/60 mb-1 sm:mb-2"
                 >
                   {t.projects.kicker}
                 </motion.p>
                 <motion.h2
                   initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="text-h2 font-normal tracking-[-0.02em] text-foreground"
+                  className="text-xl sm:text-3xl md:text-4xl font-display font-bold tracking-tight text-black"
                 >
                   {t.projects.heading}
                 </motion.h2>
@@ -66,11 +57,11 @@ export function ProjectsStack({
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="pointer-events-auto hidden sm:block"
+                className="hidden sm:block"
               >
                 <Link
                   href="/projetos"
-                  className="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.12em] text-white/50 transition-colors hover:text-white"
+                  className="group inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white shadow-md transition-all hover:scale-105 active:scale-95"
                 >
                   {t.projects.viewAll}
                   <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -80,25 +71,26 @@ export function ProjectsStack({
           </div>
         )}
 
-        <div className="mt-28 flex w-full items-center pl-[max(env(safe-area-inset-left),1vw)] sm:mt-10 md:mt-0 sm:pl-[max(env(safe-area-inset-left),4vw)]">
-          <motion.div style={{ x }} className="flex items-center gap-6 pr-6 sm:gap-8 sm:pr-12">
+        {/* Cards Carousel Container - Centered between header and footer */}
+        <div className="flex-1 flex items-center w-full my-auto pl-[max(env(safe-area-inset-left),3vw)] sm:pl-[max(env(safe-area-inset-left),5vw)]">
+          <motion.div style={{ x }} className="flex items-center gap-4 pr-4 sm:gap-8 sm:pr-12">
             {projects.map((project, i) => (
               <div
                 key={project.title}
-                className="w-[85vw] flex-shrink-0 sm:w-[600px] lg:w-[800px]"
+                className="w-[82vw] flex-shrink-0 sm:w-[540px] lg:w-[720px]"
               >
                 <ProjectCard project={project} index={i} />
               </div>
             ))}
-
           </motion.div>
         </div>
 
+        {/* Mobile View All Link */}
         {!hideHeader && (
-          <div className="site-shell mt-8 flex justify-center sm:hidden">
+          <div className="site-shell shrink-0 pb-2 flex justify-center sm:hidden z-20">
             <Link
               href="/projetos"
-              className="group inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.12em] text-white/55 transition-colors hover:text-white"
+              className="group inline-flex items-center gap-2 rounded-full bg-black px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-white shadow-md transition-all hover:scale-105 active:scale-95"
             >
               {t.projects.viewAllMobile}
               <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />

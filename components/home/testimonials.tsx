@@ -44,7 +44,8 @@ const REVIEWS = [
   },
 ]
 
-
+const ROW1 = [...REVIEWS.slice(0, 3), ...REVIEWS.slice(0, 3), ...REVIEWS.slice(0, 3)]
+const ROW2 = [...REVIEWS.slice(3, 6), ...REVIEWS.slice(3, 6), ...REVIEWS.slice(3, 6)]
 
 function ReviewCard({
   review,
@@ -52,34 +53,36 @@ function ReviewCard({
   review: (typeof REVIEWS)[0]
 }) {
   return (
-    <div className="group relative flex w-full flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-white/[0.025] p-6 transition-colors duration-300 hover:border-white/10 hover:bg-white/[0.045]">
-      {/* Quote icon */}
-      <Quote
-        className="mb-4 size-5 shrink-0 text-white/15"
-        strokeWidth={1.5}
-      />
+    <div className="group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#0d0e14] p-5 sm:p-6 transition-all duration-300 hover:border-white/20 hover:bg-[#131522] shadow-lg">
+      <div>
+        {/* Quote icon */}
+        <Quote
+          className="mb-3 size-4 shrink-0 text-white/30"
+          strokeWidth={1.5}
+        />
 
-      {/* Body */}
-      <p className="flex-1 text-[13px] leading-relaxed text-muted-foreground/75 sm:text-sm">
-        {review.body}
-      </p>
+        {/* Body */}
+        <p className="text-xs leading-relaxed text-white/80 sm:text-sm">
+          {review.body}
+        </p>
+      </div>
 
       {/* Author */}
-      <div className="mt-5 flex items-center gap-3 border-t border-white/5 pt-4">
+      <div className="mt-4 flex items-center gap-3 border-t border-white/10 pt-3.5">
         {/* Avatar */}
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-full overflow-hidden bg-white/5">
+        <div className="flex size-8 shrink-0 items-center justify-center rounded-full overflow-hidden bg-white/10 border border-white/15">
           <Avatar 
             size={32}
             name={review.author}
             variant="beam"
-            colors={["#000000", "#ffffff", "#b48dff", "#fc805a", "#a6ff4c"]}
+            colors={["#000000", "#ffffff", "#3b82f6", "#10b981", "#a855f7"]}
           />
         </div>
         <div className="min-w-0">
-          <p className="truncate text-xs font-semibold text-white/80">
+          <p className="truncate text-xs font-bold text-white">
             {review.author}
           </p>
-          <p className="truncate font-mono text-[10px] text-white/35">
+          <p className="truncate font-mono text-[10px] text-white/40">
             {review.title}
           </p>
         </div>
@@ -93,35 +96,63 @@ export function Testimonials() {
   return (
     <section
       id="depoimentos"
-      className="group relative border-t border-border/10 bg-background py-16 sm:py-24"
+      className="group relative border-t border-white/10 bg-black text-white py-14 sm:py-20 md:py-24"
     >
       {/* Header */}
-      <div className="site-shell relative z-10 mb-10 sm:mb-14">
+      <div className="site-shell relative z-10 mb-5 sm:mb-12 max-w-4xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="label-kicker mb-3 text-muted-foreground/60"
+          className="text-xs font-mono font-semibold uppercase tracking-widest text-white/60 mb-2"
         >
           {t.testimonials.kicker}
-          </motion.p>
+        </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-h2 max-w-xl font-normal text-foreground tracking-[-0.02em]"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight"
         >
           {t.testimonials.heading}
         </motion.h2>
       </div>
 
-      {/* Grid of reviews */}
-      <div className="site-shell">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 sm:gap-6">
-          {REVIEWS.map((review) => (
-            <ReviewCard key={review.id} review={review} />
-          ))}
+      {/* Infinite 2-Row Marquee Carousel */}
+      <div className="relative overflow-hidden flex flex-col gap-4 sm:gap-6 py-2">
+        {/* Fade Edges */}
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 bg-gradient-to-r from-black to-transparent sm:w-28" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 bg-gradient-to-l from-black to-transparent sm:w-28" />
+
+        {/* Row 1 - Left Infinite Carousel */}
+        <div className="flex overflow-hidden">
+          <motion.div
+            className="flex shrink-0 gap-4 sm:gap-6"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 38, ease: "linear", repeat: Infinity }}
+          >
+            {ROW1.map((review, i) => (
+              <div key={`${review.id}-row1-${i}`} className="w-[300px] sm:w-[380px] shrink-0">
+                <ReviewCard review={review} />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Row 2 - Right Infinite Carousel */}
+        <div className="flex overflow-hidden">
+          <motion.div
+            className="flex shrink-0 gap-4 sm:gap-6"
+            animate={{ x: ["-50%", "0%"] }}
+            transition={{ duration: 42, ease: "linear", repeat: Infinity }}
+          >
+            {ROW2.map((review, i) => (
+              <div key={`${review.id}-row2-${i}`} className="w-[300px] sm:w-[380px] shrink-0">
+                <ReviewCard review={review} />
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

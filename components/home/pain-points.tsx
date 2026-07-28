@@ -1,41 +1,42 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { AlertCircle, Clock, TrendingDown, ShieldAlert } from "lucide-react"
+import { Zap, Crosshair, Gauge, Terminal } from "lucide-react"
 import { Shape3 } from "@/components/ui/abstract-shapes"
 import { useI18n } from "@/lib/i18n/context"
 
-const ICONS = [TrendingDown, Clock, AlertCircle, ShieldAlert]
+const ICONS = [Zap, Crosshair, Gauge, Terminal]
+const ACCENTS = ["IMPACTO EM VENDAS", "RISCO DE PRAZO", "GARGALO OPERACIONAL", "PERDA DE CONVERSÃO"]
 
 export function PainPoints() {
   const { t } = useI18n()
   return (
     <section
       id="problemas"
-      className="relative overflow-hidden border-t border-border/10 bg-background py-16 sm:py-24 md:py-32"
+      className="relative overflow-hidden border-t border-white/10 bg-black text-white py-8 sm:py-16 md:py-20"
     >
       {/* subtle background texture */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(255,255,255,0.03),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(255,255,255,0.05),transparent_70%)]"
       />
 
       <motion.div
-        className="pointer-events-none absolute right-10 bottom-20 z-0 w-32 opacity-20 sm:w-40 mix-blend-screen"
+        className="pointer-events-none absolute right-10 bottom-10 z-0 w-28 opacity-15 sm:w-36 mix-blend-screen"
         animate={{ rotate: -360, scale: [1, 1.05, 1] }}
         transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
       >
         <Shape3 />
       </motion.div>
 
-      <div className="site-shell relative z-10">
+      <div className="site-shell relative z-10 max-w-4xl mx-auto">
         {/* Section header */}
-        <div className="mb-12 max-w-2xl sm:mb-16">
+        <div className="mb-4 max-w-2xl sm:mb-10">
           <motion.p
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="label-kicker mb-3 text-muted-foreground/60"
+            className="text-xs font-mono font-semibold uppercase tracking-widest text-white/60 mb-2"
           >
             {t.painPoints.kicker}
           </motion.p>
@@ -44,50 +45,53 @@ export function PainPoints() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-h2 font-normal text-foreground tracking-[-0.02em]"
+            className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white tracking-tight"
           >
             {t.painPoints.heading}
           </motion.h2>
         </div>
 
-        {/* Pain point cards */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
+        {/* Pain point cards - 100% Identical to Benefits & Testimonials */}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
           {t.painPoints.items.map((item, index) => {
-            const Icon = ICONS[index]
+            const Icon = ICONS[index % ICONS.length]
             const num = String(index + 1).padStart(2, "0")
+            const accent = ACCENTS[index % ACCENTS.length]
             return (
               <motion.div
                 key={num}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                whileHover={{ y: -3 }}
                 transition={{
-                  duration: 0.55,
-                  delay: index * 0.08,
+                  duration: 0.45,
+                  delay: index * 0.06,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-500 hover:border-white/10 hover:bg-white/[0.04] sm:p-8"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#0d0e14] p-4 sm:p-6 text-white transition-all duration-300 hover:border-white/20 hover:bg-[#131522] shadow-lg"
               >
-                <div className="mb-5 flex items-center justify-between">
-                  <Icon className="size-6 text-white/70" strokeWidth={1.5} />
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-white/20">
-                    {num}
-                  </span>
+                <div>
+                  <div className="mb-2 sm:mb-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex size-8 items-center justify-center rounded-xl bg-white text-black shadow-sm">
+                        <Icon className="size-4 text-black" strokeWidth={2} />
+                      </div>
+                      <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/40">
+                        {num}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="mb-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-white/40">
+                    {accent}
+                  </p>
+                  <h3 className="mb-2 font-display text-base sm:text-lg font-bold leading-snug tracking-tight text-white">
+                    {item.headline}
+                  </h3>
+                  <p className="text-xs leading-relaxed text-white/80 sm:text-sm">
+                    {item.copy}
+                  </p>
                 </div>
-                <h3 className="mb-3 font-display text-base font-semibold leading-snug tracking-[-0.01em] text-foreground sm:text-lg">
-                  {item.headline}
-                </h3>
-                <p className="text-[13px] leading-relaxed text-muted-foreground/70 sm:text-sm">
-                  {item.copy}
-                </p>
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    background:
-                      "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255,255,255,0.04), transparent)",
-                  }}
-                />
               </motion.div>
             )
           })}

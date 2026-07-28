@@ -1,6 +1,5 @@
 "use client"
 
-import { ENGINEERING_APPROACH } from "@/lib/data"
 import { Search, Network, Code, TestTube, Rocket, IterationCcw } from "lucide-react"
 import { motion } from "framer-motion"
 import { Shape6 } from "@/components/ui/abstract-shapes"
@@ -13,23 +12,23 @@ export function EngineeringApproach() {
   return (
     <section
       id="engineering"
-      className="relative overflow-hidden bg-background py-10 sm:py-16 md:py-20"
+      className="relative overflow-hidden border-t border-white/10 bg-black text-white py-12 sm:py-16 md:py-20"
     >
       <motion.div
-        className="pointer-events-none absolute right-10 top-1/4 z-0 w-32 opacity-20 sm:w-40 mix-blend-screen"
+        className="pointer-events-none absolute right-10 top-1/4 z-0 w-32 opacity-15 sm:w-40 mix-blend-screen"
         animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
       >
         <Shape6 />
       </motion.div>
 
-      <div className="site-shell relative z-10">
-        <div className="mb-8 max-w-3xl sm:mb-12">
+      <div className="site-shell relative z-10 max-w-5xl mx-auto">
+        <div className="mb-5 max-w-3xl sm:mb-12">
           <motion.p
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="label-kicker mb-2 sm:mb-3 text-white/40"
+            className="text-xs font-mono font-semibold uppercase tracking-widest text-white/60 mb-2 sm:mb-3"
           >
             {t.engineering.kicker}
           </motion.p>
@@ -37,7 +36,7 @@ export function EngineeringApproach() {
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-h2 font-normal text-foreground tracking-[-0.02em] text-balance"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight"
           >
             {t.engineering.heading}
           </motion.h2>
@@ -45,39 +44,41 @@ export function EngineeringApproach() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-4 text-base font-light leading-relaxed text-muted-foreground sm:text-lg"
+            className="mt-3 text-sm leading-relaxed text-white/80 sm:text-base md:text-lg"
           >
             {t.engineering.body}
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {t.engineering.steps.map((item, i) => {
             const Icon = ICONS[i] || Code
             return (
               <div
                 key={item.title}
-                className="group relative flex flex-col rounded-xl border border-border/20 bg-transparent p-4 transition-colors hover:border-white/15 hover:bg-white/[0.02] sm:rounded-2xl sm:p-5 md:p-6"
+                className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#0d0e14] p-5 sm:p-6 transition-all hover:border-white/20 hover:bg-[#131522] shadow-md"
               >
-                <div className="mb-3 flex items-center justify-between sm:mb-4">
-                  <div className="flex size-9 items-center justify-center rounded-lg bg-secondary/50 text-foreground/80 sm:size-10 sm:rounded-xl">
-                    <Icon className="size-4" />
+                <div>
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="flex size-9 items-center justify-center rounded-xl bg-white text-black shadow-sm">
+                      <Icon className="size-4 text-black" strokeWidth={2} />
+                    </div>
+                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-white/40">
+                      0{i + 1}
+                    </span>
                   </div>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/35">
-                    0{i + 1}
-                  </span>
+
+                  <h3 className="font-display text-base font-bold uppercase tracking-tight text-white sm:text-lg">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-2 text-xs leading-relaxed text-white/75 sm:text-sm">
+                    {item.description}
+                  </p>
                 </div>
 
-                <h3 className="font-display text-base font-semibold uppercase tracking-[0.02em] text-foreground sm:text-lg">
-                  {item.title}
-                </h3>
-
-                <p className="mt-1.5 text-sm font-light leading-relaxed text-muted-foreground sm:mt-2">
-                  {item.description}
-                </p>
-
-                <div className="mt-auto pt-5">
-                  <p className="border-t border-border/20 pt-3 font-mono text-[10px] uppercase tracking-wider text-muted-foreground/50">
+                <div className="mt-5 pt-4 border-t border-white/10">
+                  <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-white/50">
                     {item.detail}
                   </p>
                 </div>
