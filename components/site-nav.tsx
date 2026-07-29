@@ -3,12 +3,13 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Menu, X, ArrowRight, Sparkles, MessageCircle, Globe, ChevronRight } from "lucide-react"
+import { Menu, X, ChevronRight, Globe } from "lucide-react"
 import { Logo } from "@/components/logo"
 import { cn } from "@/lib/utils"
 import { useI18n } from "@/lib/i18n/context"
 import { motion, AnimatePresence } from "framer-motion"
 import { Icon } from "@iconify/react"
+import { CONTACT } from "@/lib/data"
 
 export function SiteNav() {
   const pathname = usePathname()
@@ -20,11 +21,8 @@ export function SiteNav() {
     { href: "/", label: t.nav.home, index: "01" },
     { href: "/sobre", label: t.nav.about, index: "02" },
     { href: "/projetos", label: t.nav.projects, index: "03" },
-    { href: "/processo", label: t.nav.process, index: "04" },
+    { href: "/freelance", label: t.nav.contact, index: "04" },
   ]
-
-  const WHATSAPP =
-    "https://wa.me/5511977070209?text=Ol%C3%A1%20Thomas%2C%20quero%20falar%20sobre%20um%20projeto."
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -33,7 +31,6 @@ export function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden"
@@ -59,7 +56,6 @@ export function SiteNav() {
           "pointer-events-auto mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4",
         )}
       >
-        {/* Logo - left */}
         <div
           className={cn(
             "rounded-full transition-all duration-300 bg-black text-white px-3 py-1.5 border border-white/15 shadow-md backdrop-blur-md",
@@ -68,11 +64,10 @@ export function SiteNav() {
           <Logo size={24} className="gap-2" />
         </div>
 
-        {/* Compact centered pill nav - desktop */}
         <nav
           className={cn(
             "absolute left-1/2 top-3 hidden -translate-x-1/2 items-center gap-0.5 rounded-full border px-1.5 py-1 transition-all duration-300 sm:top-4 md:flex",
-            pathname === "/diagnostico"
+            pathname === "/diagnostico" || pathname === "/freelance"
               ? "border-black/20 bg-black text-white shadow-xl"
               : scrolled
                 ? "border-white/10 bg-black/80 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl"
@@ -97,7 +92,6 @@ export function SiteNav() {
             )
           })}
 
-          {/* Language Toggle Desktop */}
           <button
             type="button"
             onClick={toggleLocale}
@@ -108,16 +102,14 @@ export function SiteNav() {
           </button>
         </nav>
 
-        {/* Spacer to balance logo width on desktop */}
         <div className="hidden w-[100px] md:block" aria-hidden />
 
-        {/* Mobile menu button */}
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           className={cn(
             "inline-flex size-11 items-center justify-center rounded-full border md:hidden transition-colors shadow-lg",
-            pathname === "/diagnostico"
+            pathname === "/diagnostico" || pathname === "/freelance"
               ? "border-white/20 bg-black text-white"
               : scrolled
                 ? "border-white/15 bg-black/90 backdrop-blur-xl text-white"
@@ -130,7 +122,6 @@ export function SiteNav() {
         </button>
       </div>
 
-      {/* Modern Redesigned Mobile Fullscreen Overlay Sheet - Dark Theme */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -140,7 +131,6 @@ export function SiteNav() {
             transition={{ duration: 0.25 }}
             className="pointer-events-auto fixed inset-0 z-50 flex flex-col bg-[#08090d]/95 backdrop-blur-2xl text-white md:hidden overflow-y-auto"
           >
-            {/* Mobile Header Bar */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 shrink-0">
               <Logo size={24} className="gap-2" />
               <button
@@ -153,9 +143,7 @@ export function SiteNav() {
               </button>
             </div>
 
-            {/* Navigation Body */}
             <div className="flex-1 px-6 py-8 flex flex-col justify-between gap-8">
-              {/* Links List */}
               <div className="flex flex-col gap-3">
                 <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white/60 mb-2">
                   Navegação
@@ -204,28 +192,33 @@ export function SiteNav() {
                 })}
               </div>
 
-              {/* CTAs & Quick Actions */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
                 className="flex flex-col gap-3"
               >
-
-
+                <Link
+                  href={CONTACT.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-black transition-all active:scale-95"
+                >
+                  LinkedIn
+                </Link>
                 <a
-                  href={WHATSAPP}
+                  href={CONTACT.whatsapp_real}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => setOpen(false)}
                   className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10 active:scale-95"
                 >
                   <Icon icon="mdi:whatsapp" className="size-5 text-white/80" />
-                  WhatsApp Direto
+                  WhatsApp
                 </a>
               </motion.div>
 
-              {/* Utility Footer */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -234,7 +227,6 @@ export function SiteNav() {
               >
                 <span className="font-mono text-[11px]">São Paulo, SP</span>
 
-                {/* Language Switcher */}
                 <button
                   type="button"
                   onClick={toggleLocale}
