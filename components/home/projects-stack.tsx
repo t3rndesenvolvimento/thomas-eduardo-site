@@ -68,6 +68,15 @@ export function ProjectsStack({
  >
  {t.projects.heading}
  </motion.h2>
+ <motion.p
+ initial={{ opacity: 0, y: 8 }}
+ whileInView={{ opacity: 1, y: 0 }}
+ viewport={{ once: true }}
+ transition={{ duration: 0.5, delay: 0.1 }}
+ className="mt-1 text-sm sm:text-base font-light text-black/60 max-w-[28ch] text-balance"
+ >
+ {t.projects.subtitle}
+ </motion.p>
  </div>
 
  <motion.div
