@@ -164,8 +164,15 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/*
+          No-JS / failed-JS fallback: hide black boot cover and unlock scroll.
+          Also covered by CSS animation in globals.css (loader-boot-fade).
+        */}
         <noscript>
-          <style>{`html.loader-boot::before { display: none !important; }`}</style>
+          <style>{`
+            html.loader-boot::before { display: none !important; }
+            html.loader-active, html.loader-active body { overflow: auto !important; }
+          `}</style>
         </noscript>
       </head>
       <body
@@ -220,13 +227,13 @@ gtag('config', 'G-V95BP4VGFX');`,
           }}
         />
 
-        {/* PostHog Analytics */}
+        {/* PostHog Analytics — api_host must be PostHog cloud, not this site */}
         <Script
           id="posthog"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `!function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-posthog.init('phc_wNUQSvKvfSVPCDCh7DTHk7hzkSc7A4agRv6LLAWWr2qn',{api_host:'https://www.thomaseduardo.com.br',ui_host:'https://us.posthog.com',defaults:'2026-05-30',person_profiles:'identified_only'});`,
+posthog.init('phc_wNUQSvKvfSVPCDCh7DTHk7hzkSc7A4agRv6LLAWWr2qn',{api_host:'https://us.i.posthog.com',ui_host:'https://us.posthog.com',defaults:'2026-05-30',person_profiles:'identified_only'});`,
           }}
         />
 

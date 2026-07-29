@@ -12,6 +12,11 @@ import { PageTransition } from "@/components/page-transition"
 import { Toaster } from "sileo"
 import { I18nProvider } from "@/lib/i18n/context"
 
+function clearLoaderClasses() {
+  if (typeof document === "undefined") return
+  document.documentElement.classList.remove("loader-boot", "loader-active")
+}
+
 /**
  * Shell component that conditionally renders the site chrome
  * (nav, footer, cursor, whatsapp, etc.) based on the current route.
@@ -25,13 +30,15 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
 
   // On chrome-free routes the PageLoader component is absent,
   // so we must remove the loader classes ourselves to unblock the page.
+  // Also run a short safety timeout on every mount as a belt-and-suspenders fix.
   useEffect(() => {
     if (isChromeFree) {
-      document.documentElement.classList.remove(
-        "loader-boot",
-        "loader-active",
-      )
+      clearLoaderClasses()
+      return
     }
+
+    const safety = window.setTimeout(clearLoaderClasses, 2500)
+    return () => window.clearTimeout(safety)
   }, [isChromeFree])
 
   if (isChromeFree) {

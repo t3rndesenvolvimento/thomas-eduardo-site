@@ -4,10 +4,24 @@ import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { usePathname } from "next/navigation"
 
+const LOADER_DURATION_MS = 900
+const SAFETY_TIMEOUT_MS = 2000
+const EXIT_DURATION_MS = 500
+
+function clearLoaderClasses() {
+  if (typeof document === "undefined") return
+  document.documentElement.classList.remove("loader-boot", "loader-active")
+}
+
 /**
  * Intro loader - monochrome, brand mark + progress.
  * Full-page wipe on exit. Respects prefers-reduced-motion.
  * Skipped on utility routes (/r redirects, linkbio, curriculo).
+ *
+ * Safety: never leaves the page stuck on a black screen.
+ * - Hard timeout removes loader classes after SAFETY_TIMEOUT_MS
+ * - Cleanup always runs on unmount
+ * - CSS fallback in globals.css fades the boot cover even without JS
  */
 export function PageLoader() {
   const pathname = usePathname()
@@ -23,10 +37,24 @@ export function PageLoader() {
   const [progress, setProgress] = useState(0)
   const [phase, setPhase] = useState<"loading" | "exit" | "done">("loading")
 
+  // Global safety net: never stay black longer than SAFETY_TIMEOUT_MS
+  useEffect(() => {
+    const safety = window.setTimeout(() => {
+      clearLoaderClasses()
+      setPhase("done")
+    }, SAFETY_TIMEOUT_MS)
+
+    return () => {
+      window.clearTimeout(safety)
+      clearLoaderClasses()
+    }
+  }, [])
+
   // Skip routes: only clean up boot classes (render already returns null)
   useEffect(() => {
     if (!skip) return
-    document.documentElement.classList.remove("loader-boot", "loader-active")
+    clearLoaderClasses()
+    setPhase("done")
   }, [skip])
 
   useEffect(() => {
@@ -37,21 +65,20 @@ export function PageLoader() {
     document.documentElement.classList.add("loader-active")
 
     if (reduceMotion) {
-      const t = setTimeout(() => {
+      const t = window.setTimeout(() => {
         setProgress(100)
         setPhase("done")
-        document.documentElement.classList.remove("loader-active")
+        clearLoaderClasses()
       }, 80)
-      return () => clearTimeout(t)
+      return () => window.clearTimeout(t)
     }
 
     let raf = 0
     let start: number | null = null
-    const duration = 1400
 
     const tick = (now: number) => {
       if (start == null) start = now
-      const t = Math.min(1, (now - start) / duration)
+      const t = Math.min(1, (now - start) / LOADER_DURATION_MS)
       // ease-out cubic
       const eased = 1 - (1 - t) ** 3
       setProgress(Math.round(eased * 100))
@@ -66,17 +93,17 @@ export function PageLoader() {
     raf = requestAnimationFrame(tick)
     return () => {
       cancelAnimationFrame(raf)
-      document.documentElement.classList.remove("loader-active", "loader-boot")
+      clearLoaderClasses()
     }
   }, [reduceMotion, skip])
 
   useEffect(() => {
     if (phase !== "exit") return
-    const t = setTimeout(() => {
+    const t = window.setTimeout(() => {
       setPhase("done")
-      document.documentElement.classList.remove("loader-active", "loader-boot")
-    }, 720)
-    return () => clearTimeout(t)
+      clearLoaderClasses()
+    }, EXIT_DURATION_MS)
+    return () => window.clearTimeout(t)
   }, [phase])
 
   if (skip || phase === "done") return null
@@ -87,17 +114,17 @@ export function PageLoader() {
       initial={{ y: 0 }}
       animate={phase === "exit" ? { y: "-100%" } : { y: 0 }}
       transition={{
-        duration: 0.7,
+        duration: EXIT_DURATION_MS / 1000,
         ease: [0.76, 0, 0.24, 1],
       }}
       aria-busy={phase === "loading"}
       aria-live="polite"
       role="status"
     >
-      <span className="sr-only">Carregando</span>
+      <span className="sr-only">Carregando {progress}%</span>
 
       <div className="flex w-full flex-col items-center gap-8 px-6">
-        <div className="spinner"></div>
+        <div className="spinner" aria-hidden />
       </div>
     </motion.div>
   )
