@@ -54,18 +54,18 @@ const PRINCIPLES = [
 
 export default function ProcessPage() {
   return (
-    <main className="min-h-screen bg-[#050505] text-white">
+    <main className="min-h-screen bg-canvas text-zinc-50">
       <PageAnimator />
       <ProcessoChrome>
         <header className="site-shell relative z-10 pt-28 pb-14 sm:pt-36 sm:pb-20">
-          <div className="max-w-3xl rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-10 sm:px-10 sm:py-12">
-            <p className="text-xs font-mono uppercase tracking-widest text-white/40 mb-4">
+          <div className="max-w-3xl rounded-3xl border border-white/[0.08] bg-elevated/50 px-6 py-10 sm:px-10 sm:py-12">
+            <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">
               Processo
             </p>
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]">
               Do problema ao deploy
             </h1>
-            <p className="mt-5 max-w-xl text-base sm:text-lg text-white/50 font-light leading-relaxed">
+            <p className="mt-5 max-w-xl text-base sm:text-lg text-zinc-400 font-light leading-relaxed">
               Em time (CLT/PJ) ou em projeto sob demanda: clareza, ownership e
               entrega em produção.
             </p>
@@ -74,13 +74,13 @@ export default function ProcessPage() {
                 href={CONTACT.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-black"
+                className="inline-flex items-center gap-2 rounded-full bg-zinc-50 px-6 py-3 text-xs font-bold uppercase tracking-wider text-zinc-950"
               >
                 LinkedIn <ArrowRight className="size-3.5" />
               </Link>
               <Link
                 href="/freelance"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white/85"
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-xs font-bold uppercase tracking-wider text-zinc-300"
               >
                 Projetos sob demanda
               </Link>
@@ -93,13 +93,13 @@ export default function ProcessPage() {
             {STEPS.map((s) => (
               <div
                 key={s.n}
-                className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-7"
+                className="rounded-2xl border border-white/[0.08] bg-elevated/40 p-6 sm:p-7"
               >
-                <span className="font-mono text-[11px] text-white/35">{s.n}</span>
-                <h2 className="mt-3 font-display text-xl font-semibold tracking-tight">
+                <span className="font-mono text-[11px] text-zinc-600">{s.n}</span>
+                <h2 className="mt-3 font-display text-xl font-semibold tracking-tight text-zinc-50">
                   {s.title}
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-white/50 font-light">
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400 font-light">
                   {s.text}
                 </p>
               </div>
@@ -107,10 +107,10 @@ export default function ProcessPage() {
           </div>
         </section>
 
-        <section className="relative z-10 border-y border-white/10 bg-white text-black">
+        <section className="relative z-10 border-y border-white/[0.06] bg-zinc-50 text-zinc-950">
           <div className="site-shell py-14 sm:py-20 grid gap-10 lg:grid-cols-2 lg:gap-16 items-start">
             <div>
-              <p className="text-xs font-mono uppercase tracking-widest text-black/35 mb-3">
+              <p className="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-3">
                 Princípios
               </p>
               <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">
@@ -121,9 +121,9 @@ export default function ProcessPage() {
               {PRINCIPLES.map((t) => (
                 <li
                   key={t}
-                  className="flex items-start gap-3 text-sm sm:text-base text-black/65"
+                  className="flex items-start gap-3 text-sm sm:text-base text-zinc-600"
                 >
-                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-black text-white">
+                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-zinc-950 text-zinc-50">
                     <Check className="size-3" />
                   </span>
                   {t}
@@ -134,13 +134,13 @@ export default function ProcessPage() {
         </section>
 
         <section className="site-shell relative z-10 py-16 sm:py-24">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 sm:p-12 text-center max-w-3xl mx-auto">
-            <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight">
+          <div className="rounded-3xl border border-white/[0.08] bg-elevated/50 p-8 sm:p-12 text-center max-w-3xl mx-auto">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-zinc-50">
               Quer trabalhar junto?
             </h2>
-            <p className="mt-4 text-white/50 font-light max-w-md mx-auto text-sm sm:text-base">
+            <p className="mt-4 text-zinc-400 font-light max-w-md mx-auto text-sm sm:text-base">
               Engenharia no LinkedIn. Projetos em{" "}
-              <Link href="/freelance" className="text-white underline underline-offset-2">
+              <Link href="/freelance" className="text-zinc-200 underline underline-offset-2">
                 /freelance
               </Link>
               .
@@ -150,13 +150,13 @@ export default function ProcessPage() {
                 href={CONTACT.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-black"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-50 px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-zinc-950"
               >
                 LinkedIn
               </Link>
               <Link
                 href="/projetos"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-zinc-300"
               >
                 Ver projetos
               </Link>
