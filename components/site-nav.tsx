@@ -56,7 +56,7 @@ export function SiteNav() {
       <div className="site-shell flex items-center justify-between py-3.5 sm:py-5">
         <Logo size={20} className="gap-2" />
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {LINKS.map((l) => {
             const active =
               pathname === l.href ||
@@ -78,7 +78,7 @@ export function SiteNav() {
             href={CONTACT.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-2xl bg-brand px-4 py-1.5 text-sm font-semibold text-black hover:brightness-110"
+            className="rounded-full bg-brand px-4 py-1.5 text-sm font-semibold text-black hover:brightness-110"
           >
             LinkedIn
           </a>
@@ -95,7 +95,7 @@ export function SiteNav() {
           type="button"
           onClick={() => setOpen((v) => !v)}
           className="inline-flex size-11 items-center justify-center text-white md:hidden"
-          aria-label={open ? "Fechar" : "Menu"}
+          aria-label={open ? "Close" : "Menu"}
           aria-expanded={open}
         >
           {open ? <CloseIcon size={22} /> : <MenuIcon size={22} />}
@@ -118,7 +118,7 @@ export function SiteNav() {
                   href={l.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "flex min-h-12 items-center text-lg font-display font-semibold",
+                    "flex min-h-12 items-center font-display text-lg font-bold",
                     pathname === l.href ? "text-brand" : "text-white",
                   )}
                 >
@@ -130,7 +130,7 @@ export function SiteNav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-brand text-sm font-semibold text-black"
+                className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-brand text-sm font-semibold text-black"
               >
                 LinkedIn
               </a>

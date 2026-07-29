@@ -16,17 +16,26 @@ export function SiteFooter() {
     return null
 
   return (
-    <footer className="border-t border-white/10 bg-canvas py-10">
-      <div className="site-shell flex flex-col items-center justify-between gap-4 sm:flex-row">
-        <p className="text-xs text-neutral-500">
-          (c) {new Date().getFullYear()} Thomas Eduardo
-        </p>
-        <div className="flex items-center gap-5">
+    <footer className="border-t border-white/10 bg-canvas py-12">
+      <div className="site-shell flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="font-display text-sm font-bold text-white">Thomas Eduardo</p>
+          <p className="mt-1 text-xs text-neutral-500">
+            Full Stack / Product Engineer
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-6">
           <Link href="/projetos" className="text-xs text-neutral-500 hover:text-brand">
-            Projetos
+            Work
           </Link>
           <Link href="/sobre" className="text-xs text-neutral-500 hover:text-brand">
-            Sobre
+            About
+          </Link>
+          <Link href="/processo" className="text-xs text-neutral-500 hover:text-brand">
+            Process
+          </Link>
+          <Link href="/freelance" className="text-xs text-neutral-500 hover:text-brand">
+            On demand
           </Link>
           <a
             href={CONTACT.github}
@@ -47,6 +56,11 @@ export function SiteFooter() {
             <LinkedinIcon size={18} />
           </a>
         </div>
+      </div>
+      <div className="site-shell mt-8 border-t border-white/5 pt-6">
+        <p className="text-[11px] text-neutral-600">
+          (c) {new Date().getFullYear()} Thomas Eduardo · Code that ships.
+        </p>
       </div>
     </footer>
   )

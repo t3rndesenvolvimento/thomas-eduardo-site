@@ -9,25 +9,27 @@ import {
   CheckIcon,
   GithubIcon,
   LinkedinIcon,
-  RocketIcon,
 } from "@/components/brand-icons"
 
 const TIMELINE = [
   {
-    date: "08/2023 – atual",
+    n: "01",
+    date: "08/2023 – present",
     title: "Full Stack / Product Engineer",
-    text: "Produtos web e sistemas: Next.js, React, Node, auth, paineis e deploy.",
+    text: "Web products and systems: Next.js, React, Node, auth, dashboards and deploy.",
   },
   {
+    n: "02",
     date: "2024",
-    title: "AWS re/Start + certificacoes",
-    text: "AWS re/Start, API REST e JWT (Ada), UX (FIAP), IT Essentials (Cisco).",
+    title: "AWS re/Start + certifications",
+    text: "AWS re/Start, REST API & JWT (Ada), UX (FIAP), IT Essentials (Cisco).",
     certs: true,
   },
   {
-    date: "Em andamento",
-    title: "Engenharia de Software — Anhanguera",
-    text: "Arquitetura, cloud e sistemas distribuidos.",
+    n: "03",
+    date: "In progress",
+    title: "Software Engineering — Anhanguera",
+    text: "Architecture, cloud and distributed systems.",
   },
 ]
 
@@ -51,42 +53,39 @@ export default function SobrePage() {
     <main className="min-h-screen bg-canvas text-white">
       <PageAnimator />
 
-      <header className="site-shell max-w-3xl pt-28 pb-10 sm:pt-36 sm:pb-14">
-        <p className="mb-3 inline-flex items-center gap-2 text-sm font-medium text-brand">
-          <RocketIcon size={16} className="text-brand" />
-          Sobre
-        </p>
-        <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight">
+      <header className="site-shell max-w-3xl pt-28 pb-12 sm:pt-36 sm:pb-16">
+        <p className="mb-3 text-sm font-medium text-brand">About</p>
+        <h1 className="font-display text-4xl sm:text-6xl font-extrabold tracking-[-0.03em] leading-[0.95]">
           Thomas Eduardo
         </h1>
-        <p className="mt-2 text-xl text-neutral-400">
+        <p className="mt-3 text-lg sm:text-xl text-neutral-400">
           Full Stack / Product Engineer · Sao Paulo
         </p>
       </header>
 
-      <section className="site-shell max-w-3xl space-y-4 pb-12 text-[15px] leading-relaxed text-neutral-400 sm:text-base">
+      <section className="site-shell max-w-3xl space-y-4 pb-14 text-[15px] leading-relaxed text-neutral-400 sm:text-base">
         <p>
-          Desde 2023 entrego aplicacoes web e sistemas em producao — React,
-          Next.js, TypeScript, Node, dados e deploy. Busco times de produto
-          (CLT ou PJ) onde ownership importa.
+          Since 2023 shipping web apps and systems — React, Next.js, TypeScript,
+          Node, data and deploy. Looking for product teams (CLT or PJ) where
+          ownership matters.
         </p>
         <p>
-          Case principal:{" "}
+          Flagship case:{" "}
           <Link href="/projetos/teron-os" className="text-brand hover:underline">
             TERON OS
           </Link>
-          . Projetos sob demanda em{" "}
+          . On-demand work at{" "}
           <Link href="/freelance" className="text-brand hover:underline">
             /freelance
           </Link>
           .
         </p>
-        <div className="flex flex-wrap gap-3 pt-2">
+        <div className="flex flex-wrap gap-3 pt-3">
           <a
             href={CONTACT.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 rounded-2xl border border-white/15 px-4 text-sm hover:border-brand hover:text-brand"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-4 text-sm hover:border-brand hover:text-brand"
           >
             <LinkedinIcon size={16} />
             LinkedIn
@@ -95,7 +94,7 @@ export default function SobrePage() {
             href={CONTACT.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 rounded-2xl border border-white/15 px-4 text-sm hover:border-brand hover:text-brand"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-4 text-sm hover:border-brand hover:text-brand"
           >
             <GithubIcon size={16} />
             GitHub
@@ -104,12 +103,12 @@ export default function SobrePage() {
       </section>
 
       <section className="site-shell max-w-3xl pb-14">
-        <h2 className="mb-5 text-sm font-medium text-brand">Stack</h2>
+        <p className="mb-5 text-sm font-medium text-brand">Stack</p>
         <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {SKILLS.map((s) => (
             <li
               key={s}
-              className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-neutral-300"
+              className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2.5 text-sm text-neutral-300"
             >
               <CheckIcon size={16} className="shrink-0 text-brand" />
               {s}
@@ -119,15 +118,18 @@ export default function SobrePage() {
       </section>
 
       <section className="site-shell max-w-3xl pb-16 sm:pb-24">
-        <h2 className="mb-8 text-sm font-medium text-brand">Trajetoria</h2>
-        <ol className="space-y-8">
+        <p className="mb-6 text-sm font-medium text-brand">Timeline</p>
+        <ol className="space-y-4">
           {TIMELINE.map((item) => (
             <li
               key={item.title}
-              className="rounded-3xl border border-white/10 bg-surface p-5 sm:p-6"
+              className="rounded-[1.5rem] border border-white/10 bg-surface p-5 sm:p-6"
             >
-              <p className="text-[11px] font-medium text-brand">{item.date}</p>
-              <h3 className="mt-1 font-display text-lg font-bold">{item.title}</h3>
+              <div className="flex items-baseline gap-3">
+                <span className="font-mono text-xs text-brand">{item.n}</span>
+                <span className="text-[11px] text-neutral-500">{item.date}</span>
+              </div>
+              <h2 className="mt-2 font-display text-lg font-bold">{item.title}</h2>
               <p className="mt-1 text-sm text-neutral-400">{item.text}</p>
               {item.certs && (
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -152,15 +154,15 @@ export default function SobrePage() {
       </section>
 
       <section className="site-shell max-w-3xl border-t border-white/10 pb-24 pt-14 text-center">
-        <h2 className="font-display text-2xl sm:text-3xl font-bold">
-          Aberto a oportunidades
+        <h2 className="font-display text-2xl sm:text-4xl font-extrabold tracking-tight">
+          Interested?
         </h2>
-        <p className="mt-3 text-sm text-neutral-400">CLT, PJ ou sob demanda.</p>
+        <p className="mt-3 text-sm text-neutral-400">CLT, PJ or selected projects.</p>
         <a
           href={CONTACT.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-brand px-7 py-3 text-sm font-semibold text-black"
+          className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3 text-sm font-semibold text-black hover:brightness-110"
         >
           LinkedIn
           <ArrowOutIcon size={16} />
