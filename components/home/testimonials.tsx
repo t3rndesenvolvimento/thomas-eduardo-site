@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Quote } from "lucide-react"
 import { useI18n } from "@/lib/i18n/context"
+import { AmbientFrame, ContentFrame } from "@/components/ui/ambient-frame"
 
 const REVIEWS = [
   {
@@ -28,14 +29,17 @@ export function Testimonials() {
   return (
     <section
       id="depoimentos"
-      className="relative bg-black text-white py-20 sm:py-28"
+      className="relative overflow-hidden bg-[#050505] text-white py-20 sm:py-28"
     >
-      <div className="site-shell max-w-5xl mx-auto">
+      <AmbientFrame tone="dark" variant="mesh" />
+      <AmbientFrame tone="dark" variant="corner" className="opacity-60" />
+
+      <div className="site-shell relative z-10 max-w-5xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-xs font-mono font-semibold uppercase tracking-widest text-white/50 mb-3"
+          className="text-xs font-mono font-semibold uppercase tracking-widest text-white/40 mb-3"
         >
           {t.testimonials.kicker}
         </motion.p>
@@ -50,25 +54,26 @@ export function Testimonials() {
 
         <div className="mt-12 grid gap-4 sm:grid-cols-3">
           {REVIEWS.map((r, i) => (
-            <motion.blockquote
+            <motion.div
               key={r.author}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-7"
+              transition={{ delay: i * 0.07 }}
             >
-              <Quote className="size-4 text-white/25 mb-4" strokeWidth={1.5} />
-              <p className="text-sm leading-relaxed text-white/70 flex-1">
-                {r.body}
-              </p>
-              <footer className="mt-6 pt-4 border-t border-white/10">
-                <p className="text-sm font-semibold text-white">{r.author}</p>
-                <p className="text-xs font-mono text-white/40 mt-0.5">
-                  {r.title}
+              <ContentFrame tone="dark" className="flex h-full flex-col p-6 sm:p-7">
+                <Quote className="size-4 text-white/25 mb-4" strokeWidth={1.5} />
+                <p className="text-sm leading-relaxed text-white/65 flex-1">
+                  {r.body}
                 </p>
-              </footer>
-            </motion.blockquote>
+                <footer className="mt-6 pt-4 border-t border-white/10">
+                  <p className="text-sm font-semibold text-white">{r.author}</p>
+                  <p className="text-xs font-mono text-white/35 mt-0.5">
+                    {r.title}
+                  </p>
+                </footer>
+              </ContentFrame>
+            </motion.div>
           ))}
         </div>
       </div>
