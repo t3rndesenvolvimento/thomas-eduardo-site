@@ -71,7 +71,7 @@ justify-between
 
 <SectionHeading
 kicker="Selected Work"
-title="Projetos selecionados"
+title="Projetos"
 />
 
 

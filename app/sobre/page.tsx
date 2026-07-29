@@ -14,6 +14,7 @@ import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { Shape1, Shape2, Shape4 } from "@/components/ui/abstract-shapes"
 import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section"
+import { Coolshape } from "coolshapes-react"
 
 const METRICS = [
  { value: "3+", label: "Anos", detail: "Produto e sistemas" },
@@ -84,7 +85,7 @@ export default function SobrePage() {
 
  <div className="relative z-10 flex flex-col space-y-[-2rem] sm:space-y-[-3rem]">
  <ScrollRevealSection index={0} className="bg-[#0a0a0a]">
- <section className="relative min-h-[100svh] w-full flex items-center overflow-hidden">
+ <section className="relative min-h-[100svh] w-full flex items-end pb-16 lg:pb-0 lg:items-center overflow-hidden">
  {/* Background Video on Left */}
  <div className="absolute left-0 top-0 w-full lg:w-1/2 h-full z-0 opacity-40 lg:opacity-60">
  <video
@@ -105,7 +106,7 @@ export default function SobrePage() {
  <div className="hidden lg:block lg:w-1/2" />
  
  {/* Right Side Content */}
- <div className="lg:w-1/2 lg:pl-16 pt-32 pb-16 lg:py-0">
+ <div className="lg:w-1/2 lg:pl-16 pt-32 pb-8 lg:py-0 mt-auto lg:mt-0">
  <motion.div
  initial={{ opacity: 0, x: 20 }}
  animate={{ opacity: 1, x: 0 }}
@@ -316,9 +317,18 @@ export default function SobrePage() {
  </div>
  </ScrollRevealSection>
 
- {/* Timeline - vertical modern */}
- <ScrollRevealSection index={3} className="py-16 sm:py-24 bg-background">
- <div className="site-shell">
+  {/* Timeline - vertical modern */}
+  <ScrollRevealSection index={3} className="py-16 sm:py-24 bg-background relative overflow-hidden">
+  <motion.div
+  className="pointer-events-none absolute left-0 bottom-0 z-0 opacity-20 mix-blend-screen"
+  animate={{ rotate: 180, scale: [1, 1.1, 1] }}
+  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+  <div className="size-32 sm:size-48">
+  <Coolshape type="star" index={3} noise={true} />
+  </div>
+  </motion.div>
+  <div className="site-shell relative z-10">
  <div className="mb-8 sm:mb-10">
  <p className="label-kicker mb-2">Trajetória</p>
  <h2 className="text-h2 text-white">Experiência e formação.</h2>
@@ -427,7 +437,16 @@ export default function SobrePage() {
  aria-hidden
  className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_50%_100%,rgba(255,255,255,0.06),transparent_60%)]"
  />
- <div className="site-shell relative text-center">
+ <motion.div
+  className="pointer-events-none absolute right-10 top-0 z-0 opacity-20 mix-blend-screen"
+  animate={{ rotate: -180, scale: [1, 1.05, 1] }}
+  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+  <div className="size-32 sm:size-48">
+  <Coolshape type="ellipse" index={1} noise={true} />
+  </div>
+  </motion.div>
+  <div className="site-shell relative text-center z-10">
  <p className="label-kicker mb-4 text-white/45">Próximo passo</p>
  <h2 className="text-[3.5rem] sm:text-7xl lg:text-[7rem] font-display font-bold leading-[0.9] tracking-tight text-white">
  Tem um projeto

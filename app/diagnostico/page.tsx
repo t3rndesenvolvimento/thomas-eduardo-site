@@ -6,6 +6,7 @@ import { PageAnimator } from "@/components/page-animator"
 import { CONTACT, SERVICES } from "@/lib/data"
 import { ArrowLeft, ArrowRight, CheckCircle2, AlertCircle } from "lucide-react"
 import { CtaLink } from "@/components/ui/cta"
+import { Coolshape } from "coolshapes-react"
 
 type FormData = {
   name: string
@@ -109,7 +110,16 @@ export default function DiagnosticoPage() {
     <main className="min-h-screen bg-black text-white flex flex-col font-sans selection:bg-white selection:text-black">
       <PageAnimator />
 
-      <div className="pt-8 sm:pt-12 px-6 flex-1 flex flex-col max-w-4xl mx-auto w-full">
+      <div className="pt-8 sm:pt-12 px-6 flex-1 flex flex-col max-w-4xl mx-auto w-full relative z-10">
+        <motion.div
+          className="pointer-events-none absolute right-10 top-20 z-0 opacity-20 mix-blend-screen"
+          animate={{ rotate: 360, scale: [1, 1.05, 1] }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        >
+          <div className="size-32 sm:size-48">
+            <Coolshape type="circle" index={2} noise={true} />
+          </div>
+        </motion.div>
         <CtaLink
           href="/"
           variant="ghost"

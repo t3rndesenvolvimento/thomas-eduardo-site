@@ -17,6 +17,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useI18n } from "@/lib/i18n/context"
 import { ArrowRight, PlayCircle } from "lucide-react"
+import { Coolshape } from "coolshapes-react"
 
 // Springs nomeadas por "peso" — evita repetir { stiffness, damping, mass } em cada motion value
 const TILT_SPRING: SpringOptions = { stiffness: 120, damping: 22, mass: 0.4 }
@@ -137,6 +138,16 @@ export function Hero() {
  />
  </>
  )}
+
+  <motion.div
+  className="pointer-events-none absolute right-10 top-20 z-10 opacity-20 mix-blend-screen"
+  animate={{ rotate: 360, scale: [1, 1.05, 1] }}
+  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+  <div className="size-32 sm:size-48">
+  <Coolshape type="star" index={8} noise={true} />
+  </div>
+  </motion.div>
 
  {/* Luz ambiente que segue o ponteiro */}
  {!reduceMotion && (

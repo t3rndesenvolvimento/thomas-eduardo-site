@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Quote } from "lucide-react"
 import Avatar from "boring-avatars"
 import { useI18n } from "@/lib/i18n/context"
+import { Shape11 } from "@/components/ui/abstract-shapes"
 
 const REVIEWS = [
  {
@@ -98,6 +99,13 @@ export function Testimonials() {
  id="depoimentos"
  className="group relative bg-black text-white py-28 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center"
  >
+  <motion.div
+  className="pointer-events-none absolute right-0 top-1/4 z-0 w-32 opacity-20 sm:w-40 mix-blend-screen"
+  animate={{ rotate: -180, scale: [1, 1.05, 1] }}
+  transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+  >
+  <Shape11 />
+  </motion.div>
  {/* Header */}
  <div className="site-shell relative z-10 mb-5 sm:mb-12 max-w-4xl mx-auto">
  <motion.p

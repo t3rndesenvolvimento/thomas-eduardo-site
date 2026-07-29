@@ -37,6 +37,7 @@ export function PageHero({
   lines,
   light = false,
   size = "default",
+  align = "left",
 }: {
   kicker: string
   title?: string
@@ -44,6 +45,7 @@ export function PageHero({
   lines?: string[]
   light?: boolean
   size?: "default" | "sm"
+  align?: "left" | "center"
 }) {
   const titleLines =
     lines ??
@@ -61,7 +63,7 @@ export function PageHero({
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_80%_0%,rgba(255,255,255,0.05),transparent_55%)]"
         />
       )}
-      <div className="relative site-shell">
+      <div className={`relative site-shell ${align === "center" ? "flex flex-col items-center text-center" : ""}`}>
         <motion.p
           custom={0.08}
           initial="hidden"
@@ -79,19 +81,19 @@ export function PageHero({
           style={{
             fontSize:
               size === "sm"
-                ? "clamp(2rem, 5vw, 4rem)"
-                : "clamp(3.5rem, 8vw, 7rem)",
+                ? "clamp(1.5rem, 5vw, 4rem)"
+                : "clamp(2rem, 8vw, 7rem)",
             lineHeight: 0.95,
           }}
         >
           {titleLines.map((line, i) => (
-            <span key={`${line}-${i}`} className="line-mask">
+            <span key={`${line}-${i}`} className="line-mask block">
               <motion.span
                 custom={i}
                 initial="hidden"
                 animate="visible"
                 variants={lineReveal}
-                className={`will-change-transform ${
+                className={`block will-change-transform whitespace-nowrap ${
                   i === titleLines.length - 1 && titleLines.length > 1
                     ? light
                       ? "text-white/70"
@@ -113,7 +115,7 @@ export function PageHero({
             variants={fadeUp}
             className={`mt-3 max-w-lg text-sm font-light leading-relaxed sm:mt-4 sm:text-base ${
               light ? "text-white/55" : "text-muted-foreground"
-            }`}
+            } ${align === "center" ? "mx-auto text-balance" : ""}`}
           >
             <span>{description}</span>
           </motion.p>

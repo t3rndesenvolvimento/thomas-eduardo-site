@@ -8,6 +8,7 @@ import { Logo } from "@/components/logo"
 import { cn } from "@/lib/utils"
 import { useI18n } from "@/lib/i18n/context"
 import { motion, AnimatePresence } from "framer-motion"
+import { Icon } from "@iconify/react"
 
 export function SiteNav() {
   const pathname = usePathname()
@@ -52,7 +53,7 @@ export function SiteNav() {
     return null
 
   return (
-    <header className="sticky inset-x-0 top-0 z-50 pointer-events-none">
+    <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
       <div
         className={cn(
           "pointer-events-auto mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4",
@@ -95,12 +96,7 @@ export function SiteNav() {
               </Link>
             )
           })}
-          <Link
-            href="/diagnostico"
-            className="ml-1 rounded-full bg-white text-black px-4 py-1.5 text-[10px] uppercase font-bold tracking-[0.14em] transition-transform hover:scale-105"
-          >
-            {t.nav.contact}
-          </Link>
+
           {/* Language Toggle Desktop */}
           <button
             type="button"
@@ -215,15 +211,7 @@ export function SiteNav() {
                 transition={{ delay: 0.25 }}
                 className="flex flex-col gap-3"
               >
-                <Link
-                  href="/diagnostico"
-                  onClick={() => setOpen(false)}
-                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 text-sm font-bold text-black shadow-lg transition-transform active:scale-95"
-                >
-                  <Sparkles className="size-4" />
-                  {t.nav.contact}
-                  <ArrowRight className="size-4" />
-                </Link>
+
 
                 <a
                   href={WHATSAPP}
@@ -232,7 +220,7 @@ export function SiteNav() {
                   onClick={() => setOpen(false)}
                   className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10 active:scale-95"
                 >
-                  <MessageCircle className="size-4 text-white/80" />
+                  <Icon icon="mdi:whatsapp" className="size-5 text-white/80" />
                   WhatsApp Direto
                 </a>
               </motion.div>

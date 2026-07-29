@@ -12,6 +12,7 @@ import { PageHero } from "@/components/page-hero"
 import { Shape1, Shape3, Shape5, Shape6, Shape8 } from "@/components/ui/abstract-shapes"
 import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section"
 import { EngineeringApproach } from "@/components/home/engineering-approach"
+import { Coolshape } from "coolshapes-react"
 
 const STEPS = [
  { step: "01", title: "Conversa", text: "Você explica a ideia e o objetivo.", image: "/images/process/process_conversa.png" },
@@ -106,13 +107,23 @@ export default function ProcessPage() {
  <PageAnimator />
 
  <div className="relative z-10 flex flex-col space-y-[-2rem] sm:space-y-[-3rem]">
- <ScrollRevealSection index={0} className="bg-background flex flex-col justify-center">
+ <ScrollRevealSection index={0} className="bg-background flex flex-col justify-center relative overflow-hidden">
+  <motion.div
+  className="pointer-events-none absolute left-10 top-1/4 z-0 opacity-20 mix-blend-screen"
+  animate={{ rotate: -360, scale: [1, 1.05, 1] }}
+  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+  <div className="size-32 sm:size-48">
+  <Coolshape type="polygon" index={1} noise={true} />
+  </div>
+  </motion.div>
  <div>
  <PageHero
  kicker=""
  lines={["Seu software não", "precisa ser complicado."]}
  description="Transformo processos manuais em sistemas rápidos, escaláveis e feitos para o seu negócio."
  light
+ align="center"
  />
 
  <div className="site-shell -mt-2 mb-16 flex flex-col gap-2.5 min-[420px]:flex-row sm:mb-20 justify-center">
@@ -195,59 +206,63 @@ export default function ProcessPage() {
  </div>
  </ScrollRevealSection>
 
- {/* Transparency */}
- <ScrollRevealSection index={3} className="py-16 sm:py-24 bg-background">
- <div className="site-shell">
- <div className="hero-frame animate-frame-glow overflow-hidden bg-[#0A0A0A] border border-white/10">
- <div className="grid lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
- <div className="p-8 sm:p-12 lg:p-16 relative">
- <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
- <div className="relative z-10">
- <p className="label-kicker mb-3">Transparência</p>
- <h2 className="text-h2 text-white text-balance">Sem surpresas durante o projeto.</h2>
- <ul className="mt-8 space-y-4">
- {[
- "Cronograma definido.",
- "Escopo documentado.",
- "Aprovação em cada etapa.",
- "Comunicação constante.",
- "Código entregue ao cliente.",
- ].map((t) => (
- <li key={t} className="flex items-start gap-4 text-[15px] font-light text-white/80">
- <span className="mt-1 flex size-5 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/5">
- <Check className="size-3 text-white" />
- </span>
- {t}
- </li>
- ))}
- </ul>
- </div>
- </div>
+  {/* Transparency */}
+  <ScrollRevealSection index={3} className="py-16 sm:py-24 bg-background relative overflow-hidden">
+  <motion.div
+  className="pointer-events-none absolute right-0 top-1/3 z-0 w-32 opacity-20 sm:w-40 mix-blend-screen"
+  animate={{ rotate: -180, scale: [1, 1.05, 1] }}
+  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+  <Shape6 />
+  </motion.div>
+  <div className="site-shell relative z-10">
+  <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-24">
+  <div className="relative">
+  <div className="relative z-10">
+  <p className="label-kicker mb-3">Transparência</p>
+  <h2 className="text-h2 text-white text-balance">Sem surpresas durante o projeto.</h2>
+  <ul className="mt-8 space-y-4">
+  {[
+  "Cronograma definido.",
+  "Escopo documentado.",
+  "Aprovação em cada etapa.",
+  "Comunicação constante.",
+  "Código entregue ao cliente.",
+  ].map((t) => (
+  <li key={t} className="flex items-start gap-4 text-[15px] font-light text-white/80">
+  <span className="mt-1 flex size-5 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/5">
+  <Check className="size-3 text-white" />
+  </span>
+  {t}
+  </li>
+  ))}
+  </ul>
+  </div>
+  </div>
 
- <div className="p-8 sm:p-12 lg:p-16 bg-white/[0.02] relative">
- <div className="relative z-10">
- <p className="label-kicker mb-3">Investimento</p>
- <h2 className="text-h2 text-white text-balance">Quanto custa desenvolver um software?</h2>
- <p className="mt-6 text-[15px] leading-relaxed font-light text-white/70 text-pretty">
- Não existe preço fixo. Cada projeto é analisado conforme:
- </p>
- <ul className="mt-4 space-y-2 mb-6">
- {["Funcionalidades", "Integrações", "Complexidade", "Prazo", "Infraestrutura"].map((t) => (
- <li key={t} className="flex items-center gap-2 text-sm text-white/60">
- <span className="size-1.5 rounded-full bg-white/20" /> {t}
- </li>
- ))}
- </ul>
- 
- <CtaLink href={CONTACT.whatsapp} variant="ghost" size="sm" external>
- Solicite uma análise gratuita
- </CtaLink>
- </div>
- </div>
- </div>
- </div>
- </div>
- </ScrollRevealSection>
+  <div className="relative">
+  <div className="relative z-10">
+  <p className="label-kicker mb-3">Investimento</p>
+  <h2 className="text-h2 text-white text-balance">Quanto custa desenvolver um software?</h2>
+  <p className="mt-6 text-[15px] leading-relaxed font-light text-white/70 text-pretty">
+  Não existe preço fixo. Cada projeto é analisado conforme:
+  </p>
+  <ul className="mt-4 space-y-2 mb-6">
+  {["Funcionalidades", "Integrações", "Complexidade", "Prazo", "Infraestrutura"].map((t) => (
+  <li key={t} className="flex items-center gap-2 text-sm text-white/60">
+  <span className="size-1.5 rounded-full bg-white/20" /> {t}
+  </li>
+  ))}
+  </ul>
+  
+  <CtaLink href={CONTACT.whatsapp} variant="ghost" size="sm" external>
+  Solicite uma análise gratuita
+  </CtaLink>
+  </div>
+  </div>
+  </div>
+  </div>
+  </ScrollRevealSection>
 
  {/* Services / Types of Projects */}
  <ScrollRevealSection index={4} className="py-16 sm:py-24 bg-white relative overflow-hidden">
@@ -316,22 +331,31 @@ export default function ProcessPage() {
  </div>
  </ScrollRevealSection>
 
- {/* CTA */}
- <ScrollRevealSection index={6} className="py-24 sm:py-32 px-4 bg-background">
- <div className="site-shell mx-auto max-w-4xl text-center">
- <h2 className="text-4xl sm:text-5xl font-sans font-semibold tracking-tight text-white mb-6 text-balance">
- O próximo sistema da sua empresa pode começar hoje.
- </h2>
- <p className="mx-auto max-w-xl text-base font-light leading-relaxed text-white/60 mb-10 text-balance">
- Solicite uma análise gratuita do seu projeto. Em até 24 horas você recebe um plano inicial com escopo, prazo e estimativa de investimento.
- </p>
- <div className="flex justify-center">
- <CtaLink href={CONTACT.whatsapp} variant="solid" size="md" className="px-10 py-5 text-sm uppercase tracking-widest shadow-xl" external>
- Solicitar análise gratuita
- </CtaLink>
- </div>
- </div>
- </ScrollRevealSection>
+  {/* CTA */}
+  <ScrollRevealSection index={6} className="py-20 sm:py-28 md:py-32 lg:py-40 px-4 bg-white relative overflow-hidden flex flex-col justify-center min-h-[50svh]">
+  <motion.div
+  className="pointer-events-none absolute left-0 bottom-0 z-0 opacity-20 mix-blend-multiply"
+  animate={{ rotate: 180, scale: [1, 1.1, 1] }}
+  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+  <div className="size-32 sm:size-48">
+  <Coolshape type="star" index={6} noise={true} />
+  </div>
+  </motion.div>
+  <div className="site-shell mx-auto max-w-5xl text-center px-4 sm:px-6 relative z-10">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tighter text-black mb-6 sm:mb-8 text-balance leading-[1.1]">
+  O próximo sistema da sua empresa pode começar hoje.
+  </h2>
+  <p className="mx-auto max-w-2xl text-base sm:text-lg md:text-xl font-light leading-relaxed text-black/70 mb-10 sm:mb-12 text-balance">
+  Solicite uma análise gratuita do seu projeto. Em até 24 horas você recebe um plano inicial com escopo, prazo e estimativa de investimento.
+  </p>
+  <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+  <CtaLink href={CONTACT.whatsapp} variant="solid" size="lg" className="w-full sm:w-auto px-8 sm:px-12 py-5 sm:py-6 text-sm sm:text-base bg-black text-white hover:bg-black/90 uppercase tracking-widest shadow-xl rounded-full" external>
+  Solicitar análise gratuita
+  </CtaLink>
+  </div>
+  </div>
+  </ScrollRevealSection>
  </div>
  </main>
  )

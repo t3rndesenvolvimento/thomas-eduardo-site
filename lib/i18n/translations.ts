@@ -85,7 +85,7 @@ export const translations = {
     // ─── Projects ─────────────────────────────────────────────────────────────
     projects: {
       kicker: "Trabalhos",
-      heading: "Projetos selecionados.",
+      heading: "Projetos.",
       viewAll: "Ver todos",
       viewAllMobile: "Ver todos os projetos",
     },

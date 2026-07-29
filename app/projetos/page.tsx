@@ -11,6 +11,7 @@ import { CtaLink } from "@/components/ui/cta"
 import { ExternalLink } from "lucide-react"
 import { Shape7, Shape1 } from "@/components/ui/abstract-shapes"
 import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section"
+import { Coolshape } from "coolshapes-react"
 
 
 
@@ -134,10 +135,19 @@ export default function ProjetosPage() {
  <PageAnimator />
 
  <div className="relative z-10 flex flex-col space-y-[-2rem] sm:space-y-[-3rem]">
- <ScrollRevealSection index={0} className="bg-background flex flex-col justify-center">
+ <ScrollRevealSection index={0} className="bg-background flex flex-col justify-center relative overflow-hidden">
+  <motion.div
+  className="pointer-events-none absolute right-10 top-1/4 z-0 opacity-20 mix-blend-screen"
+  animate={{ rotate: 360, scale: [1, 1.05, 1] }}
+  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+  <div className="size-32 sm:size-48">
+  <Coolshape type="star" index={1} noise={true} />
+  </div>
+  </motion.div>
  <PageHero
  kicker="Portfólio · Casos Reais"
- lines={["Projetos selecionados."]}
+ lines={["Projetos."]}
  description="Soluções testadas no mercado. Veja como transformei gargalos de empresas reais em faturamento rápido, velocidade e conversão."
  light
  />
@@ -153,34 +163,38 @@ export default function ProjetosPage() {
   )
   })}
 
-  <ScrollRevealSection index={2 + PROJECTS.length} className="bg-white flex flex-col justify-center min-h-[70svh]">
+  <ScrollRevealSection index={2 + PROJECTS.length} className="bg-black text-white flex flex-col justify-center min-h-[70svh] relative overflow-hidden">
+  <motion.div
+  className="pointer-events-none absolute left-0 top-1/4 z-0 w-32 opacity-20 sm:w-40 mix-blend-screen"
+  animate={{ rotate: 180, scale: [1, 1.1, 1] }}
+  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+  >
+  <Shape7 />
+  </motion.div>
   <div className="site-shell py-16 sm:py-24">
- <div className="mt-12 sm:mt-16 overflow-hidden rounded-xl bg-white sm:rounded-2xl relative shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
- <div className="absolute inset-0 bg-gradient-to-br from-black/[0.02] to-transparent pointer-events-none" />
- <div className="grid md:grid-cols-2 gap-6 p-6 sm:p-8 md:p-10 items-center">
- <div className="relative z-10">
- <p className="label-kicker text-black/45 mb-2">Open Source</p>
- <h3 className="text-2xl sm:text-3xl font-display font-semibold text-black tracking-tight mb-3">
- Quer ver o código por trás dos projetos?
- </h3>
- <p className="text-black/70 leading-relaxed mb-6 max-w-md text-sm sm:text-base">
- Arquitetura, padrões de código e decisões técnicas detalhadas nos repositórios. Um portfólio aberto de como construo software de qualidade.
- </p>
- <CtaLink href={CONTACT.github} variant="solid" size="md" external>
- Acessar meu GitHub
- </CtaLink>
- </div>
- <div className="relative z-10 aspect-[16/10] sm:aspect-video rounded-lg overflow-hidden shadow-lg bg-black/5 flex items-center justify-center">
- <p className="text-black/30 text-xs absolute z-0">Salve a imagem em public/images/github-profile.png</p>
- <Image
- src="/images/github-profile.png"
- alt="Thomas Eduardo GitHub Profile"
- fill
- className="object-cover object-top opacity-80 hover:opacity-100 transition-opacity duration-500 z-10"
- />
- </div>
- </div>
- </div>
+  <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
+  <div className="relative z-10">
+  <p className="label-kicker text-white/45 mb-2">Open Source</p>
+  <h3 className="text-2xl sm:text-3xl font-display font-semibold text-white tracking-tight mb-4">
+  Quer ver o código por trás dos projetos?
+  </h3>
+  <p className="text-white/70 leading-relaxed mb-8 max-w-md text-sm sm:text-base">
+  Arquitetura, padrões de código e decisões técnicas detalhadas nos repositórios. Um portfólio aberto de como construo software de qualidade.
+  </p>
+  <CtaLink href={CONTACT.github} variant="outline" size="md" className="border-white/20 hover:bg-white/10 text-white" external>
+  Acessar meu GitHub
+  </CtaLink>
+  </div>
+  <div className="relative z-10 aspect-[16/10] sm:aspect-video rounded-lg overflow-hidden shadow-lg bg-white/5 flex items-center justify-center">
+  <p className="text-white/30 text-xs absolute z-0">Salve a imagem em public/images/github-profile.png</p>
+  <Image
+  src="/images/github-profile.png"
+  alt="Thomas Eduardo GitHub Profile"
+  fill
+  className="object-cover object-top opacity-80 hover:opacity-100 transition-opacity duration-500 z-10"
+  />
+  </div>
+  </div>
   </div>
   </ScrollRevealSection>
  </div>
