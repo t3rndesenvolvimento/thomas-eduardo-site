@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Hero } from "@/components/home/hero"
 import { FeaturedProjects } from "@/components/home/featured-projects"
+import { Expertise } from "@/components/home/expertise"
 import { About } from "@/components/home/about"
 import { HomeCta } from "@/components/home/home-cta"
 import { PageAnimator } from "@/components/page-animator"
@@ -9,11 +10,11 @@ import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section"
 export const metadata: Metadata = {
   title: "Full Stack & Product Engineer | Thomas Eduardo",
   description:
-    "Portfólio de Thomas Eduardo — Full Stack / Product Engineer em São Paulo. Next.js, React, TypeScript, Node.js.",
+    "Portfolio de Thomas Eduardo — Full Stack / Product Engineer em Sao Paulo. Next.js, React, TypeScript, Node.js.",
   alternates: { canonical: "/" },
 }
 
-/** Pilhas: canvas → white → canvas → white. Fundo sólido em cada painel. */
+/** Kinetic-inspired structure with sticky panels */
 export default function HomePage() {
   return (
     <>
@@ -23,16 +24,22 @@ export default function HomePage() {
           <Hero />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={1} id="projects" className="bg-neutral-50 text-black">
+        <ScrollRevealSection index={1} className="bg-neutral-50 text-black">
           <FeaturedProjects />
         </ScrollRevealSection>
 
         <ScrollRevealSection index={2} className="bg-canvas text-white">
-          <About />
+          <Expertise />
         </ScrollRevealSection>
 
         <ScrollRevealSection index={3} className="bg-neutral-50 text-black">
-          <HomeCta />
+          <div className="[&_h2]:text-black [&_p]:text-neutral-600 [&_.text-neutral-400]:text-neutral-600 [&_.border-white\\/10]:border-black/10 [&_.bg-white\\/5]:bg-black/[0.03] [&_.text-white]:text-black [&_.text-neutral-300]:text-neutral-700">
+            <About light />
+          </div>
+        </ScrollRevealSection>
+
+        <ScrollRevealSection index={4} className="bg-canvas text-white">
+          <HomeCta dark />
         </ScrollRevealSection>
       </div>
     </>
