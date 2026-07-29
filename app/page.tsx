@@ -14,7 +14,7 @@ const TechExpertise = dynamic(
     import("@/components/home/tech-expertise").then((mod) => ({
       default: mod.TechExpertise,
     })),
-  { loading: () => <div className="h-80 bg-background" /> },
+  { loading: () => <div className="h-80 bg-canvas" /> },
 )
 
 export const metadata: Metadata = {
@@ -29,32 +29,33 @@ export default function HomePage() {
     <>
       <PageAnimator />
 
-      <div className="relative z-10 flex flex-col space-y-[-2rem] sm:space-y-[-3rem]">
+      <div className="relative z-10">
         <ScrollRevealSection index={0} className="bg-canvas">
           <Hero />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={1} className="bg-canvas">
+        <ScrollRevealSection index={1} className="bg-canvas" sticky={false}>
           <ClientsCarousel />
         </ScrollRevealSection>
 
-        <div className="relative z-[3] bg-white rounded-t-[2rem] sm:rounded-t-[3.5rem] shadow-[0_-20px_50px_rgba(0,0,0,0.25)]">
+        {/* Horizontal projects — own scroll space, not sticky-over */}
+        <div className="relative z-[20]">
           <ProjectsStack />
         </div>
 
-        <ScrollRevealSection index={3} className="bg-white">
+        <ScrollRevealSection index={3} className="bg-neutral-50 text-black">
           <About />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={4} className="bg-white">
+        <ScrollRevealSection index={4} className="bg-canvas text-white">
           <TechExpertise />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={5} className="bg-canvas">
+        <ScrollRevealSection index={5} className="bg-neutral-50 text-black">
           <Testimonials />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={6} className="bg-canvas">
+        <ScrollRevealSection index={6} className="bg-canvas text-white">
           <HomeCta />
         </ScrollRevealSection>
       </div>

@@ -7,9 +7,7 @@ const ALL_CLIENTS = [...CLIENTS, ...CLIENTS]
 
 export function ClientsCarousel({
   title = "Empresas e marcas",
-  titleClassName = "text-[10px] font-mono uppercase tracking-[0.18em] text-zinc-600",
-  className = "relative overflow-hidden border-y border-white/[0.06] bg-canvas py-8 sm:py-10",
-  fadeClassName = "from-[#09090b]",
+  className = "relative overflow-hidden border-y border-white/10 bg-canvas py-10 sm:py-12",
 }: {
   title?: string
   titleClassName?: string
@@ -18,32 +16,26 @@ export function ClientsCarousel({
 }) {
   return (
     <section className={className}>
-      <div
-        className={`pointer-events-none absolute left-0 top-0 z-10 h-full w-12 bg-gradient-to-r ${fadeClassName} to-transparent sm:w-28`}
-      />
-      <div
-        className={`pointer-events-none absolute right-0 top-0 z-10 h-full w-12 bg-gradient-to-l ${fadeClassName} to-transparent sm:w-28`}
-      />
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-canvas to-transparent sm:w-28" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-canvas to-transparent sm:w-28" />
 
-      <div className="mb-5 text-center sm:mb-6">
-        <p className={titleClassName}>{title}</p>
-      </div>
+      <p className="mb-6 text-center text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+        {title}
+      </p>
 
       <div className="flex overflow-hidden">
         <motion.div
-          className="flex shrink-0 items-center gap-10 sm:gap-16"
+          className="flex shrink-0 items-center gap-12 sm:gap-16"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 40, ease: "linear", repeat: Infinity }}
+          transition={{ duration: 38, ease: "linear", repeat: Infinity }}
         >
           {ALL_CLIENTS.map((client, i) => (
-            <div
+            <span
               key={`${client.name}-${i}`}
-              className="flex h-8 shrink-0 items-center px-1 opacity-35 transition-opacity duration-300 hover:opacity-70 sm:h-9"
+              className="whitespace-nowrap font-display text-xl font-bold tracking-tight text-neutral-600 transition-colors hover:text-brand sm:text-2xl md:text-3xl"
             >
-              <span className="whitespace-nowrap font-display text-lg font-semibold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
-                {client.name}
-              </span>
-            </div>
+              {client.name}
+            </span>
           ))}
         </motion.div>
       </div>

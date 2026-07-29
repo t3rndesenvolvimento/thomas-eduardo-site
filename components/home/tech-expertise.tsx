@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { Icon } from "@iconify/react"
 import { useI18n } from "@/lib/i18n/context"
-import { AmbientFrame, ContentFrame } from "@/components/ui/ambient-frame"
 
 const GROUPS = [
   {
@@ -49,76 +48,70 @@ export function TechExpertise() {
   return (
     <section
       id="expertise"
-      className="relative overflow-hidden bg-white text-black py-20 sm:py-28"
+      className="relative min-h-[100svh] flex flex-col justify-center py-24 sm:py-32 overflow-hidden"
     >
-      <AmbientFrame tone="light" variant="grid" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-grid opacity-30"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-0 top-1/3 h-72 w-72 rounded-full bg-brand/15 blur-[100px]"
+      />
 
-      <div className="site-shell relative z-10 max-w-5xl mx-auto">
-        <div className="mb-10 flex flex-col gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-xs font-mono font-semibold uppercase tracking-widest text-black/45 mb-2"
-            >
-              {t.techExpertise.kicker}
-            </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-black"
-            >
-              <span className="sm:hidden">{t.techExpertise.headingMobile}</span>
-              <span className="hidden sm:inline">
-                {t.techExpertise.headingDesktop}
-              </span>
-            </motion.h2>
-          </div>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-xs text-sm sm:text-base text-black/50 sm:text-right font-light"
-          >
-            {t.techExpertise.subtitle}
-          </motion.p>
-        </div>
+      <div className="site-shell relative z-10 max-w-5xl">
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="label-kicker text-brand mb-4"
+        >
+          {t.techExpertise.kicker}
+        </motion.p>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.h2
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-display text-[clamp(2.75rem,8vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-white max-w-[10ch]"
+        >
+          Stack em{" "}
+          <span className="text-brand">produção</span>
+        </motion.h2>
+
+        <p className="mt-5 max-w-md text-neutral-400">{t.techExpertise.subtitle}</p>
+
+        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {GROUPS.map((group, i) => {
             const meta = t.techExpertise.groups[group.categoryKey]
             return (
               <motion.div
                 key={meta.category}
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
               >
-                <ContentFrame tone="light" className="h-full p-5 sm:p-6">
-                  <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-black/30 mb-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="font-display text-base font-bold tracking-tight text-black">
-                    {meta.category}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-black/50">
-                    {meta.description}
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {group.techs.map((tech) => (
-                      <div
-                        key={tech.name}
-                        title={tech.name}
-                        className="flex size-9 items-center justify-center rounded-xl border border-black/8 bg-white shadow-sm"
-                      >
-                        <Icon icon={tech.icon} className="size-4" />
-                      </div>
-                    ))}
-                  </div>
-                </ContentFrame>
+                <p className="font-mono text-xs text-brand mb-2">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="font-display text-xl font-bold text-white">
+                  {meta.category}
+                </h3>
+                <p className="mt-2 text-sm text-neutral-500 leading-relaxed">
+                  {meta.description}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {group.techs.map((tech) => (
+                    <div
+                      key={tech.name}
+                      title={tech.name}
+                      className="flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/5"
+                    >
+                      <Icon icon={tech.icon} className="size-5" />
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             )
           })}

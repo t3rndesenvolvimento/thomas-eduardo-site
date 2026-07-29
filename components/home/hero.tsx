@@ -3,104 +3,131 @@
 import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
 import { useI18n } from "@/lib/i18n/context"
-import { ArrowRight } from "lucide-react"
+import { ArrowDownRight } from "lucide-react"
 import { CONTACT } from "@/lib/data"
-import { AmbientFrame } from "@/components/ui/ambient-frame"
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-const PROOF = [
-  { value: "+35%", label: "leads (Braservice)" },
-  { value: "~40%", label: "ciclo de vendas (TERON)" },
-  { value: "+50%", label: "captação (Yázigi)" },
-]
-
 export function Hero() {
   const { t } = useI18n()
-  const reduceMotion = useReducedMotion()
+  const reduce = useReducedMotion()
 
   return (
     <section
-      className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden bg-canvas text-foreground"
+      className="relative flex min-h-[100dvh] w-full flex-col justify-end overflow-hidden bg-canvas text-white"
       data-hero-container
     >
-      <AmbientFrame tone="dark" variant="grid" />
-      <AmbientFrame tone="dark" variant="rings" className="opacity-40" />
+      {/* Orange glow + grid */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-grid opacity-40"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse 80% 60% at 70% 20%, black 10%, transparent 70%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 60% at 70% 20%, black 10%, transparent 70%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-20 top-0 h-[50vh] w-[50vh] rounded-full bg-brand/20 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-0 bottom-0 h-[30vh] w-[40vw] rounded-full bg-brand/10 blur-[100px]"
+      />
 
-      <div className="site-shell relative z-10 flex w-full flex-col items-center px-4 pb-16 pt-28 text-center sm:px-6 sm:pb-20 sm:pt-32">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+      {/* Giant watermark word */}
+      <motion.p
+        aria-hidden
+        initial={reduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="pointer-events-none absolute right-[-4%] top-[18%] select-none font-display text-[min(28vw,16rem)] font-extrabold leading-none tracking-tighter text-white/[0.04]"
+      >
+        CODE
+      </motion.p>
+
+      <div className="site-shell relative z-10 w-full pb-16 pt-28 sm:pb-20 sm:pt-32">
+        <motion.p
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
-          className="mb-8 w-full max-w-3xl rounded-3xl border border-white/[0.08] bg-elevated/60 px-6 py-12 backdrop-blur-[2px] sm:px-12 sm:py-16"
+          className="mb-6 flex items-center gap-3 text-sm font-mono text-neutral-400"
         >
-          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-3.5 py-1.5">
-            <span className="size-1.5 rounded-full bg-emerald-400/90" />
-            <span className="text-[11px] font-medium tracking-wide text-zinc-400">
-              {CONTACT.role} · {CONTACT.location}
-            </span>
-          </div>
+          <span className="inline-block size-2 rounded-full bg-brand" />
+          {CONTACT.location} · disponível
+        </motion.p>
 
-          <h1 className="font-display text-[2.35rem] font-bold leading-[1.05] tracking-[-0.03em] text-zinc-50 sm:text-5xl md:text-6xl lg:text-[4.25rem]">
-            Full Stack & Product Engineer
-          </h1>
+        <motion.h1
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.05, ease: EASE }}
+          className="max-w-[12ch] font-display text-[clamp(3.25rem,11vw,7.5rem)] font-extrabold leading-[0.92] tracking-[-0.04em] text-white"
+        >
+          Full Stack
+          <br />
+          <span className="text-brand">Engineer</span>
+        </motion.h1>
 
-          <p className="mx-auto mt-6 max-w-[34rem] text-[15px] leading-relaxed text-zinc-400 sm:mt-7 sm:text-base md:text-lg">
-            {t.hero.description}
-          </p>
+        <motion.p
+          initial={reduce ? false : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.12, ease: EASE }}
+          className="mt-8 max-w-md text-base leading-relaxed text-neutral-400 sm:text-lg"
+        >
+          {t.hero.description}
+        </motion.p>
 
-          <div className="mt-9 flex w-full flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:items-center sm:justify-center">
-            <Link
-              href="/projetos"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-50 px-7 py-3.5 text-[13px] font-semibold text-zinc-950 transition-opacity hover:opacity-90"
-            >
-              {t.hero.ctaPrimary}
-              <ArrowRight className="size-4 opacity-70" />
-            </Link>
-            <Link
-              href="/freelance"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-transparent px-7 py-3.5 text-[13px] font-semibold text-zinc-300 transition-colors hover:border-white/20 hover:bg-white/[0.04]"
-            >
-              {t.hero.ctaSecondary}
-            </Link>
-            <a
-              href={CONTACT.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center py-2 text-[13px] font-medium text-zinc-500 transition-colors hover:text-zinc-300 sm:px-2"
-            >
-              GitHub
-            </a>
-          </div>
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.18, ease: EASE }}
+          className="mt-10 flex flex-wrap items-center gap-4"
+        >
+          <Link
+            href="/projetos"
+            className="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-black transition-transform hover:scale-[1.02] active:scale-[0.98]"
+          >
+            {t.hero.ctaPrimary}
+            <ArrowDownRight className="size-4" />
+          </Link>
+          <Link
+            href="/freelance"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white/90 hover:border-white/40"
+          >
+            {t.hero.ctaSecondary}
+          </Link>
+          <a
+            href={CONTACT.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-neutral-500 hover:text-white"
+          >
+            GitHub
+          </a>
         </motion.div>
 
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.15, ease: EASE }}
-          className="w-full max-w-3xl rounded-2xl border border-white/[0.08] bg-elevated/40 px-4 py-6 sm:px-8"
+          initial={reduce ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.35 }}
+          className="mt-16 flex flex-wrap gap-x-10 gap-y-4 border-t border-white/10 pt-8"
         >
-          <p className="mb-4 text-[10px] font-mono uppercase tracking-[0.18em] text-zinc-600">
-            Resultados em produção
-          </p>
-          <div className="grid grid-cols-3 gap-4 sm:gap-8">
-            {PROOF.map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.06 }}
-                className="text-center"
-              >
-                <p className="font-display text-xl font-semibold tracking-tight text-zinc-50 sm:text-2xl">
-                  {item.value}
-                </p>
-                <p className="mt-1 text-[11px] leading-snug text-zinc-500 sm:text-xs">
-                  {item.label}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          {[
+            { v: "+35%", l: "leads" },
+            { v: "~40%", l: "ciclo TERON" },
+            { v: "+50%", l: "captação" },
+          ].map((m) => (
+            <div key={m.l}>
+              <p className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                {m.v}
+              </p>
+              <p className="mt-0.5 text-xs font-mono uppercase tracking-wider text-neutral-500">
+                {m.l}
+              </p>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

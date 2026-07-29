@@ -2,65 +2,68 @@
 
 import { motion } from "framer-motion"
 import { CONTACT } from "@/lib/data"
-import { CtaLink } from "@/components/ui/cta"
 import { useI18n } from "@/lib/i18n/context"
-import { AmbientFrame, ContentFrame } from "@/components/ui/ambient-frame"
+import { ArrowUpRight } from "lucide-react"
+import Link from "next/link"
 
 export function HomeCta() {
   const { t } = useI18n()
   return (
-    <section className="relative overflow-hidden bg-canvas py-20 sm:py-28">
-      <AmbientFrame tone="dark" variant="rings" className="opacity-50" />
-      <AmbientFrame tone="dark" variant="grid" />
+    <section className="relative min-h-[70svh] flex flex-col justify-center py-24 sm:py-32 overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[40vh] w-[40vh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/20 blur-[120px]"
+      />
 
-      <div className="site-shell relative z-10">
-        <ContentFrame
-          tone="dark"
-          className="mx-auto max-w-3xl px-6 py-12 text-center sm:px-12 sm:py-16"
+      <div className="site-shell relative z-10 text-center max-w-3xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="label-kicker text-brand mb-6"
         >
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="label-kicker mb-4 text-zinc-500"
-          >
-            {t.homeCta.kicker}
-          </motion.p>
+          {t.homeCta.kicker}
+        </motion.p>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-50 leading-[1.1]"
-          >
-            {t.homeCta.line1}
-            <br />
-            <span className="text-zinc-500">{t.homeCta.line2}</span>
-          </motion.h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-display text-[clamp(2.75rem,9vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-white"
+        >
+          {t.homeCta.line1}
+        </motion.h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mx-auto mt-5 max-w-md text-sm sm:text-base font-light text-zinc-400 leading-relaxed"
-          >
-            {t.homeCta.body}
-          </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mx-auto mt-6 max-w-md text-neutral-400 leading-relaxed"
+        >
+          {t.homeCta.body}
+        </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-8 flex flex-col items-center justify-center gap-3 min-[420px]:flex-row"
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <a
+            href={CONTACT.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-brand px-8 py-4 text-sm font-semibold text-black"
           >
-            <CtaLink href={CONTACT.linkedin} variant="solid" size="lg" external>
-              {t.homeCta.ctaPrimary}
-            </CtaLink>
-            <CtaLink href="/freelance" variant="soft" size="lg">
-              {t.homeCta.ctaSecondary}
-            </CtaLink>
-          </motion.div>
-        </ContentFrame>
+            {t.homeCta.ctaPrimary} <ArrowUpRight className="size-4" />
+          </a>
+          <Link
+            href="/freelance"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-sm font-semibold text-white"
+          >
+            {t.homeCta.ctaSecondary}
+          </Link>
+        </motion.div>
       </div>
     </section>
   )
