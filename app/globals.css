@@ -95,7 +95,11 @@
     overflow: hidden;
   }
 
-  /* Paint black cover before React hydrates (removed by PageLoader) */
+  /*
+   * Paint black cover before React hydrates (removed by PageLoader).
+   * Safety: auto-fade after ~1.6s so the page is never stuck black
+   * if JS fails, is blocked, or hydration is delayed.
+   */
   html.loader-boot::before {
     content: "";
     position: fixed;
@@ -103,6 +107,20 @@
     z-index: 99;
     background: #000000;
     pointer-events: none;
+    animation: loader-boot-fade 1.6s ease-in forwards;
+  }
+
+  @keyframes loader-boot-fade {
+    0%,
+    70% {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    100% {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 
   body {
@@ -427,6 +445,12 @@
 
     html {
       scroll-behavior: auto;
+    }
+
+    html.loader-boot::before {
+      animation: none;
+      opacity: 0;
+      visibility: hidden;
     }
   }
 
