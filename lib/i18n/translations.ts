@@ -3,33 +3,29 @@ export type Translations = typeof translations["pt-BR"]
 
 export const translations = {
   "pt-BR": {
-    // ─── Nav ──────────────────────────────────────────────────────────────────
     nav: {
       home: "Início",
       about: "Sobre",
       projects: "Projetos",
       process: "Processo",
-      contact: "Diagnóstico gratuito",
+      contact: "Projetos sob demanda",
     },
 
-    // ─── Footer ───────────────────────────────────────────────────────────────
     footer: {
-      available: "Disponível para projetos",
+      available: "Aberto a CLT, PJ e projetos",
     },
 
-    // ─── Hero ─────────────────────────────────────────────────────────────────
     hero: {
-      tagline: "Seu software não\nprecisa ser complicado.",
-      title: "Thomas Eduardo, Engenheiro de Software",
+      tagline: "Full Stack & Product Engineer",
+      title: "Thomas Eduardo, Full Stack / Product Engineer",
       description:
-        "Transformo processos manuais em sistemas rápidos, escaláveis e feitos para o seu negócio.",
-      ctaPrimary: "Fazer Diagnóstico Grátis",
-      ctaSecondary: "Ver Projetos",
-      socialProof: "Sistemas e páginas em produção gerando receita",
+        "Construo interfaces e backends com Next.js, React, TypeScript e Node.js. Cases em produção com métricas de conversão e sistemas sob medida.",
+      ctaPrimary: "Ver projetos",
+      ctaSecondary: "Precisa de um projeto?",
+      socialProof: "Next.js · React · TypeScript · Node.js · São Paulo",
       scroll: "rolar",
     },
 
-    // ─── Pain Points ──────────────────────────────────────────────────────────
     painPoints: {
       kicker: "Gargalos reais",
       heading: "Sua empresa está perdendo tempo e vendas?",
@@ -53,7 +49,6 @@ export const translations = {
       ],
     },
 
-    // ─── Benefits ─────────────────────────────────────────────────────────────
     benefits: {
       kicker: "A solução",
       heading: "Engenharia focada em resultados:",
@@ -82,152 +77,138 @@ export const translations = {
       ],
     },
 
-    // ─── Projects ─────────────────────────────────────────────────────────────
     projects: {
-      kicker: "Trabalhos",
+      kicker: "Cases",
       heading: "Projetos.",
-      subtitle: "Casos reais de sistemas que geram resultado.",
+      subtitle: "Trabalho real em produção — stack, problema e resultado.",
       viewAll: "Ver todos",
       viewAllMobile: "Ver todos os projetos",
     },
 
-    // ─── Testimonials ─────────────────────────────────────────────────────────
     testimonials: {
       kicker: "Depoimentos",
       heading: "O que dizem os clientes.",
     },
 
-    // ─── About ────────────────────────────────────────────────────────────────
     about: {
       kicker: "Perfil",
-      headingLine1: "Clareza.",
-      headingLine2: "Performance.",
-      headingLine3: "Resultado.",
-      cta: "Falar com Thomas no WhatsApp",
-      ctaMobile: "Falar no WhatsApp",
-      p1: "Desenvolvo aplicações web e sistemas completos desde 2023, do banco de dados à interface gráfica.",
-      p2: "Entendo o problema do seu negócio antes de escrever código. O objetivo é criar soluções simples, rápidas e lucrativas.",
+      headingLine1: "Produto.",
+      headingLine2: "Código.",
+      headingLine3: "Entrega.",
+      cta: "LinkedIn",
+      ctaMobile: "LinkedIn",
+      p1: "Desenvolvedor full stack desde 2023. Atuo do frontend ao backend com foco em produtos que vão para produção.",
+      p2: "Busco oportunidades CLT ou PJ como Full Stack / Product Engineer. Também atendo projetos sob demanda em /freelance.",
       pillars: [
         {
           title: "Produto",
-          text: "Decisões orientadas ao resultado e ao retorno financeiro do cliente.",
+          text: "Decisões técnicas alinhadas ao problema de negócio e à métrica que importa.",
         },
         {
           title: "Engenharia",
-          text: "Código limpo, arquitetura sólida e sistemas fáceis de manter.",
+          text: "TypeScript, APIs claras, código legível e deploy previsível.",
         },
         {
-          title: "Previsibilidade",
-          text: "Prazos cumpridos à risca e comunicação direta em cada etapa.",
+          title: "Comunicação",
+          text: "Escopo explícito, prazos honestos e atualização constante.",
         },
       ],
     },
 
-    // ─── Tech Expertise ───────────────────────────────────────────────────────
     techExpertise: {
       kicker: "Stack",
       headingMobile: "Tecnologias.",
       headingDesktop: "Tecnologias & Ferramentas.",
-      subtitle: "Stack moderna utilizada em projetos reais de alta escala.",
+      subtitle: "Stack usada em projetos reais em produção.",
       groups: [
         {
           category: "Frontend",
-          description: "Interfaces rápidas e responsivas.",
+          description: "Next.js, React, TypeScript, Tailwind.",
         },
         {
           category: "Backend",
-          description: "APIs seguras e arquitetura escalável.",
+          description: "Node.js, APIs REST, autenticação.",
         },
         {
           category: "Banco de Dados",
-          description: "Modelagem otimizada de dados.",
+          description: "PostgreSQL, MongoDB, Prisma.",
         },
         {
           category: "Infraestrutura",
-          description: "Deploy contínuo e computação na nuvem.",
+          description: "Vercel, Docker, CI/CD, AWS.",
         },
       ],
     },
 
-    // ─── Engineering Approach ─────────────────────────────────────────────────
     engineering: {
-      kicker: "Processo direto",
-      heading: "Transparência do primeiro contato até a entrega.",
-      body: "Acompanhe cada passo com prazos claros, alinhamentos constantes e entregas funcionais.",
+      kicker: "Processo",
+      heading: "Do discovery ao deploy.",
+      body: "Etapas claras, entregas funcionais e feedback contínuo.",
       steps: [
         {
-          title: "1. Diagnóstico",
-          description:
-            "Entendimento das necessidades do negócio e definição da melhor solução.",
-          detail: "Escopo, arquitetura inicial e estimativa.",
+          title: "1. Discovery",
+          description: "Entender o problema e o sucesso mensurável.",
+          detail: "Escopo e critérios de aceite.",
         },
         {
           title: "2. Arquitetura",
-          description: "Projetar interfaces rápidas e estruturas de dados eficientes.",
-          detail: "Design limpo e banco otimizado.",
+          description: "Stack, dados e limites técnicos.",
+          detail: "Decisões documentadas.",
         },
         {
           title: "3. Desenvolvimento",
-          description:
-            "Construção com tecnologias modernas e foco em segurança.",
-          detail: "Frontend intuitivo e backend escalável.",
+          description: "Incrementos em produção-ready.",
+          detail: "Código type-safe e revisável.",
         },
         {
           title: "4. Testes",
-          description:
-            "Garantia de funcionamento correto em todos os dispositivos.",
-          detail: "Testes de velocidade, links e formulários.",
+          description: "Validar fluxos críticos.",
+          detail: "Manual + automatizado quando faz sentido.",
         },
         {
-          title: "5. Publicação",
-          description: "Deploy em servidores de alta disponibilidade sem quedas.",
-          detail: "Publicação na nuvem e configuração.",
+          title: "5. Deploy",
+          description: "CI/CD e ambiente estável.",
+          detail: "Monitoramento básico.",
         },
         {
-          title: "6. Acompanhamento",
-          description:
-            "Suporte pós-lançamento e acompanhamento de resultados.",
-          detail: "Garantia contínua e ajustes.",
+          title: "6. Iteração",
+          description: "Ajustes com base em uso real.",
+          detail: "Melhoria contínua.",
         },
       ],
     },
 
-    // ─── Home CTA ─────────────────────────────────────────────────────────────
     homeCta: {
-      kicker: "Vamos conversar?",
-      line1: "Pronto para escalar o seu projeto",
-      line2: "com tecnologia de ponta?",
-      body: "Faça um diagnóstico gratuito. Em menos de 24 horas envio um plano inicial com escopo, prazo e estimativa.",
-      ctaPrimary: "Fazer Diagnóstico Grátis",
-      ctaSecondary: "Ver Todos os Projetos",
+      kicker: "Próximo passo",
+      line1: "Aberto a oportunidades",
+      line2: "e a projetos sob demanda",
+      body: "CLT ou PJ como Full Stack / Product Engineer — ou um briefing rápido se você precisa de um site ou sistema.",
+      ctaPrimary: "Me chamar no LinkedIn",
+      ctaSecondary: "Quero um projeto",
     },
   },
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // EN-US
-  // ═══════════════════════════════════════════════════════════════════════════
   "en-US": {
     nav: {
       home: "Home",
       about: "About",
       projects: "Projects",
       process: "Process",
-      contact: "Free Diagnosis",
+      contact: "Hire for a project",
     },
 
     footer: {
-      available: "Available for projects",
+      available: "Open to full-time, contract & freelance",
     },
 
-    // ─── Hero ─────────────────────────────────────────────────────────────────
     hero: {
-      tagline: "Your software shouldn't\nbe complicated.",
-      title: "Thomas Eduardo, Software Engineer",
+      tagline: "Full Stack & Product Engineer",
+      title: "Thomas Eduardo, Full Stack / Product Engineer",
       description:
-        "I transform manual processes into fast, scalable systems built for your business.",
-      ctaPrimary: "Get Free Diagnosis",
-      ctaSecondary: "View Projects",
-      socialProof: "Production systems and pages generating revenue",
+        "I build UIs and backends with Next.js, React, TypeScript and Node.js. Production work with conversion metrics and custom systems.",
+      ctaPrimary: "View projects",
+      ctaSecondary: "Need a project?",
+      socialProof: "Next.js · React · TypeScript · Node.js · São Paulo",
       scroll: "scroll",
     },
 
@@ -285,6 +266,7 @@ export const translations = {
     projects: {
       kicker: "Work",
       heading: "Selected projects.",
+      subtitle: "Real production work — stack, problem, outcome.",
       viewAll: "View all",
       viewAllMobile: "View all projects",
     },
@@ -296,25 +278,25 @@ export const translations = {
 
     about: {
       kicker: "Profile",
-      headingLine1: "Clarity.",
-      headingLine2: "Performance.",
-      headingLine3: "Results.",
-      cta: "Talk with Thomas on WhatsApp",
-      ctaMobile: "Talk on WhatsApp",
-      p1: "Building full-stack web applications and software systems since 2023.",
-      p2: "I analyze your business problem before writing any code. The goal is simple, fast, and profitable solutions.",
+      headingLine1: "Product.",
+      headingLine2: "Code.",
+      headingLine3: "Delivery.",
+      cta: "LinkedIn",
+      ctaMobile: "LinkedIn",
+      p1: "Full-stack developer since 2023. From UI to API, shipping to production.",
+      p2: "Open to full-time or contract roles. Freelance work lives at /freelance.",
       pillars: [
         {
           title: "Product",
-          text: "Technical decisions driven by business outcome and financial return.",
+          text: "Technical choices tied to the business metric that matters.",
         },
         {
           title: "Engineering",
-          text: "Clean code, solid architecture, and easy to maintain systems.",
+          text: "TypeScript, clear APIs, readable code, predictable deploys.",
         },
         {
-          title: "Predictability",
-          text: "Strict deadlines met with direct communication at every step.",
+          title: "Communication",
+          text: "Explicit scope, honest timelines, steady updates.",
         },
       ],
     },
@@ -323,72 +305,72 @@ export const translations = {
       kicker: "Stack",
       headingMobile: "Technologies.",
       headingDesktop: "Technologies & Tools.",
-      subtitle: "Modern stack used in real production projects.",
+      subtitle: "Stack used in real production projects.",
       groups: [
         {
           category: "Frontend",
-          description: "Fast, responsive web interfaces.",
+          description: "Next.js, React, TypeScript, Tailwind.",
         },
         {
           category: "Backend",
-          description: "Secure APIs and scalable architecture.",
+          description: "Node.js, REST APIs, auth.",
         },
         {
           category: "Database",
-          description: "Optimized data modeling.",
+          description: "PostgreSQL, MongoDB, Prisma.",
         },
         {
           category: "Infrastructure",
-          description: "Continuous deployment and cloud setups.",
+          description: "Vercel, Docker, CI/CD, AWS.",
         },
       ],
     },
 
     engineering: {
-      kicker: "Direct process",
-      heading: "Full transparency from first call to deployment.",
-      body: "Track every step with clear timelines, frequent updates, and working software.",
+      kicker: "Process",
+      heading: "From discovery to deploy.",
+      body: "Clear steps, working software, continuous feedback.",
       steps: [
         {
-          title: "1. Diagnosis",
-          description: "Understanding requirements and defining the best technical approach.",
-          detail: "Scope, architecture, and timeline.",
+          title: "1. Discovery",
+          description: "Understand the problem and success metrics.",
+          detail: "Scope and acceptance criteria.",
         },
         {
           title: "2. Architecture",
-          description: "Designing fast interfaces and efficient database structures.",
-          detail: "Clean design and database tuning.",
+          description: "Stack, data and constraints.",
+          detail: "Documented decisions.",
         },
         {
           title: "3. Development",
-          description: "Building with modern tools and security best practices.",
-          detail: "Intuitive frontend and scalable backend.",
+          description: "Production-ready increments.",
+          detail: "Type-safe, reviewable code.",
         },
         {
           title: "4. Testing",
-          description: "Validating performance and responsiveness on all devices.",
-          detail: "Speed, link, and form checks.",
+          description: "Validate critical flows.",
+          detail: "Manual + automated when it pays off.",
         },
         {
-          title: "5. Deployment",
-          description: "Zero-downtime deployment on cloud servers.",
-          detail: "Domain and cloud configuration.",
+          title: "5. Deploy",
+          description: "CI/CD and stable environments.",
+          detail: "Basic monitoring.",
         },
         {
-          title: "6. Support",
-          description: "Post-launch support and ongoing performance checks.",
-          detail: "Maintenance and continuous improvements.",
+          title: "6. Iteration",
+          description: "Improve from real usage.",
+          detail: "Continuous improvement.",
         },
       ],
     },
 
     homeCta: {
-      kicker: "Let's talk?",
-      line1: "Ready to scale your business",
-      line2: "with high-end software?",
-      body: "Request a free diagnosis. Get a clear plan with scope and timeline within 24 hours.",
-      ctaPrimary: "Get Free Diagnosis",
-      ctaSecondary: "View All Projects",
+      kicker: "Next step",
+      line1: "Open to opportunities",
+      line2: "and project work",
+      body: "Full-time or contract as Full Stack / Product Engineer — or a short briefing if you need a site or system.",
+      ctaPrimary: "LinkedIn",
+      ctaSecondary: "Hire for a project",
     },
   },
 }
