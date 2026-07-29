@@ -2,10 +2,10 @@
 
 import { useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { PROJECTS } from "@/lib/data"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ProjectCard } from "@/components/project-card"
-import { ArrowRight } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { useI18n } from "@/lib/i18n/context"
 
 const FEATURED_ORDER = [
@@ -23,7 +23,6 @@ const featuredProjects = FEATURED_ORDER.map((title) =>
 
 export function ProjectsStack({
   projects = featuredProjects.length ? featuredProjects : PROJECTS.slice(0, 6),
-  hideHeader = false,
 }: {
   projects?: (typeof PROJECTS)[0][]
   hideHeader?: boolean
@@ -36,7 +35,7 @@ export function ProjectsStack({
     offset: ["start start", "end end"],
   })
 
-  const x = useTransform(scrollYProgress, [0.08, 0.9], ["0%", "-75%"])
+  const x = useTransform(scrollYProgress, [0.08, 0.9], ["0%", "-72%"])
 
   return (
     <section
@@ -44,57 +43,77 @@ export function ProjectsStack({
       id="projects"
       className="relative h-[220vh] w-full sm:h-[280vh] bg-neutral-50"
     >
-      <div className="sticky top-0 flex h-[100dvh] w-full flex-col justify-between overflow-hidden bg-neutral-50 text-black py-6 sm:py-10">
-        {!hideHeader && (
-          <div className="site-shell z-20 w-full shrink-0">
-            <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="label-kicker text-brand mb-2">{t.projects.kicker}</p>
-                <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-black">
-                  {t.projects.heading}
-                </h2>
-                <p className="mt-3 text-sm sm:text-base text-neutral-500 max-w-[36ch]">
-                  {t.projects.subtitle}
-                </p>
-              </div>
-              <Link
-                href="/projetos"
-                className="hidden sm:inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-black"
-              >
-                {t.projects.viewAll}
-                <ArrowRight className="size-3.5" />
-              </Link>
-            </div>
+      <div className="sticky top-0 flex h-[100dvh] w-full flex-col overflow-hidden bg-neutral-50 text-black py-8 sm:py-12">
+        <div className="site-shell shrink-0 mb-6 sm:mb-8">
+          <p className="label-kicker text-brand mb-2">Featured work</p>
+          <div className="flex items-end justify-between gap-4">
+            <h2 className="font-display text-3xl sm:text-5xl font-extrabold tracking-tight">
+              {t.projects.heading}
+            </h2>
+            <Link
+              href="/projetos"
+              className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-neutral-500 hover:text-black"
+            >
+              Ver todos <ArrowUpRight className="size-4" />
+            </Link>
           </div>
-        )}
+        </div>
 
-        <div className="flex-1 flex items-center w-full min-h-0 pl-[max(env(safe-area-inset-left),4vw)] sm:pl-[5vw]">
+        <div className="flex-1 flex items-center min-h-0 pl-[max(env(safe-area-inset-left),4vw)] sm:pl-[5vw]">
           <motion.div
             style={{ x }}
-            className="flex items-center gap-6 pr-8 sm:gap-10 sm:pr-16"
+            className="flex items-stretch gap-5 pr-8 sm:gap-8 sm:pr-16"
           >
-            {projects.map((project, i) => (
-              <div
-                key={project.title}
-                className="w-[85vw] flex-shrink-0 sm:w-[480px] lg:w-[620px]"
-              >
-                <ProjectCard project={project} index={i} />
-              </div>
-            ))}
+            {projects.map((project) => {
+              const href =
+                project.title === "TERON OS"
+                  ? "/projetos/teron-os"
+                  : project.href?.startsWith("/")
+                    ? project.href
+                    : project.href
+
+              return (
+                <Link
+                  key={project.title}
+                  href={href || "/projetos"}
+                  {...(href?.startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="group w-[78vw] flex-shrink-0 sm:w-[420px] lg:w-[520px] flex flex-col"
+                >
+                  {/* Bolder: image first, minimal meta */}
+                  <div className="relative aspect-[4/3] overflow-hidden bg-neutral-200">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      sizes="(max-width: 640px) 80vw, 520px"
+                    />
+                  </div>
+                  <div className="mt-4 flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-black group-hover:text-brand transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="mt-1 text-sm text-neutral-500">{project.tag}</p>
+                    </div>
+                    <ArrowUpRight className="size-5 shrink-0 text-neutral-400 group-hover:text-brand transition-colors" />
+                  </div>
+                </Link>
+              )
+            })}
           </motion.div>
         </div>
 
-        {!hideHeader && (
-          <div className="site-shell shrink-0 pb-2 flex justify-center sm:hidden">
-            <Link
-              href="/projetos"
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-black"
-            >
-              {t.projects.viewAllMobile}
-              <ArrowRight className="size-3.5" />
-            </Link>
-          </div>
-        )}
+        <div className="site-shell shrink-0 pt-4 flex justify-center sm:hidden">
+          <Link
+            href="/projetos"
+            className="text-sm font-semibold text-neutral-600"
+          >
+            Ver todos →
+          </Link>
+        </div>
       </div>
     </section>
   )

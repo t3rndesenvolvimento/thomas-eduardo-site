@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { Hero } from "@/components/home/hero"
-import { ClientsCarousel } from "@/components/home/clients-carousel"
 import { ProjectsStack } from "@/components/home/projects-stack"
 import { Testimonials } from "@/components/home/testimonials"
 import { About } from "@/components/home/about"
@@ -24,6 +23,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 }
 
+/**
+ * Home structure inspired by Bolder (minimal portfolio):
+ * Hero + skills → Featured work → About → Stack → Social proof → CTA
+ */
 export default function HomePage() {
   return (
     <>
@@ -33,27 +36,23 @@ export default function HomePage() {
           <Hero />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={1} className="bg-canvas" sticky={false}>
-          <ClientsCarousel />
-        </ScrollRevealSection>
-
         <div className="relative z-[25]">
           <ProjectsStack />
         </div>
 
-        <ScrollRevealSection index={3} className="bg-neutral-50 text-black">
+        <ScrollRevealSection index={2} className="bg-neutral-50 text-black">
           <About />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={4} className="bg-canvas text-white">
+        <ScrollRevealSection index={3} className="bg-canvas text-white">
           <TechExpertise />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={5} className="bg-neutral-50 text-black">
+        <ScrollRevealSection index={4} className="bg-neutral-50 text-black">
           <Testimonials />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={6} className="bg-canvas text-white">
+        <ScrollRevealSection index={5} className="bg-canvas text-white">
           <HomeCta />
         </ScrollRevealSection>
       </div>
