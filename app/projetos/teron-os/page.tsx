@@ -1,36 +1,42 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight } from "lucide-react"
 import { PROJECTS, CONTACT } from "@/lib/data"
+import { PageAnimator } from "@/components/page-animator"
+import { ArrowOutIcon } from "@/components/brand-icons"
 
 export const metadata: Metadata = {
-  title: "Case Study · TERON OS",
+  title: "TERON OS · Case Study",
   description:
-    "Monorepo full stack: OS interno + portal do cliente na mesma API. Ciclo lead → proposta → projeto → fatura. Redução de 40% no ciclo de vendas.",
+    "Full-stack monorepo: internal OS + client portal on one API. Lead to invoice cycle. ~40% shorter sales cycle.",
   alternates: { canonical: "/projetos/teron-os" },
 }
 
 const SECTIONS = [
   {
-    title: "Contexto",
-    body: "Operação de serviços digitais com CRM, propostas, projetos e financeiro em ferramentas separadas. O time e o cliente não compartilhavam a mesma visão do andamento — aprovações e materiais ficavam em e-mail e chat.",
+    n: "01",
+    title: "Context",
+    body: "Digital services operation with CRM, proposals, projects and finance split across tools. Team and client did not share the same view of progress — approvals and files lived in email and chat.",
   },
   {
-    title: "Problema",
-    body: "Ciclo comercial longo por retrabalho manual: lead ganho não virava projeto de forma automática; cliente sem transparência; risco de inconsistência entre o que foi vendido e o que estava em execução.",
+    n: "02",
+    title: "Problem",
+    body: "Long sales cycle from manual rework: a won lead did not become a project automatically; client had no transparency; risk of mismatch between what was sold and what was in execution.",
   },
   {
-    title: "Decisões técnicas",
-    body: "Monorepo (pnpm) com quatro superfícies: Site, OS (time), Workspace (cliente) e API compartilhada. Front em React + TypeScript + Vite; API Node; design system único. Separação clara de papéis (operação vs. portal) sobre o mesmo modelo de dados — uma ação do cliente no Workspace atualiza o pipeline do OS sem sincronização manual.",
+    n: "03",
+    title: "Technical decisions",
+    body: "pnpm monorepo with four surfaces: Site, OS (team), Workspace (client) and shared API. React + TypeScript + Vite on the front; Node API; one design system. Clear role split on the same data model — a client action in Workspace updates the OS pipeline without manual sync.",
   },
   {
-    title: "O que eu entreguei",
-    body: "Arquitetura do monorepo, modelagem do fluxo lead → proposta → projeto → fatura, interfaces do OS e do Workspace, e integração na mesma API. Foco em ownership full stack: do domínio de negócio à UI em produção.",
+    n: "04",
+    title: "What I shipped",
+    body: "Monorepo architecture, lead to proposal to project to invoice flow, OS and Workspace interfaces, and integration on the same API. Full-stack ownership from domain to UI in production.",
   },
   {
-    title: "Resultado",
-    body: "Redução de cerca de 40% no ciclo de vendas com fluxo ponta a ponta. Cliente com visibilidade real do projeto; time operando CRM, propostas e financeiro no mesmo sistema.",
+    n: "05",
+    title: "Outcome",
+    body: "About 40% shorter sales cycle with an end-to-end flow. Client visibility into the project; team running CRM, proposals and finance in one system.",
   },
 ]
 
@@ -38,102 +44,106 @@ export default function TeronOsCaseStudy() {
   const project = PROJECTS.find((p) => p.title === "TERON OS")
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-canvas text-white">
+      <PageAnimator />
+
       <div className="site-shell pt-28 pb-6 sm:pt-36">
         <Link
           href="/projetos"
-          className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-neutral-500 transition-colors hover:text-brand"
         >
-          <ArrowLeft className="size-4" /> Projetos
+          <span className="rotate-180 inline-flex">
+            <ArrowOutIcon size={16} />
+          </span>
+          All case studies
         </Link>
       </div>
 
-      <header className="site-shell pb-12 sm:pb-16 max-w-3xl">
-        <p className="text-xs font-mono uppercase tracking-widest text-white/45 mb-4">
-          Case study · Produto SaaS · Monorepo
+      <header className="site-shell max-w-3xl pb-12 sm:pb-16">
+        <p className="mb-3 text-sm font-medium text-brand">
+          Case study · SaaS · Monorepo
         </p>
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]">
+        <h1 className="font-display text-4xl sm:text-6xl font-extrabold tracking-[-0.03em] leading-[0.95]">
           TERON OS
         </h1>
-        <p className="mt-5 text-lg sm:text-xl text-white/60 font-light leading-relaxed">
-          Unificar operação interna e portal do cliente na mesma plataforma — do
-          lead ao pagamento, com uma única fonte de verdade.
+        <p className="mt-5 text-base sm:text-lg leading-relaxed text-neutral-400">
+          Internal ops and client portal on one platform — from lead to payment,
+          one source of truth.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-6 text-sm">
+        <dl className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-white/40 mb-1">
-              Papel
-            </p>
-            <p className="text-white/85">Full Stack / Product Engineer</p>
+            <dt className="text-[11px] font-medium uppercase tracking-wider text-neutral-500">
+              Role
+            </dt>
+            <dd className="mt-1 text-sm text-white">Full Stack / Product Engineer</dd>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-white/40 mb-1">
-              Impacto
-            </p>
-            <p className="text-white/85">~40% menor ciclo de vendas</p>
+            <dt className="text-[11px] font-medium uppercase tracking-wider text-neutral-500">
+              Impact
+            </dt>
+            <dd className="mt-1 text-sm text-white">~40% shorter sales cycle</dd>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-white/40 mb-1">
-              Ano
-            </p>
-            <p className="text-white/85">{project?.year ?? "2026"}</p>
+            <dt className="text-[11px] font-medium uppercase tracking-wider text-neutral-500">
+              Year
+            </dt>
+            <dd className="mt-1 text-sm text-white">{project?.year ?? "2025"}</dd>
           </div>
-        </div>
+        </dl>
       </header>
 
       {project?.image && (
-        <div className="site-shell mb-16">
-          <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <div className="site-shell mb-14 sm:mb-20">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-neutral-900">
             <Image
               src={project.image}
-              alt="TERON OS — interface do centro de comando"
-              width={1920}
-              height={1080}
-              className="h-full w-full object-cover"
+              alt="TERON OS"
+              fill
+              className="object-cover"
               priority
+              sizes="100vw"
             />
           </div>
         </div>
       )}
 
       <div className="site-shell pb-20 grid gap-12 lg:grid-cols-[1fr_280px] lg:gap-16">
-        <article className="max-w-2xl space-y-12">
+        <article className="max-w-2xl space-y-10">
           {SECTIONS.map((s) => (
-            <section key={s.title}>
-              <h2 className="font-display text-xl sm:text-2xl font-semibold tracking-tight mb-3">
+            <section key={s.n}>
+              <p className="font-mono text-xs text-brand">{s.n}</p>
+              <h2 className="mt-1 font-display text-xl sm:text-2xl font-bold tracking-tight">
                 {s.title}
               </h2>
-              <p className="text-base sm:text-lg text-white/65 font-light leading-relaxed">
+              <p className="mt-3 text-[15px] sm:text-base leading-relaxed text-neutral-400">
                 {s.body}
               </p>
             </section>
           ))}
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-              <p className="text-3xl font-bold tracking-tight">~40%</p>
-              <p className="mt-2 text-sm text-white/55">
-                Redução estimada no ciclo de vendas
+            <div className="rounded-[1.5rem] border border-white/10 bg-surface p-6">
+              <p className="font-display text-3xl font-extrabold text-brand">~40%</p>
+              <p className="mt-2 text-sm text-neutral-500">
+                Estimated reduction in sales cycle
               </p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-              <p className="text-3xl font-bold tracking-tight">1 API</p>
-              <p className="mt-2 text-sm text-white/55">
-                OS + Workspace na mesma verdade de dados
+            <div className="rounded-[1.5rem] border border-white/10 bg-surface p-6">
+              <p className="font-display text-3xl font-extrabold text-brand">1 API</p>
+              <p className="mt-2 text-sm text-neutral-500">
+                OS + Workspace on one data truth
               </p>
             </div>
           </div>
 
           <section>
-            <h2 className="font-display text-xl sm:text-2xl font-semibold tracking-tight mb-3">
-              Stack
-            </h2>
+            <p className="mb-3 text-sm font-medium text-brand">Stack</p>
             <div className="flex flex-wrap gap-2">
               {(project?.stack ?? []).map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/75"
+                  className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-neutral-400"
                 >
                   {tech}
                 </span>
@@ -142,30 +152,31 @@ export default function TeronOsCaseStudy() {
           </section>
         </article>
 
-        <aside className="lg:sticky lg:top-28 h-fit space-y-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-          <p className="text-sm text-white/55 leading-relaxed">
-            Interessado em engenharia de produto full stack? Veja o perfil ou
-            outros cases.
+        <aside className="h-fit space-y-5 rounded-[1.5rem] border border-white/10 bg-surface p-6 lg:sticky lg:top-28">
+          <p className="text-sm leading-relaxed text-neutral-400">
+            Interested in full-stack product engineering? See the profile or more
+            cases.
           </p>
-          <Link
+          <a
             href={CONTACT.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-black"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-black hover:brightness-110"
           >
-            LinkedIn <ArrowRight className="size-3.5" />
-          </Link>
+            LinkedIn
+            <ArrowOutIcon size={16} />
+          </a>
           <Link
             href="/projetos"
-            className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-5 py-3 text-xs font-bold uppercase tracking-wider text-white/90"
+            className="flex w-full items-center justify-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white/90 hover:border-white/35"
           >
-            Mais projetos
+            More case studies
           </Link>
           <Link
             href="/freelance"
-            className="block text-center text-xs text-white/40 hover:text-white/70"
+            className="block text-center text-xs text-neutral-500 hover:text-brand"
           >
-            Projetos sob demanda →
+            On-demand projects
           </Link>
         </aside>
       </div>
