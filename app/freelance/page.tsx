@@ -2,25 +2,25 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { PageAnimator } from "@/components/page-animator"
 import { CONTACT } from "@/lib/data"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowOutIcon, CheckIcon, RocketIcon, SparkIcon } from "@/components/brand-icons"
 
 export const metadata: Metadata = {
   title: "Projetos sob demanda",
-  description: "Landing, sistemas e produtos. Escopo fechado e entrega em produção.",
+  description: "Landing, sistemas e produtos. Escopo fechado e entrega em producao.",
   alternates: { canonical: "/freelance" },
 }
 
 const OFFERS = [
-  { title: "Landing pages", body: "Rápidas, CTA claro, WhatsApp — campanha e custo por lead." },
-  { title: "Sistemas", body: "Auth, CRUD, permissões e fluxos do negócio." },
-  { title: "Produtos", body: "Do MVP ao deploy com iteração em uso real." },
+  { title: "Landing pages", body: "Rapidas, CTA claro, WhatsApp — campanha e custo por lead." },
+  { title: "Sistemas", body: "Auth, CRUD, permissoes e fluxos do negocio." },
+  { title: "Produtos", body: "Do MVP ao deploy com iteracao em uso real." },
 ]
 
 const STEPS = [
-  { n: "01", t: "Briefing", d: "Formulário curto com contexto." },
-  { n: "02", t: "Alinhamento", d: "Retorno em até 24h úteis." },
+  { n: "01", t: "Briefing", d: "Formulario curto com contexto." },
+  { n: "02", t: "Alinhamento", d: "Retorno em ate 24h uteis." },
   { n: "03", t: "Escopo", d: "Prazo e valor claros." },
-  { n: "04", t: "Entrega", d: "Build, validação, deploy." },
+  { n: "04", t: "Entrega", d: "Build, validacao, deploy." },
 ]
 
 export default function FreelancePage() {
@@ -29,34 +29,42 @@ export default function FreelancePage() {
       <PageAnimator />
 
       <header className="site-shell max-w-3xl pt-28 pb-12 sm:pt-36 sm:pb-16">
-        <p className="font-mono text-sm text-brand mb-3">Sob demanda</p>
-        <h1 className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">
+        <p className="mb-3 inline-flex items-center gap-2 text-sm font-medium text-brand">
+          <SparkIcon size={16} className="text-brand" />
+          Sob demanda
+        </p>
+        <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight">
           Site, sistema ou produto
         </h1>
         <p className="mt-4 max-w-lg text-neutral-400 leading-relaxed">
-          Escopo fechado, comunicação direta, entrega em produção.
+          Escopo fechado, comunicacao direta, entrega em producao.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href="/diagnostico"
-            className="inline-flex rounded border border-brand px-6 py-3 text-sm font-medium text-brand hover:bg-brand/10"
+            className="inline-flex min-h-12 items-center gap-2 rounded-2xl bg-brand px-6 text-sm font-semibold text-black"
           >
             Solicitar briefing
+            <ArrowOutIcon size={16} />
           </Link>
           <Link
             href="/projetos"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-white"
+            className="inline-flex min-h-12 items-center gap-1 text-sm text-neutral-400 hover:text-white"
           >
-            Ver cases <ArrowUpRight className="size-3.5" />
+            Ver cases
+            <ArrowOutIcon size={16} />
           </Link>
         </div>
       </header>
 
       <section className="site-shell max-w-3xl pb-12">
-        <h2 className="font-mono text-sm text-brand mb-6">O que entrego</h2>
-        <ul className="divide-y divide-white/10 border-y border-white/10">
+        <h2 className="mb-5 text-sm font-medium text-brand">O que entrego</h2>
+        <ul className="space-y-3">
           {OFFERS.map((item) => (
-            <li key={item.title} className="py-6">
+            <li
+              key={item.title}
+              className="rounded-3xl border border-white/10 bg-surface p-5"
+            >
               <h3 className="font-display text-lg font-bold">{item.title}</h3>
               <p className="mt-1 text-sm text-neutral-400">{item.body}</p>
             </li>
@@ -65,10 +73,13 @@ export default function FreelancePage() {
       </section>
 
       <section className="site-shell max-w-3xl pb-12">
-        <h2 className="font-mono text-sm text-brand mb-6">Como funciona</h2>
-        <ol className="grid gap-6 sm:grid-cols-2">
+        <h2 className="mb-5 text-sm font-medium text-brand">Como funciona</h2>
+        <ol className="grid gap-3 sm:grid-cols-2">
           {STEPS.map((s) => (
-            <li key={s.n}>
+            <li
+              key={s.n}
+              className="rounded-3xl border border-white/10 bg-surface p-5"
+            >
               <span className="font-mono text-xs text-brand">{s.n}</span>
               <p className="mt-1 font-display font-bold">{s.t}</p>
               <p className="mt-0.5 text-sm text-neutral-500">{s.d}</p>
@@ -77,23 +88,25 @@ export default function FreelancePage() {
         </ol>
       </section>
 
-      <section className="site-shell max-w-3xl pb-24 border-t border-white/10 pt-12">
-        <h2 className="font-display text-2xl font-extrabold">Vamos alinhar o escopo</h2>
-        <p className="mt-2 text-sm text-neutral-400">Retorno em até 24h úteis.</p>
+      <section className="site-shell max-w-3xl border-t border-white/10 pb-24 pt-12">
+        <h2 className="font-display text-2xl font-bold">Vamos alinhar o escopo</h2>
+        <p className="mt-2 text-sm text-neutral-400">Retorno em ate 24h uteis.</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/diagnostico"
-            className="inline-flex rounded border border-brand px-6 py-3 text-sm font-medium text-brand hover:bg-brand/10"
+            className="inline-flex min-h-12 items-center gap-2 rounded-2xl bg-brand px-6 text-sm font-semibold text-black"
           >
-            Começar briefing
+            Comecar briefing
+            <ArrowOutIcon size={16} />
           </Link>
           <a
             href={CONTACT.whatsapp_real}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-white"
+            className="inline-flex min-h-12 items-center gap-1 text-sm text-neutral-400 hover:text-white"
           >
-            WhatsApp <ArrowUpRight className="size-3.5" />
+            WhatsApp
+            <ArrowOutIcon size={16} />
           </a>
         </div>
       </section>
