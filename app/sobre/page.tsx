@@ -4,7 +4,7 @@ import Image from "next/image"
 import { CtaLink } from "@/components/ui/cta"
 import { motion } from "framer-motion"
 import { CONTACT } from "@/lib/data"
-import { TechGrid } from "@/components/tech-icon"
+import { TechGrid, TechIcon } from "@/components/tech-icon"
 import { PageAnimator } from "@/components/page-animator"
 import { PageHero } from "@/components/page-hero"
 import { ClientsCarousel } from "@/components/home/clients-carousel"
@@ -61,15 +61,54 @@ const TIMELINE = [
  },
 ]
 
-const STACK_ICONS = [
-  "Figma",
-  "Framer",
-  "Webflow",
-  "Notion",
-  "Miro",
-  "Adobe CC",
-  "React",
-  "Tailwind CSS",
+const STACK = [
+  {
+    category: "Design & Prototipagem",
+    description: "Do conceito ao handoff, uso ferramentas que garantem clareza visual antes de qualquer linha de código.",
+    tools: [
+      { name: "Figma", note: "UI/UX, design system, handoff" },
+      { name: "Framer", note: "Prototipagem animada" },
+      { name: "Webflow", note: "Sites sem-code de alta fidelidade" },
+      { name: "Adobe CC", note: "Edição visual e motion" },
+      { name: "Miro", note: "Workshops e ideação visual" },
+      { name: "Notion", note: "Documentação e gestão" },
+    ],
+  },
+  {
+    category: "Frontend",
+    description: "Interfaces modernas, acessíveis e otimizadas para performance real em produção.",
+    tools: [
+      { name: "React", note: "SPA e interfaces reativas" },
+      { name: "Next.js", note: "SSR, SSG e App Router" },
+      { name: "TypeScript", note: "Código tipado e escalável" },
+      { name: "Tailwind CSS", note: "Estilização utilitária" },
+      { name: "Framer", note: "Animações de UI" },
+    ],
+  },
+  {
+    category: "Backend & Banco de Dados",
+    description: "APIs robustas, autenticação segura e bancos de dados escolhidos conforme o projeto.",
+    tools: [
+      { name: "Node.js", note: "Runtime JS server-side" },
+      { name: "Fastify", note: "APIs performáticas" },
+      { name: "PostgreSQL", note: "Banco relacional" },
+      { name: "MongoDB", note: "Banco NoSQL" },
+      { name: "Prisma", note: "ORM type-safe" },
+      { name: "Redis", note: "Cache e filas" },
+      { name: "Firebase", note: "Auth e Realtime" },
+    ],
+  },
+  {
+    category: "Infra & DevOps",
+    description: "Deploy contínuo, ambientes seguros e monitoramento para garantir disponibilidade.",
+    tools: [
+      { name: "Vercel", note: "Deploy e edge functions" },
+      { name: "AWS", note: "EC2, S3, Lambda, RDS" },
+      { name: "Docker", note: "Containerização" },
+      { name: "Linux", note: "Servidores VPS" },
+      { name: "Git", note: "Versionamento" },
+    ],
+  },
 ]
 
 const fade = {
@@ -401,35 +440,74 @@ export default function SobrePage() {
  </div>
  </ScrollRevealSection>
 
- {/* Stack */}
- <ScrollRevealSection index={4} className="bg-white text-black py-16 sm:py-24 relative overflow-hidden">
- <motion.div
- className="pointer-events-none absolute left-10 top-1/4 z-0 w-32 opacity-25 sm:w-40"
- animate={{ rotate: -360, y: [0, 20, 0] }}
- transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
- >
- <Shape4 />
- </motion.div>
- <div className="site-shell relative z-10">
- <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
-  <div>
+  {/* Stack */}
+  <ScrollRevealSection index={4} className="bg-white text-black py-14 sm:py-24 relative overflow-hidden">
+  <motion.div
+  className="pointer-events-none absolute left-0 top-1/4 z-0 w-32 opacity-15 sm:w-48"
+  animate={{ rotate: -360, y: [0, 20, 0] }}
+  transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+  >
+  <Shape4 />
+  </motion.div>
+  <div className="site-shell relative z-10">
+
+  {/* Header */}
+  <div className="mb-10 sm:mb-14">
   <p className="label-kicker mb-2 text-black/45">Stack</p>
+  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+  <div className="max-w-lg">
   <h2 className="text-h2 text-black mb-3">Ferramentas do dia a dia.</h2>
-  <p className="max-w-md text-sm sm:text-base leading-relaxed text-black/70">
-  Do protótipo visual à estruturação de conteúdo, utilizo as ferramentas de design e ideação mais modernas para garantir entregas refinadas e bem planejadas antes de qualquer linha de código.
+  <p className="text-sm sm:text-base leading-relaxed text-black/60">
+  Cada ferramenta tem um papel claro — do primeiro rascunho até o deploy em produção.
+  Não uso o que está na moda, uso o que resolve.
   </p>
   </div>
   <Link
   href="/projetos"
-  className="btn-cta group/cta inline-flex items-center justify-center rounded-full font-medium uppercase tracking-[0.08em] transition-[transform,background-color,color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform hover:-translate-y-px active:translate-y-0 active:scale-[0.98] h-9 gap-1.5 px-4 text-[11px] bg-black/5 text-black hover:bg-black/10"
+  className="btn-cta group/cta inline-flex w-fit items-center justify-center rounded-full font-medium uppercase tracking-[0.08em] transition-[transform,background-color,color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform hover:-translate-y-px active:translate-y-0 active:scale-[0.98] h-9 gap-1.5 px-4 text-[11px] bg-black/5 text-black hover:bg-black/10 shrink-0"
   >
   Ver em projetos
   <ArrowUpRight className="size-3.5 transition-transform group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" />
   </Link>
- </div>
- <TechGrid stack={STACK_ICONS} theme="light" />
- </div>
- </ScrollRevealSection>
+  </div>
+  </div>
+
+  {/* Categories */}
+  <div className="grid gap-6 sm:gap-8">
+  {STACK.map((group, gi) => (
+  <motion.div
+  key={group.category}
+  initial={{ opacity: 0, y: 14 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: gi * 0.07 }}
+  className="py-5 sm:py-7"
+  >
+  {/* Category header */}
+  <div className="mb-4 flex items-baseline gap-3">
+  <span className="font-mono text-[10px] uppercase tracking-widest text-black/30">{String(gi + 1).padStart(2, "0")}</span>
+  <h3 className="font-display text-sm sm:text-base font-semibold tracking-tight text-black">{group.category}</h3>
+  <span className="hidden sm:block text-xs text-black/45 font-light">{group.description}</span>
+  </div>
+  {/* Mobile description */}
+  <p className="block sm:hidden text-xs leading-relaxed text-black/50 mb-4">{group.description}</p>
+  {/* Tools grid */}
+  <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-2">
+  {group.tools.map((tool) => (
+  <div key={tool.name} className="group flex items-center gap-2.5 rounded-xl border border-black/10 bg-black/[0.02] px-3 py-2.5 hover:border-black/20 hover:bg-black/[0.04] transition-all cursor-default">
+  <TechIcon name={tool.name} className="size-4 shrink-0" showLabel={false} theme="light" />
+  <div className="min-w-0">
+  <p className="text-[13px] font-medium text-black/75 group-hover:text-black leading-tight truncate">{tool.name}</p>
+  <p className="text-[10px] text-black/40 mt-0.5 leading-tight truncate">{tool.note}</p>
+  </div>
+  </div>
+  ))}
+  </div>
+  </motion.div>
+  ))}
+  </div>
+  </div>
+  </ScrollRevealSection>
 
  {/* CTA */}
  <ScrollRevealSection index={5} className="relative overflow-hidden bg-background py-14 sm:py-20">

@@ -19,10 +19,10 @@ export const translations = {
 
     // ─── Hero ─────────────────────────────────────────────────────────────────
     hero: {
-      tagline: "Engenheiro de Software, Foco em Resultados",
+      tagline: "Seu software não\nprecisa ser complicado.",
       title: "Thomas Eduardo, Engenheiro de Software",
       description:
-        "Desenvolvo landing pages de alta conversão e sistemas sob medida, com foco em velocidade, lucro e resultado real.",
+        "Transformo processos manuais em sistemas rápidos, escaláveis e feitos para o seu negócio.",
       ctaPrimary: "Fazer Diagnóstico Grátis",
       ctaSecondary: "Ver Projetos",
       socialProof: "Sistemas e páginas em produção gerando receita",
@@ -219,11 +219,12 @@ export const translations = {
       available: "Available for projects",
     },
 
+    // ─── Hero ─────────────────────────────────────────────────────────────────
     hero: {
-      tagline: "Software Engineer, Results Driven",
-      title: "Thomas Eduardo - Software Engineer",
+      tagline: "Your software shouldn't\nbe complicated.",
+      title: "Thomas Eduardo, Software Engineer",
       description:
-        "I build high-converting landing pages and custom web applications focused on speed, profitability, and business impact.",
+        "I transform manual processes into fast, scalable systems built for your business.",
       ctaPrimary: "Get Free Diagnosis",
       ctaSecondary: "View Projects",
       socialProof: "Production systems and pages generating revenue",

@@ -191,7 +191,7 @@ export function Hero() {
   initial={{ opacity: 0, y: 16 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
-  className="max-w-5xl text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-[5rem] font-display font-bold text-white tracking-tight text-center text-balance px-4 sm:px-0"
+  className="max-w-5xl text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-[5rem] font-display font-bold text-white tracking-tight text-center text-balance px-4 sm:px-0 whitespace-pre-line"
   >
   {t.hero.tagline}
   </motion.h1>
@@ -200,7 +200,7 @@ export function Hero() {
   initial={{ opacity: 0, y: 12 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.65, duration: 0.6 }}
-  className="mt-5 sm:mt-8 w-full max-w-[92%] sm:max-w-2xl mx-auto text-[15px] sm:text-base md:text-lg leading-relaxed text-white/70 text-center sm:text-balance"
+  className="mt-5 sm:mt-8 w-full mx-auto text-[12px] sm:text-sm md:text-base leading-relaxed text-white/70 text-center whitespace-nowrap"
   >
   {t.hero.description}
   </motion.p>

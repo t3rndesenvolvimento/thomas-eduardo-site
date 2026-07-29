@@ -54,15 +54,15 @@ const INCLUDED = [
 ]
 
 const PROJECT_TYPES = [
- { label: "Sistema de gestão", icon: "ph:kanban-bold" },
- { label: "CRM", icon: "ph:users-three-bold" },
- { label: "ERP", icon: "ph:factory-bold" },
- { label: "Marketplace", icon: "ph:storefront-bold" },
- { label: "Plataforma SaaS", icon: "ph:cloud-check-bold" },
- { label: "Portal Corporativo", icon: "ph:briefcase-bold" },
- { label: "Aplicativo", icon: "ph:device-mobile-bold" },
- { label: "Dashboard", icon: "ph:chart-bar-bold" },
- { label: "API", icon: "ph:plugs-bold" }
+ { label: "Sistema de gestão", icon: "ph:kanban-bold", description: "Controle total de processos, equipes e tarefas em tempo real." },
+ { label: "CRM", icon: "ph:users-three-bold", description: "Gerencie leads, clientes e funil de vendas com eficiência." },
+ { label: "ERP", icon: "ph:factory-bold", description: "Integre finanças, estoque, RH e operação em um só sistema." },
+ { label: "Marketplace", icon: "ph:storefront-bold", description: "Plataforma multi-vendedores com pagamentos e catálogo escalável." },
+ { label: "Plataforma SaaS", icon: "ph:cloud-check-bold", description: "Software como serviço com planos, assinaturas e multitenancy." },
+ { label: "Portal Corporativo", icon: "ph:briefcase-bold", description: "Hub centralizado para equipes, documentos e comunicação interna." },
+ { label: "Aplicativo", icon: "ph:device-mobile-bold", description: "App web ou mobile com experiência nativa e alto desempenho." },
+ { label: "Dashboard", icon: "ph:chart-bar-bold", description: "Visualização de dados e métricas em tempo real para decisões ágeis." },
+ { label: "API", icon: "ph:plugs-bold", description: "Integrações robustas e seguras entre sistemas e plataformas externas." }
 ]
 
 const FAQ = [
@@ -281,17 +281,20 @@ export default function ProcessPage() {
  
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
  {PROJECT_TYPES.map((item) => (
- <div key={item.label} className="group flex items-center gap-4 rounded-2xl border border-black/10 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 hover:border-black/20 hover:bg-black/[0.02] transition-colors relative overflow-hidden">
- <div className="absolute inset-0 bg-gradient-to-r from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
- <div className="relative z-10 flex items-center gap-4">
- <div className="flex size-10 items-center justify-center rounded-xl bg-black/5 border border-black/10 text-black/50 transition-colors group-hover:bg-black/10 group-hover:text-black">
- <Icon icon={item.icon} className="size-5" />
- </div>
- <h3 className="font-display text-lg font-medium tracking-tight text-black/80 group-hover:text-black transition-colors">
- {item.label}
- </h3>
- </div>
- </div>
+  <div key={item.label} className="group flex flex-col gap-4 rounded-2xl border border-black/10 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 hover:border-black/20 hover:bg-black/[0.02] transition-colors relative overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-r from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+  <div className="relative z-10 flex items-center gap-4">
+  <div className="flex size-10 items-center justify-center rounded-xl bg-black/5 border border-black/10 text-black/50 transition-colors group-hover:bg-black/10 group-hover:text-black shrink-0">
+  <Icon icon={item.icon} className="size-5" />
+  </div>
+  <h3 className="font-display text-lg font-medium tracking-tight text-black/80 group-hover:text-black transition-colors">
+  {item.label}
+  </h3>
+  </div>
+  <p className="relative z-10 text-sm leading-relaxed text-black/55 group-hover:text-black/70 transition-colors">
+  {item.description}
+  </p>
+  </div>
  ))}
  </div>
  </div>
