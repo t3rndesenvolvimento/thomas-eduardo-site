@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google"
+import { Syne, Inter, JetBrains_Mono } from "next/font/google"
 import localFont from "next/font/local"
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
@@ -8,17 +8,18 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LayoutShell } from "@/components/layout-shell"
 import "./globals.css"
 
-/** Geometric / squared sans — display + body */
-const grotesk = Space_Grotesk({
+/** Kinetic-style display: geometric, bold, character */
+const display = Syne({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["500", "600", "700", "800"],
+})
+
+/** Clean body */
+const body = Inter({
   subsets: ["latin"],
   variable: "--font-geist",
   weight: ["400", "500", "600", "700"],
-})
-
-const display = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["500", "600", "700"],
 })
 
 const mono = JetBrains_Mono({
@@ -36,7 +37,7 @@ const signature = localFont({
 const SITE_URL = "https://thomaseduardo.com.br"
 const SITE_TITLE = "Thomas Eduardo | Full Stack & Product Engineer"
 const SITE_DESCRIPTION =
-  "Full Stack / Product Engineer em São Paulo. Next.js, React, TypeScript e Node.js. Sistemas escaláveis, produtos digitais e cases com resultado mensurável."
+  "Full Stack / Product Engineer em Sao Paulo. Next.js, React, TypeScript e Node.js. Sistemas escalaveis, produtos digitais e cases com resultado mensuravel."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -47,14 +48,12 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   keywords: [
     "Thomas Eduardo",
-    "Full Stack Developer São Paulo",
+    "Full Stack Developer Sao Paulo",
     "Product Engineer",
     "Next.js Developer",
-    "React Developer São Paulo",
+    "React Developer Sao Paulo",
     "TypeScript",
     "Node.js",
-    "Engenheiro de Software",
-    "Portfólio Desenvolvedor",
   ],
   authors: [{ name: "Thomas Eduardo", url: SITE_URL }],
   creator: "Thomas Eduardo",
@@ -104,7 +103,7 @@ const jsonLd = {
       description: SITE_DESCRIPTION,
       address: {
         "@type": "PostalAddress",
-        addressLocality: "São Paulo",
+        addressLocality: "Sao Paulo",
         addressCountry: "BR",
       },
       sameAs: [
@@ -137,7 +136,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const fontVars = `${grotesk.variable} ${mono.variable} ${display.variable} ${signature.variable}`
+  const fontVars = `${body.variable} ${mono.variable} ${display.variable} ${signature.variable}`
 
   return (
     <html
