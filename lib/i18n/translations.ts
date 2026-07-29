@@ -19,10 +19,10 @@ export const translations = {
       tagline: "Full Stack & Product Engineer",
       title: "Thomas Eduardo, Full Stack / Product Engineer",
       description:
-        "Construo interfaces e backends com Next.js, React, TypeScript e Node.js. Cases em produção com métricas de conversão e sistemas sob medida.",
+        "Interfaces e backends com Next.js, React, TypeScript e Node.js. Cases em produção com métricas reais — não só mockups.",
       ctaPrimary: "Ver projetos",
       ctaSecondary: "Precisa de um projeto?",
-      socialProof: "Next.js · React · TypeScript · Node.js · São Paulo",
+      socialProof: "Next.js · React · TypeScript · Node.js",
       scroll: "rolar",
     },
 
@@ -32,19 +32,19 @@ export const translations = {
       items: [
         {
           headline: "Lentidão que mata vendas",
-          copy: "Cada segundo de espera afasta clientes. Páginas pesadas desperdiçam o seu orçamento de tráfego pago.",
+          copy: "Cada segundo de espera afasta clientes.",
         },
         {
           headline: "Atrasos e estouro de orçamento",
-          copy: "Promessas de 30 dias que viram 6 meses. Código confuso e custos que dobram no meio do caminho.",
+          copy: "Promessas de 30 dias que viram 6 meses.",
         },
         {
           headline: "Sistemas que travam no crescimento",
-          copy: "Processos manuais e plataformas engessadas geram gargalos que travam a produtividade da sua equipe.",
+          copy: "Processos manuais e plataformas engessadas.",
         },
         {
           headline: "Quedas nos picos de tráfego",
-          copy: "Campanhas fortes que derrubam o site. Falta de estabilidade destrói o retorno do seu investimento.",
+          copy: "Campanhas fortes que derrubam o site.",
         },
       ],
     },
@@ -56,38 +56,38 @@ export const translations = {
       items: [
         {
           headline: "Velocidade e Conversão",
-          copy: "Páginas carregando em menos de 1 segundo para converter mais visitantes em clientes pagantes.",
+          copy: "Páginas rápidas para converter mais.",
           accent: "Alta velocidade",
         },
         {
           headline: "Entregas no Prazo",
-          copy: "Cronograma claro, escopo fechado e comunicação constante do primeiro dia à entrega final.",
+          copy: "Cronograma claro e escopo fechado.",
           accent: "Sem surpresas",
         },
         {
           headline: "Sistemas Sob Medida",
-          copy: "Softwares intuitivos e automatizados que eliminam tarefas manuais e organizam sua operação.",
+          copy: "Software que organiza a operação.",
           accent: "Eficiência total",
         },
         {
-          headline: "Estabilidade Garantida",
-          copy: "Infraestrutura moderna que suporta picos de tráfego e vendas sem sair do ar.",
-          accent: "Disponibilidade 24/7",
+          headline: "Estabilidade",
+          copy: "Infraestrutura para picos de tráfego.",
+          accent: "Disponibilidade",
         },
       ],
     },
 
     projects: {
       kicker: "Cases",
-      heading: "Projetos.",
-      subtitle: "Trabalho real em produção — stack, problema e resultado.",
+      heading: "Projetos",
+      subtitle: "Trabalho em produção — stack, problema e resultado.",
       viewAll: "Ver todos",
       viewAllMobile: "Ver todos os projetos",
     },
 
     testimonials: {
       kicker: "Depoimentos",
-      heading: "O que dizem os clientes.",
+      heading: "O que dizem os clientes",
     },
 
     about: {
@@ -97,8 +97,8 @@ export const translations = {
       headingLine3: "Entrega.",
       cta: "LinkedIn",
       ctaMobile: "LinkedIn",
-      p1: "Desenvolvedor full stack desde 2023. Atuo do frontend ao backend com foco em produtos que vão para produção.",
-      p2: "Busco oportunidades CLT ou PJ como Full Stack / Product Engineer. Também atendo projetos sob demanda em /freelance.",
+      p1: "Full stack desde 2023. Atuo do frontend ao backend com foco em produtos que vão para produção.",
+      p2: "Busco CLT ou PJ como Full Stack / Product Engineer. Projetos sob demanda ficam em /freelance.",
       pillars: [
         {
           title: "Produto",
@@ -117,9 +117,9 @@ export const translations = {
 
     techExpertise: {
       kicker: "Stack",
-      headingMobile: "Tecnologias.",
-      headingDesktop: "Tecnologias & Ferramentas.",
-      subtitle: "Stack usada em projetos reais em produção.",
+      headingMobile: "Tecnologias",
+      headingDesktop: "Stack em produção",
+      subtitle: "Ferramentas usadas em projetos reais — não lista de buzzwords.",
       groups: [
         {
           category: "Frontend",
@@ -130,11 +130,11 @@ export const translations = {
           description: "Node.js, APIs REST, autenticação.",
         },
         {
-          category: "Banco de Dados",
+          category: "Dados",
           description: "PostgreSQL, MongoDB, Prisma.",
         },
         {
-          category: "Infraestrutura",
+          category: "Infra",
           description: "Vercel, Docker, CI/CD, AWS.",
         },
       ],
@@ -143,7 +143,7 @@ export const translations = {
     engineering: {
       kicker: "Processo",
       heading: "Do discovery ao deploy.",
-      body: "Etapas claras, entregas funcionais e feedback contínuo.",
+      body: "Etapas claras e entregas funcionais.",
       steps: [
         {
           title: "1. Discovery",
@@ -157,13 +157,13 @@ export const translations = {
         },
         {
           title: "3. Desenvolvimento",
-          description: "Incrementos em produção-ready.",
-          detail: "Código type-safe e revisável.",
+          description: "Incrementos production-ready.",
+          detail: "Código type-safe.",
         },
         {
           title: "4. Testes",
           description: "Validar fluxos críticos.",
-          detail: "Manual + automatizado quando faz sentido.",
+          detail: "Manual + automatizado.",
         },
         {
           title: "5. Deploy",
@@ -182,8 +182,8 @@ export const translations = {
       kicker: "Próximo passo",
       line1: "Aberto a oportunidades",
       line2: "e a projetos sob demanda",
-      body: "CLT ou PJ como Full Stack / Product Engineer — ou um briefing rápido se você precisa de um site ou sistema.",
-      ctaPrimary: "Me chamar no LinkedIn",
+      body: "CLT ou PJ como Full Stack / Product Engineer — ou um briefing se você precisa de um site ou sistema.",
+      ctaPrimary: "LinkedIn",
       ctaSecondary: "Quero um projeto",
     },
   },
@@ -205,75 +205,47 @@ export const translations = {
       tagline: "Full Stack & Product Engineer",
       title: "Thomas Eduardo, Full Stack / Product Engineer",
       description:
-        "I build UIs and backends with Next.js, React, TypeScript and Node.js. Production work with conversion metrics and custom systems.",
+        "UIs and backends with Next.js, React, TypeScript and Node.js. Production cases with real metrics — not just mockups.",
       ctaPrimary: "View projects",
       ctaSecondary: "Need a project?",
-      socialProof: "Next.js · React · TypeScript · Node.js · São Paulo",
+      socialProof: "Next.js · React · TypeScript · Node.js",
       scroll: "scroll",
     },
 
     painPoints: {
-      kicker: "Real bottlenecks",
-      heading: "Is your business losing sales and time?",
+      kicker: "Bottlenecks",
+      heading: "Losing sales and time?",
       items: [
-        {
-          headline: "Slow load times killing conversion",
-          copy: "Every extra second drives users away. Heavy sites waste your ad budget.",
-        },
-        {
-          headline: "Project delays & budget blowouts",
-          copy: "30-day promises turning into 6 months. Unclear code doubling costs.",
-        },
-        {
-          headline: "Systems freezing under growth",
-          copy: "Manual tasks and rigid platforms blocking your team's daily productivity.",
-        },
-        {
-          headline: "Traffic spikes crashing your site",
-          copy: "Strong ad campaigns taking down your site, destroying marketing ROI.",
-        },
+        { headline: "Slow load times", copy: "Every second costs conversion." },
+        { headline: "Delays & budget blowouts", copy: "30-day promises become 6 months." },
+        { headline: "Systems that freeze", copy: "Manual processes blocking growth." },
+        { headline: "Traffic spikes", copy: "Campaigns taking the site down." },
       ],
     },
 
     benefits: {
       kicker: "The solution",
-      heading: "Engineering focused on results:",
-      cta: "Get free diagnosis",
+      heading: "Engineering focused on outcomes:",
+      cta: "Get started",
       items: [
-        {
-          headline: "Speed and Conversion",
-          copy: "Pages loading under 1 second to convert more visitors into paying customers.",
-          accent: "Lightning fast",
-        },
-        {
-          headline: "On-Time Delivery",
-          copy: "Clear timeline, locked scope, and constant updates from day one.",
-          accent: "No surprises",
-        },
-        {
-          headline: "Custom Web Software",
-          copy: "Automated and intuitive platforms that eliminate manual tasks.",
-          accent: "Full efficiency",
-        },
-        {
-          headline: "Guaranteed Stability",
-          copy: "Modern architecture that handles traffic spikes without downtime.",
-          accent: "24/7 uptime",
-        },
+        { headline: "Speed", copy: "Fast pages that convert.", accent: "Fast" },
+        { headline: "On time", copy: "Clear scope and timeline.", accent: "Predictable" },
+        { headline: "Custom software", copy: "Systems that fit the business.", accent: "Fit" },
+        { headline: "Stability", copy: "Infra that holds under load.", accent: "Reliable" },
       ],
     },
 
     projects: {
       kicker: "Work",
-      heading: "Selected projects.",
-      subtitle: "Real production work — stack, problem, outcome.",
+      heading: "Projects",
+      subtitle: "Production work — stack, problem, outcome.",
       viewAll: "View all",
       viewAllMobile: "View all projects",
     },
 
     testimonials: {
       kicker: "Testimonials",
-      heading: "Client feedback.",
+      heading: "Client feedback",
     },
 
     about: {
@@ -283,84 +255,39 @@ export const translations = {
       headingLine3: "Delivery.",
       cta: "LinkedIn",
       ctaMobile: "LinkedIn",
-      p1: "Full-stack developer since 2023. From UI to API, shipping to production.",
-      p2: "Open to full-time or contract roles. Freelance work lives at /freelance.",
+      p1: "Full-stack since 2023. UI to API, shipping to production.",
+      p2: "Open to full-time or contract. Freelance at /freelance.",
       pillars: [
-        {
-          title: "Product",
-          text: "Technical choices tied to the business metric that matters.",
-        },
-        {
-          title: "Engineering",
-          text: "TypeScript, clear APIs, readable code, predictable deploys.",
-        },
-        {
-          title: "Communication",
-          text: "Explicit scope, honest timelines, steady updates.",
-        },
+        { title: "Product", text: "Tech choices tied to the metric that matters." },
+        { title: "Engineering", text: "TypeScript, clear APIs, predictable deploys." },
+        { title: "Communication", text: "Explicit scope, honest timelines." },
       ],
     },
 
     techExpertise: {
       kicker: "Stack",
-      headingMobile: "Technologies.",
-      headingDesktop: "Technologies & Tools.",
-      subtitle: "Stack used in real production projects.",
+      headingMobile: "Technologies",
+      headingDesktop: "Production stack",
+      subtitle: "Tools used in real projects — not a buzzword list.",
       groups: [
-        {
-          category: "Frontend",
-          description: "Next.js, React, TypeScript, Tailwind.",
-        },
-        {
-          category: "Backend",
-          description: "Node.js, REST APIs, auth.",
-        },
-        {
-          category: "Database",
-          description: "PostgreSQL, MongoDB, Prisma.",
-        },
-        {
-          category: "Infrastructure",
-          description: "Vercel, Docker, CI/CD, AWS.",
-        },
+        { category: "Frontend", description: "Next.js, React, TypeScript, Tailwind." },
+        { category: "Backend", description: "Node.js, REST APIs, auth." },
+        { category: "Data", description: "PostgreSQL, MongoDB, Prisma." },
+        { category: "Infra", description: "Vercel, Docker, CI/CD, AWS." },
       ],
     },
 
     engineering: {
       kicker: "Process",
       heading: "From discovery to deploy.",
-      body: "Clear steps, working software, continuous feedback.",
+      body: "Clear steps and working software.",
       steps: [
-        {
-          title: "1. Discovery",
-          description: "Understand the problem and success metrics.",
-          detail: "Scope and acceptance criteria.",
-        },
-        {
-          title: "2. Architecture",
-          description: "Stack, data and constraints.",
-          detail: "Documented decisions.",
-        },
-        {
-          title: "3. Development",
-          description: "Production-ready increments.",
-          detail: "Type-safe, reviewable code.",
-        },
-        {
-          title: "4. Testing",
-          description: "Validate critical flows.",
-          detail: "Manual + automated when it pays off.",
-        },
-        {
-          title: "5. Deploy",
-          description: "CI/CD and stable environments.",
-          detail: "Basic monitoring.",
-        },
-        {
-          title: "6. Iteration",
-          description: "Improve from real usage.",
-          detail: "Continuous improvement.",
-        },
+        { title: "1. Discovery", description: "Problem and success metrics.", detail: "Scope." },
+        { title: "2. Architecture", description: "Stack and constraints.", detail: "Decisions." },
+        { title: "3. Build", description: "Production-ready increments.", detail: "Type-safe." },
+        { title: "4. Test", description: "Critical flows.", detail: "Manual + auto." },
+        { title: "5. Deploy", description: "CI/CD, stable env.", detail: "Monitoring." },
+        { title: "6. Iterate", description: "From real usage.", detail: "Improve." },
       ],
     },
 
@@ -368,7 +295,7 @@ export const translations = {
       kicker: "Next step",
       line1: "Open to opportunities",
       line2: "and project work",
-      body: "Full-time or contract as Full Stack / Product Engineer — or a short briefing if you need a site or system.",
+      body: "Full-time or contract — or a short briefing for a project.",
       ctaPrimary: "LinkedIn",
       ctaSecondary: "Hire for a project",
     },
