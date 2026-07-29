@@ -1,70 +1,119 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CheckIcon } from "@/components/brand-icons"
+import {
+  IconTile,
+  Index,
+  Panel,
+  Section,
+  SectionIntro,
+} from "@/components/ui/kinetic"
+import { RocketIcon, StackIcon, CheckIcon, SparkIcon } from "@/components/brand-icons"
 
 const ITEMS = [
   {
     n: "01",
-    title: "Product interfaces",
-    body: "React and Next.js UIs that feel clear and ship fast.",
-    points: ["Design systems", "Responsive UI", "Accessible flows", "Motion that helps"],
+    icon: StackIcon,
+    title: "Front-end de produto",
+    body: "Interfaces em React e Next.js pensadas para conversão e acessibilidade, não só para o pixel.",
+    points: [
+      "React 19 · Next.js 16 · TypeScript",
+      "Tailwind CSS e design system próprio",
+      "Componentes reutilizáveis e responsivos",
+      "Core Web Vitals e Lighthouse acompanhados",
+    ],
   },
   {
     n: "02",
-    title: "Backend & data",
-    body: "APIs, auth and data models that hold under real use.",
-    points: ["Node.js APIs", "Auth & roles", "PostgreSQL", "Prisma"],
+    icon: RocketIcon,
+    title: "Back-end e APIs",
+    body: "APIs REST em Node.js com contrato claro, validação de entrada e erros tratados.",
+    points: [
+      "Node.js · Fastify · Express",
+      "JWT, refresh token e RBAC (USER/ADMIN)",
+      "Validação de dados e rotas protegidas",
+      "Integrações: Stripe, Mercado Pago, WhatsApp",
+    ],
   },
   {
     n: "03",
-    title: "Full stack delivery",
-    body: "One owner from ticket to production deploy.",
-    points: ["TypeScript end-to-end", "CI-friendly", "Vercel / cloud", "Observability basics"],
+    icon: CheckIcon,
+    title: "Dados e modelagem",
+    body: "Modelos de dados que aguentam uso real, com multi-tenant quando o produto pede.",
+    points: [
+      "PostgreSQL · Prisma · MongoDB",
+      "Migrations versionadas",
+      "Isolamento por usuário / tenant",
+      "Queries otimizadas e índices",
+    ],
   },
   {
     n: "04",
-    title: "Process & clarity",
-    body: "Discovery first, then architecture, build and iterate.",
-    points: ["Scoped delivery", "Short cycles", "Written decisions", "Handoff ready"],
+    icon: SparkIcon,
+    title: "Deploy e operação",
+    body: "Coloco no ar e continuo responsável: pipeline, monitoramento e correção.",
+    points: [
+      "Vercel · Linux · Docker · Nginx · PM2",
+      "CI/CD com GitHub Actions",
+      "Analytics e PostHog para medir uso",
+      "Documentação em Linear e Notion",
+    ],
   },
 ]
 
 export function Expertise() {
   return (
-    <div className="site-shell w-full py-16 sm:py-20 md:py-24">
-      <p className="text-sm font-medium text-brand">Expertise</p>
-      <h2 className="mt-2 max-w-[18ch] font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
-        Capabilities that drive results.
-      </h2>
-      <p className="mt-4 max-w-lg text-neutral-400 leading-relaxed">
-        At the intersection of product, interface and engineering — shipped, not just designed.
-      </p>
+    <Section>
+      <SectionIntro
+        kicker="Competências"
+        title="O que eu consigo assumir em um time hoje."
+        lead="Divido meu trabalho em quatro frentes. Em todas elas já entreguei em projeto real, com código versionado e deploy acompanhado."
+      />
 
-      <div className="mt-12 grid gap-4 sm:grid-cols-2">
-        {ITEMS.map((item, i) => (
-          <motion.div
-            key={item.n}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
-            className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-6 sm:p-7"
-          >
-            <span className="font-mono text-xs text-brand">{item.n}</span>
-            <h3 className="mt-2 font-display text-xl font-bold text-white">{item.title}</h3>
-            <p className="mt-2 text-sm text-neutral-400 leading-relaxed">{item.body}</p>
-            <ul className="mt-5 space-y-2">
-              {item.points.map((p) => (
-                <li key={p} className="flex items-center gap-2 text-sm text-neutral-300">
-                  <CheckIcon size={16} className="shrink-0 text-brand" />
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
+      <div className="mt-14 grid gap-4 sm:grid-cols-2">
+        {ITEMS.map((item, i) => {
+          const Icon = item.icon
+          return (
+            <motion.div
+              key={item.n}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+            >
+              <Panel interactive className="h-full p-6 sm:p-7">
+                <div className="flex items-start justify-between">
+                  <IconTile>
+                    <Icon size={20} />
+                  </IconTile>
+                  <Index value={item.n} />
+                </div>
+
+                <h3 className="mt-6 font-display text-xl font-bold tracking-[-0.02em] text-white">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/55">
+                  {item.body}
+                </p>
+
+                <div className="mt-6 h-px w-full bg-white/[0.08]" />
+
+                <ul className="mt-5 flex flex-col gap-2.5">
+                  {item.points.map((p) => (
+                    <li
+                      key={p}
+                      className="flex items-start gap-2.5 font-mono text-[11px] leading-relaxed tracking-[0.04em] text-white/60"
+                    >
+                      <span aria-hidden className="mt-1.5 size-1 shrink-0 rounded-full bg-brand" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </Panel>
+            </motion.div>
+          )
+        })}
       </div>
-    </div>
+    </Section>
   )
 }

@@ -2,117 +2,118 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { CONTACT } from "@/lib/data"
+import { CV_SKILLS } from "@/lib/cv"
 import {
-  ArrowOutIcon,
-  CheckIcon,
-  GithubIcon,
-  LinkedinIcon,
-  RocketIcon,
-} from "@/components/brand-icons"
+  Panel,
+  Pill,
+  Section,
+  SectionIntro,
+} from "@/components/ui/kinetic"
 
-const SKILLS = [
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Node.js",
-  "PostgreSQL",
-  "Prisma",
-  "Tailwind",
-  "Vercel",
+const LOOKING_FOR = [
+  "Time com code review e pessoas mais sêniores para aprender junto",
+  "Produto com usuário real e métrica acompanhada",
+  "Espaço para assumir tarefa de ponta a ponta",
+  "Estágio ou vaga júnior, presencial em São Paulo ou remoto",
 ]
 
-export function About({ light = false }: { light?: boolean }) {
-  const title = light ? "text-black" : "text-white"
-  const body = light ? "text-neutral-600" : "text-neutral-400"
-  const chip = light
-    ? "border-black/10 bg-black/[0.03] text-neutral-700"
-    : "border-white/10 bg-white/5 text-neutral-300"
-  const btn = light
-    ? "border-black/15 text-black hover:border-brand hover:text-brand"
-    : "border-white/15 text-white hover:border-brand hover:text-brand"
-
+export function About() {
   return (
-    <div className="site-shell w-full py-16 sm:py-20 md:py-24">
-      <p className="mb-3 inline-flex items-center gap-2 text-sm font-medium text-brand">
-        <RocketIcon size={16} className="text-brand" />
-        About
-      </p>
-      <h2 className={`max-w-[18ch] font-display text-3xl sm:text-5xl font-extrabold tracking-tight ${title}`}>
-        Product engineer who <span className="text-brand">ships</span>
-      </h2>
+    <Section>
+      <SectionIntro
+        kicker="Sobre mim"
+        title="Não quero só um freela. Quero crescer dentro de um time."
+      />
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr]">
+      <div className="mt-12 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className={`space-y-4 text-[15px] sm:text-base leading-relaxed ${body}`}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col gap-5 text-[15px] leading-relaxed text-white/65 sm:text-base"
         >
           <p>
-            Full Stack in Sao Paulo. Since 2023 shipping web apps and systems —
-            React, Next.js, TypeScript, Node and deploy.
+            Comecei em 2023 pegando projetos por conta própria porque era o
+            jeito mais rápido de escrever código que alguém realmente ia usar.
+            Desde então entreguei sistemas com autenticação, banco de dados,
+            painel administrativo, integração de pagamento e deploy — sempre
+            sozinho, sempre respondendo pelo resultado.
           </p>
           <p>
-            Flagship case:{" "}
-            <Link href="/projetos/teron-os" className="text-brand hover:underline">
-              TERON OS
-            </Link>
-            . On-demand work lives at{" "}
-            <Link href="/freelance" className="text-brand hover:underline">
-              /freelance
-            </Link>
-            .
+            Isso me ensinou prazo, escopo e conversa com cliente. Mas também
+            deixou claro o que falta: revisão de código de gente mais
+            experiente, escala de verdade e processo de engenharia maduro. É
+            exatamente por isso que estou buscando uma vaga — para acelerar
+            dentro de uma estrutura, e não mais só na minha.
           </p>
-          <div className="flex flex-wrap gap-3 pt-2">
-            <a
-              href={CONTACT.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm ${btn}`}
+          <p className="text-white/45">
+            Trabalhos sob demanda continuam disponíveis em{" "}
+            <Link
+              href="/freelance"
+              className="text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:text-white"
             >
-              <LinkedinIcon size={16} />
-              LinkedIn
-            </a>
-            <a
-              href={CONTACT.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm ${btn}`}
-            >
-              <GithubIcon size={16} />
-              GitHub
-            </a>
-          </div>
+              projetos sob demanda
+            </Link>
+            , mas a prioridade hoje é contratação.
+          </p>
         </motion.div>
 
-        <motion.ul
-          initial={{ opacity: 0, y: 12 }}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 gap-2"
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.08 }}
         >
-          {SKILLS.map((s) => (
-            <li
-              key={s}
-              className={`flex items-center gap-2 rounded-2xl border px-3 py-2.5 text-sm ${chip}`}
-            >
-              <CheckIcon size={16} className="shrink-0 text-brand" />
-              {s}
-            </li>
-          ))}
-        </motion.ul>
+          <Panel className="h-full p-6 sm:p-7">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand/80">
+              O que eu procuro
+            </p>
+            <ul className="mt-5 flex flex-col gap-3">
+              {LOOKING_FOR.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2.5 border-t border-white/[0.07] pt-3 text-sm leading-relaxed text-white/70"
+                >
+                  <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-brand" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Panel>
+        </motion.div>
       </div>
 
-      <div className="mt-10">
-        <Link
-          href="/sobre"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-brand hover:underline"
-        >
-          Full background
-          <ArrowOutIcon size={16} />
-        </Link>
+      <div className="mt-14">
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/35">
+          Stack que uso no dia a dia
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {CV_SKILLS.map((group, i) => (
+            <motion.div
+              key={group.group}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, delay: i * 0.05 }}
+            >
+              <Panel interactive className="h-full p-5">
+                <h3 className="font-display text-sm font-bold text-white">
+                  {group.group}
+                </h3>
+                <div className="mt-4 h-px w-full bg-white/[0.08]" />
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li key={item}>
+                      <Pill>{item}</Pill>
+                    </li>
+                  ))}
+                </ul>
+              </Panel>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+    </Section>
   )
 }

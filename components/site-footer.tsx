@@ -20,22 +20,25 @@ export function SiteFooter() {
       <div className="site-shell flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="font-display text-sm font-bold text-white">Thomas Eduardo</p>
-          <p className="mt-1 text-xs text-neutral-500">
-            Full Stack / Product Engineer
+          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">
+            Desenvolvedor Full Stack · São Paulo
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-6">
           <Link href="/projetos" className="text-xs text-neutral-500 hover:text-brand">
-            Work
+            Projetos
           </Link>
           <Link href="/sobre" className="text-xs text-neutral-500 hover:text-brand">
-            About
+            Sobre
+          </Link>
+          <Link href="/curriculo" className="text-xs text-neutral-500 hover:text-brand">
+            Currículo
           </Link>
           <Link href="/processo" className="text-xs text-neutral-500 hover:text-brand">
-            Process
+            Processo
           </Link>
           <Link href="/freelance" className="text-xs text-neutral-500 hover:text-brand">
-            On demand
+            Sob demanda
           </Link>
           <a
             href={CONTACT.github}
@@ -58,8 +61,9 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="site-shell mt-8 border-t border-white/5 pt-6">
-        <p className="text-[11px] text-neutral-600">
-          (c) {new Date().getFullYear()} Thomas Eduardo · Code that ships.
+        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/30">
+          © {new Date().getFullYear()} Thomas Eduardo · Aberto a oportunidades de
+          estágio e júnior
         </p>
       </div>
     </footer>

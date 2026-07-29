@@ -1,45 +1,31 @@
 import type { Metadata } from "next"
 import { Hero } from "@/components/home/hero"
+import { Snapshot } from "@/components/home/snapshot"
 import { FeaturedProjects } from "@/components/home/featured-projects"
 import { Expertise } from "@/components/home/expertise"
+import { Education } from "@/components/home/education"
 import { About } from "@/components/home/about"
 import { HomeCta } from "@/components/home/home-cta"
 import { PageAnimator } from "@/components/page-animator"
-import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section"
 
 export const metadata: Metadata = {
-  title: "Full Stack & Product Engineer | Thomas Eduardo",
+  title: "Desenvolvedor Full Stack em São Paulo | Thomas Eduardo",
   description:
-    "Portfolio de Thomas Eduardo — Full Stack / Product Engineer em Sao Paulo. Next.js, React, TypeScript, Node.js.",
+    "Thomas Eduardo — estudante de Engenharia de Software e desenvolvedor Full Stack em São Paulo. React, Next.js, TypeScript e Node.js com projetos em produção. Aberto a vagas de estágio e júnior.",
   alternates: { canonical: "/" },
 }
 
-/** Kinetic-inspired: statement hero, metric cases, expertise, about, CTA */
 export default function HomePage() {
   return (
     <>
       <PageAnimator />
-      <div className="relative">
-        <ScrollRevealSection index={0} className="bg-canvas text-white">
-          <Hero />
-        </ScrollRevealSection>
-
-        <ScrollRevealSection index={1} className="bg-neutral-50 text-black">
-          <FeaturedProjects />
-        </ScrollRevealSection>
-
-        <ScrollRevealSection index={2} className="bg-canvas text-white">
-          <Expertise />
-        </ScrollRevealSection>
-
-        <ScrollRevealSection index={3} className="bg-neutral-50 text-black">
-          <About light />
-        </ScrollRevealSection>
-
-        <ScrollRevealSection index={4} className="bg-canvas text-white">
-          <HomeCta dark />
-        </ScrollRevealSection>
-      </div>
+      <Hero />
+      <Snapshot />
+      <FeaturedProjects />
+      <Expertise />
+      <Education />
+      <About />
+      <HomeCta />
     </>
   )
 }

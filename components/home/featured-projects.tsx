@@ -1,138 +1,157 @@
 "use client"
 
-import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { PROJECTS } from "@/lib/data"
-import { ArrowOutIcon } from "@/components/brand-icons"
+import {
+  ActionLink,
+  ArrowLink,
+  Index,
+  Panel,
+  Pill,
+  Section,
+  SectionIntro,
+  Stat,
+} from "@/components/ui/kinetic"
 
-type Card = {
+type Pick = {
   title: string
-  category: string
-  year: string
-  body: string
+  tag: string
   metrics: [string, string][]
   href: string
-  image: string
 }
 
-function buildCards(): Card[] {
-  const picks = ["TERON OS", "Minuta Fácil", "Áurea", "Yázigi Swiss Park"]
-  return picks
-    .map((t) => PROJECTS.find((p) => p.title === t))
-    .filter(Boolean)
-    .map((p, i) => {
-      const project = p!
-      const href =
-        project.title === "TERON OS"
-          ? "/projetos/teron-os"
-          : project.href?.startsWith("/")
-            ? project.href
-            : project.href || "/projetos"
-      const metricSets: [string, string][][] = [
-        [
-          ["Full system", "Auth to deploy"],
-          ["Ownership", "End-to-end"],
-        ],
-        [
-          ["Faster", "Document flow"],
-          ["Live", "In production"],
-        ],
-        [
-          ["Brand + UI", "Product feel"],
-          ["Ship", "Web product"],
-        ],
-        [
-          ["Conversion", "Lead focus"],
-          ["Mobile", "First"],
-        ],
-      ]
-      return {
-        title: project.title,
-        category: project.tag || "Product",
-        year: "2024",
-        body: project.result || project.description,
-        metrics: metricSets[i] || metricSets[0],
-        href,
-        image: project.image,
-      }
-    })
-}
+/** Real cases with the numbers a recruiter can check. */
+const PICKS: Pick[] = [
+  {
+    title: "TERON OS",
+    tag: "Produto SaaS · Monorepo",
+    metrics: [
+      ["-40%", "Ciclo de vendas"],
+      ["4 apps", "Site · OS · Portal · API"],
+    ],
+    href: "/projetos/teron-os",
+  },
+  {
+    title: "Yázigi Swiss Park",
+    tag: "Landing + Admin",
+    metrics: [
+      ["+50%", "Leads qualificados"],
+      ["Supabase", "Auth e painel interno"],
+    ],
+    href: "https://www.yaziswissparkcampinas.com.br/",
+  },
+  {
+    title: "Minuta Fácil",
+    tag: "SaaS · Documentos com IA",
+    metrics: [
+      ["Multi-tenant", "PostgreSQL por usuário"],
+      ["API REST", "Node + Gemini no backend"],
+    ],
+    href: "https://minuta.thomaseduardo.com.br/",
+  },
+  {
+    title: "Sleep House",
+    tag: "Showroom · Multi-tenant",
+    metrics: [
+      ["+25%", "Visitas agendadas"],
+      ["1 deploy", "Todas as unidades"],
+    ],
+    href: "https://www.sleephouseloja.com.br/",
+  },
+]
 
 export function FeaturedProjects() {
-  const cards = buildCards()
+  const cards = PICKS.map((pick) => {
+    const project = PROJECTS.find((p) => p.title === pick.title)
+    return {
+      ...pick,
+      year: project?.year ?? "2025",
+      body: project?.result ?? project?.description ?? "",
+      stack: project?.stack ?? [],
+      image: project?.image ?? "/placeholder.svg",
+    }
+  })
 
   return (
-    <div id="work" className="site-shell w-full py-16 sm:py-20 md:py-24">
-      <div className="mb-3 text-sm font-medium text-brand">Selected works</div>
-      <h2 className="max-w-[18ch] font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-black">
-        Featured case studies
-      </h2>
-      <p className="mt-4 max-w-lg text-neutral-600 leading-relaxed">
-        Systems and products shipped to production — stack, context and outcome.
-      </p>
+    <Section id="work">
+      <SectionIntro
+        kicker="Cases selecionados"
+        title="Problema, decisão técnica e resultado."
+        lead="Cada projeto abaixo saiu de um problema de negócio real. Aqui está o que eu construí, com que stack e o que mudou depois."
+      />
 
-      <div className="mt-12 space-y-8">
+      <div className="mt-14 flex flex-col gap-6">
         {cards.map((card, i) => (
-          <motion.article
+          <motion.div
             key={card.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ delay: i * 0.05 }}
-            className="grid overflow-hidden rounded-[1.75rem] border border-black/8 bg-white shadow-sm sm:grid-cols-[1.05fr_1fr]"
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, delay: i * 0.05 }}
           >
-            <div className="relative aspect-[16/11] sm:aspect-auto sm:min-h-[280px] bg-neutral-200">
-              <Image
-                src={card.image}
-                alt={card.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 640px) 100vw, 50vw"
-              />
-            </div>
-            <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-              <p className="text-xs font-medium tracking-wide text-brand">
-                {card.category} · {card.year}
-              </p>
-              <h3 className="mt-2 font-display text-2xl sm:text-3xl font-bold tracking-tight text-black">
-                {card.title}
-              </h3>
-              <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-neutral-600">
-                {card.body}
-              </p>
-              <dl className="mt-6 grid grid-cols-2 gap-4">
-                {card.metrics.map(([value, label]) => (
-                  <div key={label}>
-                    <dt className="font-display text-lg font-bold text-black">{value}</dt>
-                    <dd className="text-xs text-neutral-500">{label}</dd>
-                  </div>
-                ))}
-              </dl>
-              <Link
-                href={card.href}
-                {...(card.href.startsWith("http")
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className="mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-brand hover:underline"
-              >
-                View case study
-                <ArrowOutIcon size={16} />
-              </Link>
-            </div>
-          </motion.article>
+            <Panel
+              as="article"
+              interactive
+              className="grid gap-0 lg:grid-cols-[1fr_1.05fr]"
+            >
+              <div className="flex flex-col justify-center gap-5 p-6 sm:p-9 lg:p-10">
+                <div className="flex items-center gap-4">
+                  <Index value={String(i + 1).padStart(2, "0")} total={String(cards.length).padStart(2, "0")} />
+                  <Pill>{card.tag}</Pill>
+                  <span className="font-mono text-[10px] tracking-[0.16em] text-white/30">
+                    {card.year}
+                  </span>
+                </div>
+
+                <h3 className="font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-3xl">
+                  {card.title}
+                </h3>
+
+                <p className="max-w-md text-sm leading-relaxed text-white/60 sm:text-[15px]">
+                  {card.body}
+                </p>
+
+                <ul className="flex flex-wrap gap-2">
+                  {card.stack.map((s) => (
+                    <li key={s}>
+                      <Pill>{s}</Pill>
+                    </li>
+                  ))}
+                </ul>
+
+                <dl className="mt-1 grid grid-cols-2 gap-5">
+                  {card.metrics.map(([value, label]) => (
+                    <Stat key={label} value={value} label={label} />
+                  ))}
+                </dl>
+
+                <ArrowLink href={card.href}>Ver o case</ArrowLink>
+              </div>
+
+              <div className="relative order-first aspect-[16/10] w-full overflow-hidden border-b border-white/[0.08] lg:order-none lg:aspect-auto lg:min-h-[420px] lg:border-b-0 lg:border-l">
+                <Image
+                  src={card.image || "/placeholder.svg"}
+                  alt={`Interface do projeto ${card.title}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent opacity-70"
+                />
+              </div>
+            </Panel>
+          </motion.div>
         ))}
       </div>
 
-      <div className="mt-12 text-center">
-        <Link
-          href="/projetos"
-          className="inline-flex items-center gap-2 rounded-full border border-black/15 px-6 py-3 text-sm font-medium text-black hover:border-brand hover:text-brand"
-        >
-          All case studies
-          <ArrowOutIcon size={16} />
-        </Link>
+      <div className="mt-12">
+        <ActionLink href="/projetos" variant="outline">
+          Ver todos os projetos
+        </ActionLink>
       </div>
-    </div>
+    </Section>
   )
 }
