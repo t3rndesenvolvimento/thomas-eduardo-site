@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 }
 
-/** Kinetic-inspired structure with sticky panels */
+/** Kinetic-inspired: statement hero, metric cases, expertise, about, CTA */
 export default function HomePage() {
   return (
     <>
@@ -33,9 +33,7 @@ export default function HomePage() {
         </ScrollRevealSection>
 
         <ScrollRevealSection index={3} className="bg-neutral-50 text-black">
-          <div className="[&_h2]:text-black [&_p]:text-neutral-600 [&_.text-neutral-400]:text-neutral-600 [&_.border-white\\/10]:border-black/10 [&_.bg-white\\/5]:bg-black/[0.03] [&_.text-white]:text-black [&_.text-neutral-300]:text-neutral-700">
-            <About light />
-          </div>
+          <About light />
         </ScrollRevealSection>
 
         <ScrollRevealSection index={4} className="bg-canvas text-white">
