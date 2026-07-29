@@ -24,7 +24,7 @@ export function HowIWork() {
  return (
  <section
  id="processo"
- className="relative bg-background py-16 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center"
+ className="relative bg-background py-28 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center"
  >
  <div className="site-shell">
  <div className="mb-8 max-w-xl sm:mb-10">

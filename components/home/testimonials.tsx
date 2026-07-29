@@ -96,7 +96,7 @@ export function Testimonials() {
  return (
  <section
  id="depoimentos"
- className="group relative bg-black text-white py-16 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center"
+ className="group relative bg-black text-white py-28 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center"
  >
  {/* Header */}
  <div className="site-shell relative z-10 mb-5 sm:mb-12 max-w-4xl mx-auto">

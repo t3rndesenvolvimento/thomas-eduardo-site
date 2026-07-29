@@ -10,7 +10,7 @@ import { useI18n } from "@/lib/i18n/context"
 export function HomeCta() {
  const { t } = useI18n()
  return (
- <section className="relative overflow-hidden bg-background py-16 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center">
+ <section className="relative overflow-hidden bg-background py-28 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center">
  <div
  aria-hidden
  className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_100%,rgba(255,255,255,0.06),transparent_60%)]"

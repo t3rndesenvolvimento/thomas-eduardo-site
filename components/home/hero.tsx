@@ -176,29 +176,20 @@ export function Hero() {
  </motion.div>
 
   <div className="site-shell relative z-10 w-full pt-28 pb-12 sm:py-24 md:py-32 flex flex-col items-center text-center px-4 sm:px-6">
-  <motion.p
-  initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
-  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-  transition={{ delay: 0.25, duration: 0.7, ease: EASE_OUT }}
-  className="mb-3 sm:mb-6 text-xs sm:text-base font-medium uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/60 text-center"
-  >
-  {t.hero.tagline}
-  </motion.p>
-
   <motion.h1
   initial={{ opacity: 0, y: 16 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
-  className="max-w-6xl text-[2rem] leading-[1.1] sm:text-6xl md:text-7xl lg:text-[6rem] font-display font-bold text-white sm:leading-[1.05] tracking-tight text-center text-balance px-2 sm:px-0"
+  className="max-w-5xl text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-[5rem] font-display font-bold text-white tracking-tight text-center text-balance px-4 sm:px-0"
   >
-  {t.hero.title}
+  {t.hero.tagline}
   </motion.h1>
 
   <motion.p
   initial={{ opacity: 0, y: 12 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.65, duration: 0.6 }}
-  className="mt-5 sm:mt-8 max-w-3xl text-sm sm:text-2xl leading-relaxed text-white/70 text-center px-4 sm:px-0 text-balance"
+  className="mt-5 sm:mt-8 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-white/70 text-center px-4 sm:px-0 text-balance"
   >
   {t.hero.description}
   </motion.p>
@@ -206,36 +197,17 @@ export function Hero() {
   <motion.div
   initial={{ opacity: 0, y: 12 }}
   animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.85, duration: 0.6 }}
-  className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0"
+  transition={{ delay: 0.65, duration: 0.6 }}
+  className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0"
   >
   <Link 
   href="/diagnostico" 
-  className="w-full sm:w-auto flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3.5 sm:px-10 sm:py-5 text-[11px] sm:text-base font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-white/10"
+  className="w-full sm:w-auto flex items-center justify-center gap-3 rounded-full bg-white px-8 py-4 sm:px-12 sm:py-5 text-xs sm:text-base font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-white/10"
   >
-  {t.hero.ctaPrimary} <ArrowRight className="size-3.5 sm:size-4" />
+  {t.hero.ctaPrimary} <ArrowRight className="size-4 sm:size-5" />
   </Link>
-  <Link 
-  href="#projetos" 
-  className="w-full sm:w-auto flex items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 sm:px-10 sm:py-5 text-[11px] sm:text-base font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10 hover:border-white/40 active:scale-95"
-  >
-  <PlayCircle className="size-3.5 sm:size-4" /> {t.hero.ctaSecondary}
-  </Link>
- </motion.div>
+  </motion.div>
 
- <motion.div
- initial={{ opacity: 0 }}
- animate={{ opacity: 1 }}
- transition={{ delay: 1.0, duration: 0.6 }}
- className="mt-5 sm:mt-8 flex items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm text-white/50 font-mono"
- >
- <div className="flex -space-x-2">
- {[1, 2, 3, 4].map((i) => (
- <div key={i} className="size-6 sm:size-8 rounded-full border-2 border-background bg-gray-800" />
- ))}
- </div>
- <p>{t.hero.socialProof}</p>
- </motion.div>
  </div>
 
  </section>

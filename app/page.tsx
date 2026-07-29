@@ -27,13 +27,6 @@ const EngineeringApproach = dynamic(
   { loading: () => <div className="h-[500px] bg-background" /> },
 )
 
-const OliverParallax = dynamic(
-  () =>
-    import("@/components/home/oliver-parallax").then((mod) => ({
-      default: mod.OliverParallax,
-    })),
-  { loading: () => <div className="h-[400px] bg-background" /> },
-)
 
 export const metadata: Metadata = {
   title: "Engenheiro de Software & Produto | Thomas Eduardo",
@@ -92,10 +85,6 @@ export default function HomePage() {
           <TechExpertise />
         </ScrollRevealSection>
 
-        {/* 10. Galeria visual */}
-        <ScrollRevealSection index={9} className="bg-[#0a0a0a]">
-          <OliverParallax />
-        </ScrollRevealSection>
 
         {/* 11. CTA Final */}
         <ScrollRevealSection index={10} className="bg-[#0a0a0a]">

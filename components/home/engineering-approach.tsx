@@ -50,7 +50,7 @@ export function EngineeringApproach() {
  </motion.p>
  </div>
 
- <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+ <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
  {t.engineering.steps.map((item, i) => {
  const Icon = ICONS[i] || Code
  return (

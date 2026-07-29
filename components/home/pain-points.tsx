@@ -13,7 +13,7 @@ export function PainPoints() {
  return (
  <section
  id="problemas"
- className="relative overflow-hidden bg-black text-white py-16 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center"
+ className="relative overflow-hidden bg-black text-white py-28 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center"
  >
  {/* subtle background texture */}
  <div
@@ -52,7 +52,7 @@ export function PainPoints() {
  </div>
 
  {/* Pain point cards - 100% Identical to Benefits & Testimonials */}
- <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+ <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
  {t.painPoints.items.map((item, index) => {
  const Icon = ICONS[index % ICONS.length]
  const num = String(index + 1).padStart(2, "0")

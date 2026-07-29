@@ -11,7 +11,7 @@ export function About() {
  return (
  <section
  id="about"
- className="relative overflow-hidden bg-white text-black py-16 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center"
+ className="relative overflow-hidden bg-white text-black py-28 sm:py-24 md:py-32 min-h-[100svh] flex flex-col justify-center"
  >
  <motion.div
  className="pointer-events-none absolute left-10 top-32 z-0 w-32 opacity-25 sm:w-40"
@@ -73,7 +73,7 @@ export function About() {
  <p>{t.about.p2}</p>
  </motion.div>
 
- <div className="grid grid-cols-3 gap-2 sm:grid-cols-2 sm:gap-4">
+ <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
  {t.about.pillars.map((p, index) => (
  <motion.div
  key={p.title}

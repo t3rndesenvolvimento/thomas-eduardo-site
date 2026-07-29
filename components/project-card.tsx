@@ -26,7 +26,7 @@ export function ProjectCard({
           ? `Fechar detalhes de ${project.title}`
           : `Ver detalhes de ${project.title}`
       }
-      className="relative h-[60vh] w-full cursor-pointer [perspective:1200px] sm:h-[400px] lg:h-[460px]"
+      className="relative h-[400px] w-full cursor-pointer [perspective:1200px] sm:h-[400px] lg:h-[460px]"
       onClick={() => setFlipped((v) => !v)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -90,14 +90,14 @@ export function ProjectCard({
         </div>
 
         {/* BACK */}
-        <div className="absolute inset-0 flex [transform:rotateY(180deg)] flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#121212] p-6 [backface-visibility:hidden] sm:rounded-2xl sm:p-8">
+        <div className="absolute inset-0 flex [transform:rotateY(180deg)] flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-[#121212] p-5 [backface-visibility:hidden] sm:rounded-2xl sm:p-8">
           <div>
             <div className="mb-4 flex items-start justify-between gap-3">
               <div>
                 <p className="label-kicker mb-1 text-white/45">
                   {String(index + 1).padStart(2, "0")} · {project.tag}
                 </p>
-                <h3 className="font-display text-xl font-semibold tracking-[-0.02em] text-white sm:text-2xl lg:text-3xl">
+                <h3 className="font-display text-lg font-semibold tracking-[-0.02em] text-white sm:text-2xl lg:text-3xl leading-tight">
                   {project.title}
                 </h3>
               </div>
@@ -111,7 +111,7 @@ export function ProjectCard({
               </motion.div>
             </div>
 
-            <p className="text-sm leading-relaxed text-white/75 sm:text-[15px] lg:text-base">
+            <p className="text-[13px] leading-relaxed text-white/75 sm:text-[15px] lg:text-base line-clamp-3 sm:line-clamp-none">
               {project.context || project.description}
             </p>
 
@@ -126,15 +126,15 @@ export function ProjectCard({
               </div>
             </div>
 
-            <div className="mt-5 sm:hidden">
-              <p className="label-kicker mb-1.5 text-white/45">Resultado</p>
-              <p className="text-sm leading-relaxed text-white/80">{project.result}</p>
+            <div className="mt-4 sm:hidden">
+              <p className="label-kicker mb-1 text-[10px] text-white/45">Resultado</p>
+              <p className="text-[13px] leading-relaxed text-white/80 line-clamp-3">{project.result}</p>
             </div>
           </div>
 
-          <div className="mt-5 border-t border-white/10 pt-4 sm:mt-5 sm:pt-5">
-            <p className="label-kicker mb-2.5 text-white/45">Tecnologias</p>
-            <TechIconRow stack={project.stack} max={7} />
+          <div className="mt-4 border-t border-white/10 pt-4 sm:mt-5 sm:pt-5">
+            <p className="label-kicker mb-2 text-[10px] text-white/45">Tecnologias</p>
+            <TechIconRow stack={project.stack} max={5} />
 
             {(project.href || project.github) && (
               <div

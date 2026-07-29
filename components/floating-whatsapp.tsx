@@ -56,7 +56,7 @@ export function FloatingWhatsApp() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.7, y: 20 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-5 right-5 z-40 print:hidden sm:bottom-6 sm:right-6 mix-blend-difference text-white"
+          className="fixed bottom-5 right-5 z-40 hidden sm:block print:hidden sm:bottom-6 sm:right-6 mix-blend-difference text-white"
         >
           <a
             href={CONTACT.whatsapp}
