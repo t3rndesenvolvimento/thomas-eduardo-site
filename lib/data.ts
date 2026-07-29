@@ -1,6 +1,6 @@
 export const CONTACT = {
   name: "Thomas Eduardo R. Nascimento",
-  role: "Software Engineer | Full Stack Developer",
+  role: "Full Stack / Product Engineer",
   email: "contato@thomaseduardo.com.br",
   phone: "(11) 97707-0209",
   location: "São Paulo, SP",
