@@ -17,7 +17,7 @@ export function Logo({ className, size = 28 }: { className?: string; size?: numb
         className="rounded-md transition-transform duration-300 group-hover:scale-105"
         priority
       />
-      <span className="font-display text-xs font-semibold lowercase tracking-[0.14em] text-white sm:text-[13px]">
+      <span className="hidden font-display text-xs font-semibold lowercase tracking-[0.14em] text-white sm:inline sm:text-[13px]">
         devthomas
       </span>
     </Link>

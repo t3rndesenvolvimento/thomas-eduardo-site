@@ -65,20 +65,17 @@ export default function HomePage() {
           <Benefits />
         </ScrollRevealSection>
 
-        {/* 6. Depoimentos */}
-        <ScrollRevealSection index={5} className="bg-black">
-          <Testimonials />
-        </ScrollRevealSection>
-
-        {/* 7. Sobre */}
+        {/* 6. Sobre */}
         <ScrollRevealSection index={6} className="bg-white">
           <About />
         </ScrollRevealSection>
 
-        {/* 8. Processo de trabalho */}
-        <ScrollRevealSection index={7} className="bg-background">
-          <EngineeringApproach />
+        {/* 7. Depoimentos */}
+        <ScrollRevealSection index={5} className="bg-black">
+          <Testimonials />
         </ScrollRevealSection>
+
+
 
         {/* 9. Stack técnica */}
         <ScrollRevealSection index={8} className="bg-white">

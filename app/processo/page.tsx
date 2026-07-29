@@ -11,6 +11,7 @@ import { CtaLink } from "@/components/ui/cta"
 import { PageHero } from "@/components/page-hero"
 import { Shape1, Shape3, Shape5, Shape6, Shape8 } from "@/components/ui/abstract-shapes"
 import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section"
+import { EngineeringApproach } from "@/components/home/engineering-approach"
 
 const STEPS = [
  { step: "01", title: "Conversa", text: "Você explica a ideia e o objetivo.", image: "/images/process/process_conversa.png" },
@@ -97,7 +98,7 @@ const fadeUp = {
 }
 
 export default function ProcessPage() {
- const [activeStep, setActiveStep] = useState(0)
+
  const [activeDeliverable, setActiveDeliverable] = useState(0)
 
  return (
@@ -154,95 +155,12 @@ export default function ProcessPage() {
  </div>
  </ScrollRevealSection>
 
- {/* Steps */}
- <ScrollRevealSection index={1} id="processo" className="bg-background py-16 sm:py-24">
- <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/[0.02] pointer-events-none" />
- <div className="site-shell">
- <div className="mb-10 sm:mb-16 text-center max-w-2xl mx-auto">
- <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 mb-4">
- <span className="size-1.5 rounded-full bg-blue-500 animate-pulse" />
- <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/70">Processo</p>
- </div>
- <h2 className="text-h2 text-white">Um processo transparente do primeiro contato até a entrega.</h2>
- <p className="mt-4 text-[15px] text-white/60">Você acompanha cada etapa do desenvolvimento e sabe exatamente o que está sendo construído.</p>
- </div>
+  {/* Processo Direto (Engineering Approach) */}
+  <ScrollRevealSection index={1} className="bg-black">
+  <EngineeringApproach />
+  </ScrollRevealSection>
 
- {/* Interactive Accordion (All screens) */}
- <div className="flex h-[380px] sm:h-[450px] w-full gap-1.5 sm:gap-3">
- {STEPS.map((item, i) => {
- const isActive = activeStep === i
- return (
- <motion.div
- key={item.step}
- onHoverStart={() => setActiveStep(i)}
- onClick={() => setActiveStep(i)}
- animate={{ 
- width: isActive ? "50%" : "10%",
- }}
- transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
- className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl border cursor-pointer ${
- isActive ? "border-white/20 bg-white/[0.04] shadow-2xl" : "border-white/5 bg-[#0a0a0a] hover:bg-white/[0.02]"
- }`}
- >
- {/* Background Glow & Image */}
- <div className={`absolute inset-0 bg-gradient-to-br from-white/[0.08] to-transparent transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
- 
- <div className={`absolute inset-0 transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
- <Image src={item.image} alt={item.title} fill className="object-cover opacity-70 mix-blend-screen transition-transform duration-[2s] group-hover:scale-105" />
- <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 sm:via-black/20 to-transparent" />
- </div>
- 
- {/* Content Container */}
- <div className="absolute inset-0 p-4 sm:p-8 flex flex-col justify-end z-10">
- <div className="flex items-center gap-3 sm:gap-4">
- <span className={`flex size-8 sm:size-12 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border font-mono text-sm sm:text-base font-semibold transition-all duration-500 ${
- isActive ? "border-white/20 bg-white/10 text-white" : "border-white/10 bg-white/5 text-white/40"
- }`}>
- {item.step}
- </span>
- 
- <motion.h3 
- animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -20 }}
- transition={{ duration: 0.4, delay: isActive ? 0.1 : 0 }}
- className="text-xl sm:text-3xl font-sans font-semibold tracking-tight text-white whitespace-nowrap"
- >
- {item.title}
- </motion.h3>
- </div>
-
- <motion.div 
- animate={{ 
- opacity: isActive ? 1 : 0, 
- height: isActive ? "auto" : 0,
- marginTop: isActive ? "0.5rem" : "0"
- }}
- transition={{ duration: 0.4, delay: isActive ? 0.2 : 0 }}
- className="overflow-hidden"
- >
- <p className="text-[13px] sm:text-[15px] font-light leading-relaxed text-white/80 sm:text-white/70 max-w-sm pl-11 sm:pl-16">
- {item.text}
- </p>
- </motion.div>
- </div>
-
- {/* Vertical Title (when inactive) */}
- <motion.div
- animate={{ opacity: isActive ? 0 : 1 }}
- transition={{ duration: 0.3 }}
- className="absolute inset-0 flex items-center justify-center pointer-events-none"
- >
- <span className="font-display text-xs sm:text-xl font-semibold tracking-widest text-white/30 uppercase -rotate-90 whitespace-nowrap">
- {item.title}
- </span>
- </motion.div>
- </motion.div>
- )
- })}
- </div>
- </div>
- </ScrollRevealSection>
-
- {/* Included */}
+  {/* Included */}
  <ScrollRevealSection index={2} className="py-16 sm:py-24 relative overflow-hidden bg-white">
  <motion.div
  className="pointer-events-none absolute right-10 top-10 z-0 w-32 opacity-25 sm:w-40"

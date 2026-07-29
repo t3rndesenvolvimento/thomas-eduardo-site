@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { PROJECTS, CONTACT } from "@/lib/data"
 import { motion } from "framer-motion"
-import { ClientsCarousel } from "@/components/home/clients-carousel"
+
 import { PageAnimator } from "@/components/page-animator"
 import { PageHero } from "@/components/page-hero"
 import { TechIconRow } from "@/components/tech-icon"
@@ -142,23 +142,7 @@ export default function ProjetosPage() {
  light
  />
  </ScrollRevealSection>
-  <ScrollRevealSection index={1} className="bg-[#121212] flex flex-col justify-center">
-  <div className="relative overflow-hidden w-full py-10 sm:py-16">
-  <motion.div
-  className="pointer-events-none absolute right-10 top-0 z-0 w-32 opacity-20 sm:w-40 mix-blend-screen"
-  animate={{ rotate: 180, scale: [1, 1.1, 1] }}
-  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-  >
-  <Shape7 />
-  </motion.div>
-  <ClientsCarousel
-  title="Clientes e projetos reais"
-  titleClassName="label-kicker text-white/50"
-  className="relative overflow-hidden py-6 sm:py-9"
-  fadeClassName="from-[#121212]"
-  />
-  </div>
-  </ScrollRevealSection>
+
 
   {PROJECTS.map((project, i) => {
   const isBlack = i % 2 === 0

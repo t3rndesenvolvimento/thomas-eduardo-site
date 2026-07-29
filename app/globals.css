@@ -78,14 +78,14 @@
 
   html {
     scroll-behavior: smooth;
-    /* Increase global typography scale slightly on mobile */
-    font-size: 115%; /* 18.4px */
+    /* Standard typography scale on mobile */
+    font-size: 100%; /* 16px */
   }
 
   @media (min-width: 640px) {
     html {
-      /* Massive global typography and layout scale increase for desktop */
-      font-size: 125%; /* 20px */
+      /* Slightly larger global scale for desktop */
+      font-size: 110%; /* 17.6px */
     }
   }
 

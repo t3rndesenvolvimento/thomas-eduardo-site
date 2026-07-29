@@ -189,7 +189,7 @@ export function Hero() {
   initial={{ opacity: 0, y: 12 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 0.65, duration: 0.6 }}
-  className="mt-5 sm:mt-8 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-white/70 text-center px-4 sm:px-0 text-balance"
+  className="mt-5 sm:mt-8 w-full max-w-[92%] sm:max-w-2xl mx-auto text-[15px] sm:text-base md:text-lg leading-relaxed text-white/70 text-center sm:text-balance"
   >
   {t.hero.description}
   </motion.p>
