@@ -7,9 +7,9 @@ const ALL_CLIENTS = [...CLIENTS, ...CLIENTS]
 
 export function ClientsCarousel({
   title = "Empresas e marcas",
-  titleClassName = "text-[10px] font-mono uppercase tracking-[0.18em] text-white/35",
-  className = "relative overflow-hidden border-y border-white/[0.07] bg-[#050505] py-8 sm:py-10",
-  fadeClassName = "from-[#050505]",
+  titleClassName = "text-[10px] font-mono uppercase tracking-[0.18em] text-zinc-600",
+  className = "relative overflow-hidden border-y border-white/[0.06] bg-canvas py-8 sm:py-10",
+  fadeClassName = "from-[#09090b]",
 }: {
   title?: string
   titleClassName?: string
@@ -38,9 +38,9 @@ export function ClientsCarousel({
           {ALL_CLIENTS.map((client, i) => (
             <div
               key={`${client.name}-${i}`}
-              className="flex h-8 shrink-0 items-center px-1 opacity-40 transition-opacity duration-300 hover:opacity-80 sm:h-9"
+              className="flex h-8 shrink-0 items-center px-1 opacity-35 transition-opacity duration-300 hover:opacity-70 sm:h-9"
             >
-              <span className="whitespace-nowrap font-display text-lg font-semibold tracking-tight text-white sm:text-xl md:text-2xl">
+              <span className="whitespace-nowrap font-display text-lg font-semibold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
                 {client.name}
               </span>
             </div>

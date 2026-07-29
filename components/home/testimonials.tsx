@@ -29,7 +29,7 @@ export function Testimonials() {
   return (
     <section
       id="depoimentos"
-      className="relative overflow-hidden bg-[#050505] text-white py-20 sm:py-28"
+      className="relative overflow-hidden bg-canvas text-foreground py-20 sm:py-28"
     >
       <AmbientFrame tone="dark" variant="mesh" />
       <AmbientFrame tone="dark" variant="corner" className="opacity-60" />
@@ -39,7 +39,7 @@ export function Testimonials() {
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-xs font-mono font-semibold uppercase tracking-widest text-white/40 mb-3"
+          className="text-xs font-mono font-semibold uppercase tracking-widest text-zinc-500 mb-3"
         >
           {t.testimonials.kicker}
         </motion.p>
@@ -47,7 +47,7 @@ export function Testimonials() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight max-w-xl"
+          className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight max-w-xl text-zinc-50"
         >
           {t.testimonials.heading}
         </motion.h2>
@@ -62,15 +62,11 @@ export function Testimonials() {
               transition={{ delay: i * 0.07 }}
             >
               <ContentFrame tone="dark" className="flex h-full flex-col p-6 sm:p-7">
-                <Quote className="size-4 text-white/25 mb-4" strokeWidth={1.5} />
-                <p className="text-sm leading-relaxed text-white/65 flex-1">
-                  {r.body}
-                </p>
-                <footer className="mt-6 pt-4 border-t border-white/10">
-                  <p className="text-sm font-semibold text-white">{r.author}</p>
-                  <p className="text-xs font-mono text-white/35 mt-0.5">
-                    {r.title}
-                  </p>
+                <Quote className="size-4 text-zinc-600 mb-4" strokeWidth={1.5} />
+                <p className="text-sm leading-relaxed text-zinc-400 flex-1">{r.body}</p>
+                <footer className="mt-6 pt-4 border-t border-white/[0.08]">
+                  <p className="text-sm font-semibold text-zinc-100">{r.author}</p>
+                  <p className="text-xs font-mono text-zinc-600 mt-0.5">{r.title}</p>
                 </footer>
               </ContentFrame>
             </motion.div>

@@ -24,25 +24,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 }
 
-/**
- * Home orientada a emprego / credibilidade técnica.
- * Funil comercial fica em /freelance.
- */
 export default function HomePage() {
   return (
     <>
       <PageAnimator />
 
       <div className="relative z-10 flex flex-col space-y-[-2rem] sm:space-y-[-3rem]">
-        <ScrollRevealSection index={0} className="bg-[#000000]">
+        <ScrollRevealSection index={0} className="bg-canvas">
           <Hero />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={1} className="bg-black">
-          <ClientsCarousel className="relative overflow-hidden bg-black text-white pt-10 pb-10 sm:pt-14 sm:pb-14" />
+        <ScrollRevealSection index={1} className="bg-canvas">
+          <ClientsCarousel />
         </ScrollRevealSection>
 
-        <div className="relative z-[3] bg-white rounded-t-[2rem] sm:rounded-t-[3.5rem] shadow-[0_-20px_50px_rgba(0,0,0,0.06)]">
+        <div className="relative z-[3] bg-white rounded-t-[2rem] sm:rounded-t-[3.5rem] shadow-[0_-20px_50px_rgba(0,0,0,0.25)]">
           <ProjectsStack />
         </div>
 
@@ -54,11 +50,11 @@ export default function HomePage() {
           <TechExpertise />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={5} className="bg-black">
+        <ScrollRevealSection index={5} className="bg-canvas">
           <Testimonials />
         </ScrollRevealSection>
 
-        <ScrollRevealSection index={6} className="bg-[#0a0a0a]">
+        <ScrollRevealSection index={6} className="bg-canvas">
           <HomeCta />
         </ScrollRevealSection>
       </div>
