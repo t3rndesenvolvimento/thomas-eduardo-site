@@ -8,8 +8,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LayoutShell } from "@/components/layout-shell"
 import "./globals.css"
 
-/* ─── Fonts ──────────────────────────────────────────────────────────────── */
-
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-geist",
@@ -34,14 +32,10 @@ const signature = localFont({
   display: "swap",
 })
 
-/* ─── Constants ──────────────────────────────────────────────────────────── */
-
 const SITE_URL = "https://thomaseduardo.com.br"
-const SITE_TITLE = "Thomas Eduardo | Copywriter & Estrategista Digital"
+const SITE_TITLE = "Thomas Eduardo | Full Stack & Product Engineer"
 const SITE_DESCRIPTION =
-  "Especialista em copywriting de alta conversão para negócios digitais. Aumente suas vendas com textos que vendem. São Paulo, Brasil."
-
-/* ─── Metadata ───────────────────────────────────────────────────────────── */
+  "Full Stack / Product Engineer em São Paulo. Next.js, React, TypeScript e Node.js. Sistemas escaláveis, produtos digitais e cases com resultado mensurável."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -52,16 +46,14 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   keywords: [
     "Thomas Eduardo",
-    "Copywriter São Paulo",
-    "Estrategista Digital",
-    "Copywriting de Alta Conversão",
-    "Landing Page",
-    "Funil de Vendas",
-    "Textos que Vendem",
-    "Desenvolvedor Full Stack São Paulo",
+    "Full Stack Developer São Paulo",
+    "Product Engineer",
     "Next.js Developer",
     "React Developer São Paulo",
-    "Soluções Digitais Escaláveis",
+    "TypeScript",
+    "Node.js",
+    "Engenheiro de Software",
+    "Portfólio Desenvolvedor",
   ],
   authors: [{ name: "Thomas Eduardo", url: SITE_URL }],
   creator: "Thomas Eduardo",
@@ -75,7 +67,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Thomas Eduardo - Copywriter & Estrategista Digital",
+        alt: "Thomas Eduardo - Full Stack & Product Engineer",
       },
     ],
     locale: "pt_BR",
@@ -100,8 +92,6 @@ export const metadata: Metadata = {
   },
 }
 
-/* ─── Structured Data (JSON-LD) ──────────────────────────────────────────── */
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -109,7 +99,7 @@ const jsonLd = {
       "@type": "Person",
       name: "Thomas Eduardo",
       url: SITE_URL,
-      jobTitle: "Copywriter & Estrategista Digital",
+      jobTitle: "Full Stack / Product Engineer",
       description: SITE_DESCRIPTION,
       address: {
         "@type": "PostalAddress",
@@ -122,18 +112,8 @@ const jsonLd = {
         "https://www.thomaseduardo.com.br",
       ],
     },
-    {
-      "@type": "Service",
-      name: "Copywriting de Alta Conversão",
-      provider: { "@type": "Person", name: "Thomas Eduardo" },
-      description:
-        "Copy baseada em dados comportamentais que aumenta a taxa de conversão.",
-      areaServed: { "@type": "Country", name: "BR" },
-    },
   ],
 }
-
-/* ─── Viewport & Icons ───────────────────────────────────────────────────── */
 
 export const viewport: Viewport = {
   themeColor: "#000000",
@@ -147,8 +127,6 @@ export const icons = {
   ],
   apple: "/favicon.png",
 }
-
-/* ─── Root Layout ────────────────────────────────────────────────────────── */
 
 export default function RootLayout({
   children,
@@ -164,10 +142,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/*
-          No-JS / failed-JS fallback: hide black boot cover and unlock scroll.
-          Also covered by CSS animation in globals.css (loader-boot-fade).
-        */}
         <noscript>
           <style>{`
             html.loader-boot::before { display: none !important; }
@@ -179,7 +153,6 @@ export default function RootLayout({
         className="font-sans font-light antialiased overflow-x-hidden"
         suppressHydrationWarning
       >
-        {/* Google Tag Manager (noscript fallback) */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-T9K46BCS"
@@ -189,7 +162,6 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* JSON-LD Structured Data */}
         <Script
           id="json-ld"
           type="application/ld+json"
@@ -197,7 +169,6 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Google Tag Manager */}
         <Script
           id="gtm"
           strategy="afterInteractive"
@@ -210,7 +181,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
 
-        {/* Google Analytics (GA4) */}
         <Script
           id="gtag-src"
           strategy="afterInteractive"
@@ -227,7 +197,6 @@ gtag('config', 'G-V95BP4VGFX');`,
           }}
         />
 
-        {/* PostHog Analytics — api_host must be PostHog cloud, not this site */}
         <Script
           id="posthog"
           strategy="afterInteractive"
@@ -237,10 +206,8 @@ posthog.init('phc_wNUQSvKvfSVPCDCh7DTHk7hzkSc7A4agRv6LLAWWr2qn',{api_host:'https
           }}
         />
 
-        {/* App Shell (conditionally renders site chrome vs clean layout) */}
         <LayoutShell>{children}</LayoutShell>
 
-        {/* Vercel Analytics & Speed Insights */}
         <Analytics />
         <SpeedInsights />
       </body>
