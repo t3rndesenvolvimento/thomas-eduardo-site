@@ -1,20 +1,9 @@
 import type { Metadata } from "next"
-import dynamic from "next/dynamic"
 import { Hero } from "@/components/home/hero"
-import { ProjectsStack } from "@/components/home/projects-stack"
-import { Testimonials } from "@/components/home/testimonials"
+import { FeaturedProjects } from "@/components/home/featured-projects"
 import { About } from "@/components/home/about"
 import { PageAnimator } from "@/components/page-animator"
 import { HomeCta } from "@/components/home/home-cta"
-import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section"
-
-const TechExpertise = dynamic(
-  () =>
-    import("@/components/home/tech-expertise").then((mod) => ({
-      default: mod.TechExpertise,
-    })),
-  { loading: () => <div className="h-80 bg-canvas" /> },
-)
 
 export const metadata: Metadata = {
   title: "Full Stack & Product Engineer | Thomas Eduardo",
@@ -23,39 +12,17 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 }
 
-/**
- * Home structure inspired by Bolder (minimal portfolio):
- * Hero + skills → Featured work → About → Stack → Social proof → CTA
- */
+/** Home no modelo Brittany Chiang: hero → featured list → about → CTA */
 export default function HomePage() {
   return (
     <>
       <PageAnimator />
-      <div className="relative z-10">
-        <ScrollRevealSection index={0} className="bg-canvas">
-          <Hero />
-        </ScrollRevealSection>
-
-        <div className="relative z-[25]">
-          <ProjectsStack />
-        </div>
-
-        <ScrollRevealSection index={2} className="bg-neutral-50 text-black">
-          <About />
-        </ScrollRevealSection>
-
-        <ScrollRevealSection index={3} className="bg-canvas text-white">
-          <TechExpertise />
-        </ScrollRevealSection>
-
-        <ScrollRevealSection index={4} className="bg-neutral-50 text-black">
-          <Testimonials />
-        </ScrollRevealSection>
-
-        <ScrollRevealSection index={5} className="bg-canvas text-white">
-          <HomeCta />
-        </ScrollRevealSection>
-      </div>
+      <main className="bg-canvas">
+        <Hero />
+        <FeaturedProjects />
+        <About />
+        <HomeCta />
+      </main>
     </>
   )
 }

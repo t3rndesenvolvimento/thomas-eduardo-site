@@ -3,11 +3,11 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Menu, X, ChevronRight, Globe } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Logo } from "@/components/logo"
 import { cn } from "@/lib/utils"
 import { useI18n } from "@/lib/i18n/context"
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { CONTACT } from "@/lib/data"
 
 export function SiteNav() {
@@ -17,11 +17,10 @@ export function SiteNav() {
   const { locale, toggleLocale, t } = useI18n()
 
   const LINKS = [
-    { href: "/", label: t.nav.home, index: "01" },
-    { href: "/sobre", label: t.nav.about, index: "02" },
-    { href: "/projetos", label: t.nav.projects, index: "03" },
-    { href: "/processo", label: t.nav.process, index: "04" },
-    { href: "/freelance", label: t.nav.contact, index: "05" },
+    { href: "/sobre", label: t.nav.about },
+    { href: "/projetos", label: t.nav.projects },
+    { href: "/processo", label: t.nav.process },
+    { href: "/freelance", label: t.nav.contact },
   ]
 
   useEffect(() => {
@@ -46,20 +45,16 @@ export function SiteNav() {
     return null
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
-      <div className="pointer-events-auto mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
-        <div className="rounded-full bg-black text-white px-3 py-1.5 border border-white/15">
-          <Logo size={24} className="gap-2" />
-        </div>
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-colors",
+        scrolled ? "bg-canvas/90 backdrop-blur-md border-b border-white/5" : "bg-transparent",
+      )}
+    >
+      <div className="site-shell flex items-center justify-between py-4 sm:py-5">
+        <Logo size={22} className="gap-2" />
 
-        <nav
-          className={cn(
-            "absolute left-1/2 top-3 hidden -translate-x-1/2 items-center gap-0.5 rounded-full border px-1.5 py-1 sm:top-4 md:flex",
-            scrolled
-              ? "border-white/10 bg-black/90 backdrop-blur-xl"
-              : "border-white/10 bg-black/50 backdrop-blur-md",
-          )}
-        >
+        <nav className="hidden md:flex items-center gap-8">
           {LINKS.map((l) => {
             const active =
               pathname === l.href ||
@@ -69,34 +64,36 @@ export function SiteNav() {
                 key={l.href}
                 href={l.href}
                 className={cn(
-                  "rounded-full px-3 py-1.5 text-[10px] uppercase font-semibold tracking-[0.12em] transition-colors",
-                  active
-                    ? "bg-brand text-black"
-                    : "text-white/65 hover:text-white",
+                  "text-sm transition-colors",
+                  active ? "text-brand" : "text-neutral-400 hover:text-white",
                 )}
               >
                 {l.label}
               </Link>
             )
           })}
+          <a
+            href={CONTACT.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded border border-brand px-4 py-1.5 text-sm text-brand hover:bg-brand/10"
+          >
+            LinkedIn
+          </a>
           <button
             type="button"
             onClick={toggleLocale}
-            className="ml-1 rounded-full border border-white/15 px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70 hover:text-white"
-            aria-label="Toggle language"
+            className="text-xs font-mono text-neutral-500 hover:text-white"
           >
             {locale === "pt-BR" ? "EN" : "PT"}
           </button>
         </nav>
 
-        <div className="hidden w-[100px] md:block" aria-hidden />
-
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-black/80 text-white md:hidden"
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={open}
+          className="md:hidden text-white p-2"
+          aria-label={open ? "Fechar" : "Menu"}
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -108,69 +105,31 @@ export function SiteNav() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="pointer-events-auto fixed inset-0 z-50 flex flex-col bg-canvas/98 backdrop-blur-xl text-white md:hidden overflow-y-auto"
+            className="fixed inset-0 top-[57px] z-40 bg-canvas md:hidden px-6 py-8"
           >
-            <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-              <Logo size={24} className="gap-2" />
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="flex size-10 items-center justify-center rounded-full border border-white/15"
-                aria-label="Fechar menu"
-              >
-                <X className="size-5" />
-              </button>
-            </div>
-            <div className="flex-1 px-6 py-8 flex flex-col justify-between gap-8">
-              <div className="flex flex-col gap-2">
-                {LINKS.map((l, index) => {
-                  const active = pathname === l.href
-                  return (
-                    <motion.div
-                      key={l.href}
-                      initial={{ opacity: 0, x: -12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.04 * index }}
-                    >
-                      <Link
-                        href={l.href}
-                        onClick={() => setOpen(false)}
-                        className={cn(
-                          "flex items-center justify-between px-4 py-4 border-l-2",
-                          active
-                            ? "border-brand text-white"
-                            : "border-white/15 text-white/70",
-                        )}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="font-mono text-xs text-brand">{l.index}</span>
-                          <span className="text-xl font-display font-bold">{l.label}</span>
-                        </div>
-                        <ChevronRight className="size-5 opacity-40" />
-                      </Link>
-                    </motion.div>
-                  )
-                })}
-              </div>
-              <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-6">
+              {LINKS.map((l) => (
                 <Link
-                  href={CONTACT.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
+                  key={l.href}
+                  href={l.href}
                   onClick={() => setOpen(false)}
-                  className="flex w-full items-center justify-center rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-black"
+                  className={cn(
+                    "text-2xl font-display font-bold",
+                    pathname === l.href ? "text-brand" : "text-white",
+                  )}
                 >
-                  LinkedIn
+                  {l.label}
                 </Link>
-                <button
-                  type="button"
-                  onClick={toggleLocale}
-                  className="flex items-center justify-center gap-2 py-3 text-xs font-semibold text-white/70"
-                >
-                  <Globe className="size-3.5" />
-                  {locale === "pt-BR" ? "English" : "Português"}
-                </button>
-              </div>
+              ))}
+              <a
+                href={CONTACT.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="mt-4 inline-flex w-fit rounded border border-brand px-5 py-2.5 text-brand"
+              >
+                LinkedIn
+              </a>
             </div>
           </motion.div>
         )}

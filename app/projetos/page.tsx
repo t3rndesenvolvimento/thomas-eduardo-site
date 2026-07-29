@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { PROJECTS, CONTACT } from "@/lib/data"
 import { PageAnimator } from "@/components/page-animator"
-import { ArrowRight, ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Github } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Projetos",
@@ -37,116 +37,104 @@ export default function ProjetosPage() {
     <main className="min-h-screen bg-canvas text-white">
       <PageAnimator />
 
-      <header className="site-shell pt-28 pb-14 sm:pt-36 sm:pb-20">
-        <p className="label-kicker text-brand mb-4">Portfólio</p>
-        <h1 className="font-display text-[clamp(3rem,10vw,6rem)] font-extrabold leading-[0.92] tracking-[-0.04em] max-w-[10ch]">
-          Projetos em <span className="text-brand">produção</span>
+      <header className="site-shell max-w-4xl pt-28 pb-14 sm:pt-36 sm:pb-16">
+        <p className="font-mono text-sm text-brand mb-3">Projetos</p>
+        <h1 className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">
+          Tudo que foi pra produção
         </h1>
-        <p className="mt-6 max-w-lg text-base sm:text-lg text-neutral-400 leading-relaxed">
-          Sistemas, produtos e interfaces. Problema, resultado e stack.
+        <p className="mt-4 max-w-lg text-neutral-400 leading-relaxed">
+          Sistemas, produtos e interfaces. Cada item com contexto e stack.
         </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/projetos/teron-os"
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-xs font-bold uppercase tracking-wider text-black"
-          >
-            Case TERON OS <ArrowRight className="size-3.5" />
-          </Link>
-          <a
-            href={CONTACT.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white"
-          >
-            GitHub
-          </a>
-        </div>
       </header>
 
-      <section className="site-shell pb-24 sm:pb-32">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {all.map((project, i) => {
-            const internal = project.href?.startsWith("/") ? project.href : null
+      <section className="site-shell max-w-4xl pb-24 sm:pb-32">
+        <ul className="divide-y divide-white/10 border-t border-white/10">
+          {all.map((project) => {
             const isTeron = project.title === "TERON OS"
             const href =
-              internal || (isTeron ? "/projetos/teron-os" : project.href) || undefined
+              isTeron
+                ? "/projetos/teron-os"
+                : project.href?.startsWith("/")
+                  ? project.href
+                  : project.href
 
             return (
-              <article key={project.title} className="group flex flex-col">
-                <div className="relative aspect-[16/10] overflow-hidden bg-neutral-900 border border-white/10">
+              <li
+                key={project.title}
+                className="grid gap-4 py-8 sm:grid-cols-[140px_1fr] sm:gap-8 sm:py-10"
+              >
+                <div className="relative aspect-video sm:aspect-square overflow-hidden border border-white/10 bg-neutral-900">
                   <Image
                     src={project.image}
-                    alt={project.title}
+                    alt=""
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="object-cover"
+                    sizes="140px"
                   />
-                  <span className="absolute left-3 top-3 font-mono text-[10px] text-white/80 bg-black/60 px-2 py-0.5">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                 </div>
-                <p className="mt-4 text-[10px] font-mono uppercase tracking-widest text-brand">
-                  {project.tag}
-                </p>
-                <h2 className="mt-1 font-display text-2xl font-bold tracking-tight">
-                  {project.title}
-                </h2>
-                <p className="mt-2 text-sm text-neutral-400 line-clamp-2">
-                  {project.result}
-                </p>
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {project.stack.slice(0, 4).map((s) => (
-                    <span
-                      key={s}
-                      className="text-[10px] font-mono text-neutral-500 border border-white/10 px-2 py-0.5"
-                    >
-                      {s}
-                    </span>
-                  ))}
+                <div>
+                  <p className="font-mono text-[11px] text-brand">{project.tag}</p>
+                  <h2 className="mt-1 font-display text-xl sm:text-2xl font-bold">
+                    {href ? (
+                      <Link
+                        href={href}
+                        {...(href.startsWith("http")
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        className="hover:text-brand transition-colors"
+                      >
+                        {project.title}
+                      </Link>
+                    ) : (
+                      project.title
+                    )}
+                  </h2>
+                  <p className="mt-2 text-sm text-neutral-400 line-clamp-2 max-w-xl">
+                    {project.result || project.description}
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-neutral-500">
+                    {project.stack.slice(0, 5).map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-3 flex gap-3">
+                    {href && (
+                      <Link
+                        href={href}
+                        {...(href.startsWith("http")
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        className="text-neutral-500 hover:text-brand"
+                      >
+                        <ArrowUpRight className="size-4" />
+                      </Link>
+                    )}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-500 hover:text-brand"
+                      >
+                        <Github className="size-4" />
+                      </a>
+                    )}
+                  </div>
                 </div>
-                <div className="mt-4 flex gap-4">
-                  {href && (
-                    <Link
-                      href={href}
-                      {...(href.startsWith("http")
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                      className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-white hover:text-brand"
-                    >
-                      {isTeron || internal ? "Case" : "Live"}
-                      <ArrowUpRight className="size-3.5" />
-                    </Link>
-                  )}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-bold uppercase tracking-wider text-neutral-500 hover:text-white"
-                    >
-                      GitHub
-                    </a>
-                  )}
-                </div>
-              </article>
+              </li>
             )
           })}
-        </div>
-      </section>
+        </ul>
 
-      <section className="border-t border-white/10">
-        <div className="site-shell py-14 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-          <div>
-            <h2 className="font-display text-2xl font-bold">Código no GitHub</h2>
-            <p className="mt-2 text-sm text-neutral-500">Commits e repositórios abertos.</p>
-          </div>
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+          <p className="text-sm text-neutral-500">Código e commits abertos</p>
           <a
             href={CONTACT.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-brand px-6 py-3 text-xs font-bold uppercase tracking-wider text-black"
+            className="inline-flex items-center gap-2 rounded border border-brand px-5 py-2.5 text-sm font-medium text-brand hover:bg-brand/10"
           >
-            Abrir GitHub <ArrowRight className="size-3.5" />
+            GitHub <ArrowUpRight className="size-4" />
           </a>
         </div>
       </section>

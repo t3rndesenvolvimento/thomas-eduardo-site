@@ -1,9 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
 import { PageAnimator } from "@/components/page-animator"
-import { ClientsCarousel } from "@/components/home/clients-carousel"
 import { CONTACT } from "@/lib/data"
+import { ArrowUpRight } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Projetos sob demanda",
@@ -18,10 +17,10 @@ const OFFERS = [
 ]
 
 const STEPS = [
-  { n: "1", t: "Briefing", d: "Formulário curto." },
-  { n: "2", t: "Alinhamento", d: "Retorno em até 24h úteis." },
-  { n: "3", t: "Escopo", d: "Prazo e valor claros." },
-  { n: "4", t: "Entrega", d: "Build, validação, deploy." },
+  { n: "01", t: "Briefing", d: "Formulário curto com contexto." },
+  { n: "02", t: "Alinhamento", d: "Retorno em até 24h úteis." },
+  { n: "03", t: "Escopo", d: "Prazo e valor claros." },
+  { n: "04", t: "Entrega", d: "Build, validação, deploy." },
 ]
 
 export default function FreelancePage() {
@@ -29,79 +28,73 @@ export default function FreelancePage() {
     <main className="min-h-screen bg-canvas text-white">
       <PageAnimator />
 
-      <section className="site-shell pt-28 pb-14 sm:pt-36 sm:pb-20">
-        <p className="label-kicker text-brand mb-4">Sob demanda</p>
-        <h1 className="font-display text-[clamp(2.75rem,9vw,5.5rem)] font-extrabold leading-[0.92] tracking-[-0.04em] max-w-[14ch]">
-          Site, sistema ou <span className="text-brand">produto</span>
+      <header className="site-shell max-w-3xl pt-28 pb-12 sm:pt-36 sm:pb-16">
+        <p className="font-mono text-sm text-brand mb-3">Sob demanda</p>
+        <h1 className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight">
+          Site, sistema ou produto
         </h1>
-        <p className="mt-6 max-w-lg text-neutral-400 text-base sm:text-lg">
-          Escopo fechado, comunicação direta, produção.
+        <p className="mt-4 max-w-lg text-neutral-400 leading-relaxed">
+          Escopo fechado, comunicação direta, entrega em produção.
         </p>
-        <div className="mt-10 flex flex-col sm:flex-row gap-3">
+        <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href="/diagnostico"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-xs font-bold uppercase tracking-wider text-black"
+            className="inline-flex rounded border border-brand px-6 py-3 text-sm font-medium text-brand hover:bg-brand/10"
           >
-            Solicitar briefing <ArrowRight className="size-4" />
+            Solicitar briefing
           </Link>
           <Link
             href="/projetos"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-wider text-white"
+            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-white"
           >
-            Ver cases
+            Ver cases <ArrowUpRight className="size-3.5" />
           </Link>
         </div>
-      </section>
+      </header>
 
-      <ClientsCarousel />
-
-      <section className="site-shell py-16 sm:py-24">
-        <h2 className="font-display text-3xl sm:text-4xl font-extrabold mb-10">O que entrego</h2>
-        <div className="grid gap-8 sm:grid-cols-3">
+      <section className="site-shell max-w-3xl pb-12">
+        <h2 className="font-mono text-sm text-brand mb-6">O que entrego</h2>
+        <ul className="divide-y divide-white/10 border-y border-white/10">
           {OFFERS.map((item) => (
-            <div key={item.title} className="border-t border-brand pt-5">
-              <h3 className="font-display text-xl font-bold">{item.title}</h3>
-              <p className="mt-2 text-sm text-neutral-400 leading-relaxed">{item.body}</p>
-            </div>
+            <li key={item.title} className="py-6">
+              <h3 className="font-display text-lg font-bold">{item.title}</h3>
+              <p className="mt-1 text-sm text-neutral-400">{item.body}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
-      <section className="site-shell pb-16">
-        <h2 className="font-display text-3xl sm:text-4xl font-extrabold mb-10">Como funciona</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="site-shell max-w-3xl pb-12">
+        <h2 className="font-mono text-sm text-brand mb-6">Como funciona</h2>
+        <ol className="grid gap-6 sm:grid-cols-2">
           {STEPS.map((s) => (
-            <div key={s.n}>
-              <span className="font-mono text-brand text-sm">{s.n}</span>
-              <p className="mt-1 font-display text-lg font-bold">{s.t}</p>
-              <p className="mt-1 text-sm text-neutral-500">{s.d}</p>
-            </div>
+            <li key={s.n}>
+              <span className="font-mono text-xs text-brand">{s.n}</span>
+              <p className="mt-1 font-display font-bold">{s.t}</p>
+              <p className="mt-0.5 text-sm text-neutral-500">{s.d}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
-      <section className="site-shell pb-24 sm:pb-32">
-        <div className="border border-white/10 bg-surface px-8 py-12 sm:px-12 text-center">
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold">Vamos alinhar o escopo</h2>
-          <p className="mt-4 text-neutral-400 max-w-md mx-auto text-sm sm:text-base">
-            Briefing curto. Retorno em até 24h úteis.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/diagnostico"
-              className="inline-flex justify-center items-center gap-2 rounded-full bg-brand px-8 py-4 text-xs font-bold uppercase tracking-wider text-black"
-            >
-              Começar briefing <ArrowRight className="size-4" />
-            </Link>
-            <a
-              href={CONTACT.whatsapp_real}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-wider text-white"
-            >
-              WhatsApp
-            </a>
-          </div>
+      <section className="site-shell max-w-3xl pb-24 border-t border-white/10 pt-12">
+        <h2 className="font-display text-2xl font-extrabold">Vamos alinhar o escopo</h2>
+        <p className="mt-2 text-sm text-neutral-400">Retorno em até 24h úteis.</p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="/diagnostico"
+            className="inline-flex rounded border border-brand px-6 py-3 text-sm font-medium text-brand hover:bg-brand/10"
+          >
+            Começar briefing
+          </Link>
+          <a
+            href={CONTACT.whatsapp_real}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-white"
+          >
+            WhatsApp <ArrowUpRight className="size-3.5" />
+          </a>
         </div>
       </section>
     </main>

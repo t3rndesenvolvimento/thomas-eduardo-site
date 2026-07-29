@@ -4,11 +4,9 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons"
 import { CONTACT } from "@/lib/data"
-import { useI18n } from "@/lib/i18n/context"
 
 export function SiteFooter() {
   const pathname = usePathname()
-  const { t } = useI18n()
 
   if (
     pathname === "/linkbio" ||
@@ -17,70 +15,37 @@ export function SiteFooter() {
   )
     return null
 
-  const links = [
-    { href: "/", label: t.nav.home },
-    { href: "/sobre", label: t.nav.about },
-    { href: "/projetos", label: t.nav.projects },
-    { href: "/processo", label: t.nav.process },
-    { href: "/freelance", label: t.nav.contact },
-  ]
-
   return (
-    <footer className="relative z-40 mt-auto border-t border-white/10 bg-canvas pt-12 pb-28 sm:pb-12">
-      <div className="site-shell">
-        <div className="mb-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          <div>
-            <p className="font-display text-lg font-bold text-white">Thomas Eduardo</p>
-            <p className="mt-2 text-sm text-neutral-500">Full Stack Engineer · São Paulo</p>
-            <p className="mt-4 text-xs font-mono uppercase tracking-widest text-brand">
-              {t.footer.available}
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-x-5 gap-y-2 content-start">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="text-[11px] uppercase tracking-[0.14em] text-neutral-500 hover:text-white"
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-3 sm:items-end">
-            <a
-              href={`mailto:${CONTACT.email}`}
-              className="text-sm text-neutral-400 hover:text-white"
-            >
-              {CONTACT.email}
-            </a>
-            <div className="flex items-center gap-4">
-              <a
-                href={CONTACT.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-500 hover:text-brand"
-                aria-label="GitHub"
-              >
-                <GithubIcon className="size-4" />
-              </a>
-              <a
-                href={CONTACT.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-500 hover:text-brand"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon className="size-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row">
-          <p className="font-mono text-[10px] text-neutral-600">
-            © {new Date().getFullYear()} Thomas Eduardo
-          </p>
-          <p className="font-mono text-[10px] text-neutral-700">Next.js · TypeScript · Vercel</p>
+    <footer className="border-t border-white/10 bg-canvas py-10">
+      <div className="site-shell flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="font-mono text-xs text-neutral-500">
+          © {new Date().getFullYear()} Thomas Eduardo
+        </p>
+        <div className="flex items-center gap-6">
+          <Link href="/projetos" className="text-xs text-neutral-500 hover:text-brand">
+            Projetos
+          </Link>
+          <Link href="/sobre" className="text-xs text-neutral-500 hover:text-brand">
+            Sobre
+          </Link>
+          <a
+            href={CONTACT.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neutral-500 hover:text-brand"
+            aria-label="GitHub"
+          >
+            <GithubIcon className="size-4" />
+          </a>
+          <a
+            href={CONTACT.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neutral-500 hover:text-brand"
+            aria-label="LinkedIn"
+          >
+            <LinkedinIcon className="size-4" />
+          </a>
         </div>
       </div>
     </footer>
