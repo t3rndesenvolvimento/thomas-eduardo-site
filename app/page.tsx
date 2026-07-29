@@ -20,7 +20,7 @@ const TechExpertise = dynamic(
 export const metadata: Metadata = {
   title: "Full Stack & Product Engineer | Thomas Eduardo",
   description:
-    "Portfólio de Thomas Eduardo — Full Stack / Product Engineer em São Paulo. Next.js, React, TypeScript, Node.js. Cases com métricas e disponibilidade para CLT, PJ ou projetos.",
+    "Portfólio de Thomas Eduardo — Full Stack / Product Engineer em São Paulo. Next.js, React, TypeScript, Node.js.",
   alternates: { canonical: "/" },
 }
 
@@ -28,7 +28,6 @@ export default function HomePage() {
   return (
     <>
       <PageAnimator />
-
       <div className="relative z-10">
         <ScrollRevealSection index={0} className="bg-canvas">
           <Hero />
@@ -38,8 +37,7 @@ export default function HomePage() {
           <ClientsCarousel />
         </ScrollRevealSection>
 
-        {/* Horizontal projects — own scroll space, not sticky-over */}
-        <div className="relative z-[20]">
+        <div className="relative z-[25]">
           <ProjectsStack />
         </div>
 

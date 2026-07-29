@@ -45,25 +45,19 @@ export function SiteNav() {
   )
     return null
 
-  const darkNav =
-    pathname === "/diagnostico" ||
-    pathname === "/freelance" ||
-    pathname === "/processo" ||
-    pathname?.startsWith("/projetos")
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
       <div className="pointer-events-auto mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
-        <div className="rounded-full bg-black text-white px-3 py-1.5 border border-white/15 shadow-md backdrop-blur-md">
+        <div className="rounded-full bg-black text-white px-3 py-1.5 border border-white/15">
           <Logo size={24} className="gap-2" />
         </div>
 
         <nav
           className={cn(
-            "absolute left-1/2 top-3 hidden -translate-x-1/2 items-center gap-0.5 rounded-full border px-1.5 py-1 transition-all duration-300 sm:top-4 md:flex",
-            darkNav || scrolled
-              ? "border-white/10 bg-black/85 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl"
-              : "border-white/10 bg-black/40 backdrop-blur-md",
+            "absolute left-1/2 top-3 hidden -translate-x-1/2 items-center gap-0.5 rounded-full border px-1.5 py-1 sm:top-4 md:flex",
+            scrolled
+              ? "border-white/10 bg-black/90 backdrop-blur-xl"
+              : "border-white/10 bg-black/50 backdrop-blur-md",
           )}
         >
           {LINKS.map((l) => {
@@ -77,7 +71,7 @@ export function SiteNav() {
                 className={cn(
                   "rounded-full px-3 py-1.5 text-[10px] uppercase font-semibold tracking-[0.12em] transition-colors",
                   active
-                    ? "bg-white text-black"
+                    ? "bg-brand text-black"
                     : "text-white/65 hover:text-white",
                 )}
               >
@@ -85,11 +79,10 @@ export function SiteNav() {
               </Link>
             )
           })}
-
           <button
             type="button"
             onClick={toggleLocale}
-            className="ml-1 rounded-full border border-white/15 px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70 transition-all hover:border-white/30 hover:text-white"
+            className="ml-1 rounded-full border border-white/15 px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70 hover:text-white"
             aria-label="Toggle language"
           >
             {locale === "pt-BR" ? "EN" : "PT"}
@@ -101,10 +94,7 @@ export function SiteNav() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className={cn(
-            "inline-flex size-11 items-center justify-center rounded-full border md:hidden transition-colors shadow-lg",
-            "border-white/15 bg-black/80 backdrop-blur-xl text-white",
-          )}
+          className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-black/80 text-white md:hidden"
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
         >
@@ -118,21 +108,19 @@ export function SiteNav() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="pointer-events-auto fixed inset-0 z-50 flex flex-col bg-[#08090d]/95 backdrop-blur-2xl text-white md:hidden overflow-y-auto"
+            className="pointer-events-auto fixed inset-0 z-50 flex flex-col bg-canvas/98 backdrop-blur-xl text-white md:hidden overflow-y-auto"
           >
-            <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 shrink-0">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
               <Logo size={24} className="gap-2" />
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="flex size-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white"
+                className="flex size-10 items-center justify-center rounded-full border border-white/15"
                 aria-label="Fechar menu"
               >
                 <X className="size-5" />
               </button>
             </div>
-
             <div className="flex-1 px-6 py-8 flex flex-col justify-between gap-8">
               <div className="flex flex-col gap-2">
                 {LINKS.map((l, index) => {
@@ -140,7 +128,7 @@ export function SiteNav() {
                   return (
                     <motion.div
                       key={l.href}
-                      initial={{ opacity: 0, x: -16 }}
+                      initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.04 * index }}
                     >
@@ -148,19 +136,15 @@ export function SiteNav() {
                         href={l.href}
                         onClick={() => setOpen(false)}
                         className={cn(
-                          "group flex items-center justify-between rounded-2xl px-5 py-4 border transition-all",
+                          "flex items-center justify-between px-4 py-4 border-l-2",
                           active
-                            ? "bg-white text-black border-white"
-                            : "bg-white/[0.03] border-white/10 text-white",
+                            ? "border-brand text-white"
+                            : "border-white/15 text-white/70",
                         )}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="font-mono text-xs font-bold opacity-50">
-                            {l.index}
-                          </span>
-                          <span className="text-lg font-display font-semibold">
-                            {l.label}
-                          </span>
+                          <span className="font-mono text-xs text-brand">{l.index}</span>
+                          <span className="text-xl font-display font-bold">{l.label}</span>
                         </div>
                         <ChevronRight className="size-5 opacity-40" />
                       </Link>
@@ -168,21 +152,20 @@ export function SiteNav() {
                   )
                 })}
               </div>
-
               <div className="flex flex-col gap-3">
                 <Link
                   href={CONTACT.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => setOpen(false)}
-                  className="flex w-full items-center justify-center rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-black"
+                  className="flex w-full items-center justify-center rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-black"
                 >
                   LinkedIn
                 </Link>
                 <button
                   type="button"
                   onClick={toggleLocale}
-                  className="flex items-center justify-center gap-2 rounded-2xl border border-white/15 py-3 text-xs font-semibold text-white/80"
+                  className="flex items-center justify-center gap-2 py-3 text-xs font-semibold text-white/70"
                 >
                   <Globe className="size-3.5" />
                   {locale === "pt-BR" ? "English" : "Português"}

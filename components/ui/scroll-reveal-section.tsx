@@ -7,13 +7,12 @@ interface ScrollRevealSectionProps {
   className?: string
   index?: number
   id?: string
-  /** Sticky stack (one panel at a time). Off by default on mobile. */
   sticky?: boolean
 }
 
 /**
- * Full-viewport panel. With sticky=true, next panel covers the previous
- * (readable: solid bg, rising z-index, no negative margins).
+ * Viewport panels. sticky=true (md+): next panel covers previous with solid bg.
+ * Spacing: min-h + padding inside children — no negative margins between panels.
  */
 export function ScrollRevealSection({
   children,
