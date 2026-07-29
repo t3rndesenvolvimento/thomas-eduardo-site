@@ -47,54 +47,58 @@ export default function HomePage() {
     <>
       <PageAnimator />
 
-      {/* 1. Hero */}
-      <Hero />
-
-      {/* 2. Marcas & Parceiros (Social Proof) */}
-      <ClientsCarousel />
-
-      {/* Sticky Stacking Cards Scroll Reveal após Marcas & Parceiros */}
+      {/* Sticky Stacking Cards Scroll Reveal for the ENTIRE page */}
       <div className="relative z-10 flex flex-col space-y-[-2rem] sm:space-y-[-3rem]">
-        {/* 3. Agitação da dor */}
-        <ScrollRevealSection index={0}>
-          <PainPoints />
+        {/* 1. Hero */}
+        <ScrollRevealSection index={0} className="bg-[#000000]">
+          <Hero />
+        </ScrollRevealSection>
+
+        {/* 2 & 3. Marcas & Parceiros + Agitação da dor */}
+        <ScrollRevealSection index={1} className="bg-black">
+          <div className="flex flex-col w-full h-full justify-center">
+            <ClientsCarousel className="relative overflow-hidden bg-black text-white pt-10 pb-6 sm:pt-14 sm:pb-9" />
+            <PainPoints />
+          </div>
         </ScrollRevealSection>
 
         {/* 4. Portfólio / Projetos */}
-        <ProjectsStack />
+        <div className="relative z-[3] bg-white rounded-t-[2rem] sm:rounded-t-[3.5rem] shadow-[0_-20px_50px_rgba(0,0,0,0.06)]">
+          <ProjectsStack />
+        </div>
 
         {/* 5. Solução e benefícios */}
-        <ScrollRevealSection index={1}>
+        <ScrollRevealSection index={4} className="bg-black">
           <Benefits />
         </ScrollRevealSection>
 
         {/* 6. Depoimentos */}
-        <ScrollRevealSection index={2}>
+        <ScrollRevealSection index={5} className="bg-black">
           <Testimonials />
         </ScrollRevealSection>
 
         {/* 7. Sobre */}
-        <ScrollRevealSection index={3}>
+        <ScrollRevealSection index={6} className="bg-white">
           <About />
         </ScrollRevealSection>
 
         {/* 8. Processo de trabalho */}
-        <ScrollRevealSection index={4}>
+        <ScrollRevealSection index={7} className="bg-background">
           <EngineeringApproach />
         </ScrollRevealSection>
 
         {/* 9. Stack técnica */}
-        <ScrollRevealSection index={5}>
+        <ScrollRevealSection index={8} className="bg-white">
           <TechExpertise />
         </ScrollRevealSection>
 
         {/* 10. Galeria visual */}
-        <ScrollRevealSection index={6}>
+        <ScrollRevealSection index={9} className="bg-[#0a0a0a]">
           <OliverParallax />
         </ScrollRevealSection>
 
         {/* 11. CTA Final */}
-        <ScrollRevealSection index={7}>
+        <ScrollRevealSection index={10} className="bg-[#0a0a0a]">
           <HomeCta />
         </ScrollRevealSection>
       </div>

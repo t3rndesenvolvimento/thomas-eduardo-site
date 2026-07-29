@@ -6,6 +6,7 @@ type TechIconProps = {
   name: string
   className?: string
   showLabel?: boolean
+  theme?: "dark" | "light"
 }
 
 const TECH_ICON_MAP: Record<string, { icon: string; color: string }> = {
@@ -42,6 +43,11 @@ const TECH_ICON_MAP: Record<string, { icon: string; color: string }> = {
   "VS Code API": { icon: "logos:visual-studio-code", color: "#007ACC" },
   Git: { icon: "logos:git-icon", color: "#F05032" },
   Figma: { icon: "logos:figma", color: "#F24E1E" },
+  Framer: { icon: "logos:framer", color: "#0055FF" },
+  Webflow: { icon: "logos:webflow", color: "#4353FF" },
+  Notion: { icon: "logos:notion-icon", color: "#000000" },
+  Miro: { icon: "logos:miro-icon", color: "#050038" },
+  "Adobe CC": { icon: "logos:adobe-creative-cloud", color: "#DA1F26" },
   Vite: { icon: "logos:vitejs", color: "#646CFF" },
   Flutter: { icon: "logos:flutter", color: "#02569B" },
 }
@@ -50,12 +56,15 @@ export function TechIcon({
   name,
   className = "size-5",
   showLabel = false,
+  theme = "dark",
 }: TechIconProps) {
   const tech = TECH_ICON_MAP[name]
 
   if (!tech) {
     return (
-      <span className="rounded-md border border-white/15 bg-white/10 px-2 py-1 font-mono text-[11px] text-white/80">
+      <span className={`rounded-md border px-2 py-1 font-mono text-[11px] ${
+        theme === "light" ? "border-black/15 bg-black/5 text-black/80" : "border-white/15 bg-white/10 text-white/80"
+      }`}>
         {name}
       </span>
     )
@@ -64,10 +73,14 @@ export function TechIcon({
   if (showLabel) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <div className="flex size-12 items-center justify-center rounded-xl border border-white/15 bg-[#1a1a1a] shadow-sm transition-all hover:scale-105 hover:border-white/30">
+        <div className={`flex size-12 items-center justify-center rounded-xl border shadow-sm transition-all hover:scale-105 ${
+          theme === "light" ? "border-black/10 bg-black/[0.02] hover:border-black/20" : "border-white/15 bg-[#1a1a1a] hover:border-white/30"
+        }`}>
           <Icon icon={tech.icon} className={className} style={{ color: tech.color }} />
         </div>
-        <span className="font-mono text-[9px] uppercase tracking-wider text-white/55">
+        <span className={`font-mono text-[9px] uppercase tracking-wider ${
+          theme === "light" ? "text-black/55" : "text-white/55"
+        }`}>
           {name}
         </span>
       </div>
@@ -88,17 +101,19 @@ export function TechIcon({
   )
 }
 
-export function TechIconRow({ stack, max = 6 }: { stack: string[]; max?: number }) {
+export function TechIconRow({ stack, max = 6, theme = "dark" }: { stack: string[]; max?: number; theme?: "dark" | "light" }) {
   const visible = stack.slice(0, max)
   const rest = stack.length - max
 
   return (
     <div className="flex flex-wrap items-center gap-2">
       {visible.map((tech) => (
-        <TechIcon key={tech} name={tech} className="size-5" />
+        <TechIcon key={tech} name={tech} className="size-5" theme={theme} />
       ))}
       {rest > 0 && (
-        <div className="flex size-9 items-center justify-center rounded-lg border border-white/15 bg-[#1c1c1c] font-mono text-[10px] text-white/70 sm:size-10">
+        <div className={`flex size-9 items-center justify-center rounded-lg border font-mono text-[10px] sm:size-10 ${
+          theme === "light" ? "border-black/10 bg-black/[0.02] text-black/70" : "border-white/15 bg-[#1c1c1c] text-white/70"
+        }`}>
           +{rest}
         </div>
       )}
@@ -106,11 +121,11 @@ export function TechIconRow({ stack, max = 6 }: { stack: string[]; max?: number 
   )
 }
 
-export function TechGrid({ stack }: { stack: string[] }) {
+export function TechGrid({ stack, theme = "dark" }: { stack: string[]; theme?: "dark" | "light" }) {
   return (
     <div className="flex flex-wrap gap-3">
       {stack.map((tech) => (
-        <TechIcon key={tech} name={tech} className="size-5" showLabel />
+        <TechIcon key={tech} name={tech} className="size-5" showLabel theme={theme} />
       ))}
     </div>
   )

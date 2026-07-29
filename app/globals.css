@@ -78,6 +78,15 @@
 
   html {
     scroll-behavior: smooth;
+    /* Increase global typography scale slightly on mobile */
+    font-size: 115%; /* 18.4px */
+  }
+
+  @media (min-width: 640px) {
+    html {
+      /* Massive global typography and layout scale increase for desktop */
+      font-size: 125%; /* 20px */
+    }
   }
 
   /* Lock scroll while intro loader is on screen */
@@ -163,7 +172,7 @@
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1.1;
-    font-size: clamp(1.9rem, 7.5vw, 5.25rem);
+    font-size: clamp(2.5rem, 9vw, 7rem);
     max-width: 100%;
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -174,7 +183,7 @@
     font-weight: 600;
     letter-spacing: -0.025em;
     line-height: 1.18;
-    font-size: clamp(1.35rem, 4.2vw, 2.5rem);
+    font-size: clamp(2rem, 6vw, 4.5rem);
   }
 
   /* Line-mask wrappers for reveal animations - extra room on mobile */
@@ -280,7 +289,8 @@
     font-weight: 400;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
+    color: currentColor;
+    opacity: 0.55;
   }
 
   /*

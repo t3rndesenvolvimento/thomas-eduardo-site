@@ -73,15 +73,15 @@ export function PageHero({
         </motion.p>
 
         <h1
-          className={`font-sans font-semibold tracking-[-0.03em] ${
+          className={`font-display font-bold tracking-tight ${
             light ? "text-white" : "text-foreground"
           }`}
           style={{
             fontSize:
               size === "sm"
-                ? "clamp(1.55rem, 5.8vw, 3rem)"
-                : "clamp(1.9rem, 7.5vw, 5rem)",
-            lineHeight: 1.15,
+                ? "clamp(2rem, 5vw, 4rem)"
+                : "clamp(3.5rem, 8vw, 7rem)",
+            lineHeight: 0.95,
           }}
         >
           {titleLines.map((line, i) => (

@@ -3,11 +3,12 @@ import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 type CtaVariant = "solid" | "ghost" | "soft"
-type CtaSize = "sm" | "md"
+type CtaSize = "sm" | "md" | "lg"
 
 const sizeClass: Record<CtaSize, string> = {
   sm: "h-8 gap-1.5 px-3 text-[10px]",
   md: "h-9 gap-1.5 px-3.5 text-[11px]",
+  lg: "h-11 sm:h-12 gap-2 px-5 sm:px-6 text-xs sm:text-sm",
 }
 
 const variantClass: Record<CtaVariant, string> = {

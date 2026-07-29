@@ -164,15 +164,19 @@ export default function DiagnosticoPage() {
                 exit={{ opacity: 0, x: -20 }}
                 className="flex flex-col gap-6"
               >
-                <h1 className="text-3xl sm:text-5xl font-display font-semibold text-white tracking-tight">
+                <h1 className="text-4xl sm:text-6xl md:text-[5rem] lg:text-[6rem] font-display font-bold text-white tracking-tight leading-[0.9]">
                   Vamos começar!
                 </h1>
-                <p className="text-white/70 text-lg sm:text-xl">
+                <p className="text-white/70 text-xl sm:text-3xl font-light mt-4">
                   Me diga seu nome e formas de contato.
                 </p>
-                <div className="space-y-8 mt-4">
-                  <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-white/40 mb-2 block">
+                <div className="space-y-8 mt-4 pb-12">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <label className="text-sm sm:text-base font-bold uppercase tracking-wider text-white/40 mb-3 block">
                       Seu nome completo
                     </label>
                     <input
@@ -180,37 +184,60 @@ export default function DiagnosticoPage() {
                       required
                       autoFocus
                       placeholder="Ex: João da Silva"
-                      className="w-full bg-transparent border-b-2 border-white/15 pb-3 text-xl sm:text-3xl text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
+                      className="w-full bg-transparent border-b-2 border-white/15 pb-4 text-3xl sm:text-5xl md:text-[4rem] text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
                       value={formData.name}
                       onChange={(e) => updateForm("name", e.target.value)}
                     />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-white/40 mb-2 block">
-                      Seu melhor E-mail
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="Ex: joao@empresa.com"
-                      className="w-full bg-transparent border-b-2 border-white/15 pb-3 text-xl sm:text-3xl text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
-                      value={formData.email}
-                      onChange={(e) => updateForm("email", e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-white/40 mb-2 block">
-                      Seu WhatsApp
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="Ex: (11) 99999-9999"
-                      className="w-full bg-transparent border-b-2 border-white/15 pb-3 text-xl sm:text-3xl text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
-                      value={formData.phone}
-                      onChange={(e) => updateForm("phone", e.target.value)}
-                    />
-                  </div>
+                  </motion.div>
+
+                  <AnimatePresence>
+                    {formData.name.trim().length > 2 && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, y: 20 }}
+                        animate={{ opacity: 1, height: "auto", y: 0 }}
+                        exit={{ opacity: 0, height: 0, y: -20 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                      >
+                        <div className="pt-4">
+                          <label className="text-sm sm:text-base font-bold uppercase tracking-wider text-white/40 mb-3 block">
+                            Seu melhor E-mail
+                          </label>
+                          <input
+                            type="email"
+                            required
+                            placeholder="Ex: joao@empresa.com"
+                            className="w-full bg-transparent border-b-2 border-white/15 pb-4 text-3xl sm:text-5xl md:text-[4rem] text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
+                            value={formData.email}
+                            onChange={(e) => updateForm("email", e.target.value)}
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  <AnimatePresence>
+                    {formData.name.trim().length > 2 && formData.email.includes("@") && formData.email.includes(".") && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, y: 20 }}
+                        animate={{ opacity: 1, height: "auto", y: 0 }}
+                        exit={{ opacity: 0, height: 0, y: -20 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                      >
+                        <div className="pt-4">
+                          <label className="text-sm sm:text-base font-bold uppercase tracking-wider text-white/40 mb-3 block">
+                            Seu WhatsApp
+                          </label>
+                          <input
+                            type="tel"
+                            required
+                            placeholder="Ex: (11) 99999-9999"
+                            className="w-full bg-transparent border-b-2 border-white/15 pb-4 text-3xl sm:text-5xl md:text-[4rem] text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
+                            value={formData.phone}
+                            onChange={(e) => updateForm("phone", e.target.value)}
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             )}
@@ -223,41 +250,56 @@ export default function DiagnosticoPage() {
                 exit={{ opacity: 0, x: -20 }}
                 className="flex flex-col gap-6"
               >
-                <h1 className="text-3xl sm:text-5xl font-display font-semibold text-white tracking-tight">
+                <h1 className="text-4xl sm:text-6xl md:text-[5rem] lg:text-[6rem] font-display font-bold text-white tracking-tight leading-[0.9]">
                   Sobre o seu negócio
                 </h1>
-                <p className="text-white/70 text-lg sm:text-xl">
+                <p className="text-white/70 text-xl sm:text-3xl font-light mt-4">
                   Como posso conhecer melhor sua operação?
                 </p>
 
-                <div className="space-y-10 mt-8">
-                  <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-white/40 mb-2 block">
+                <div className="space-y-10 mt-8 pb-12">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <label className="text-sm sm:text-base font-bold uppercase tracking-wider text-white/40 mb-3 block">
                       Nome da Empresa ou Site
                     </label>
                     <input
                       type="text"
                       required
                       autoFocus
-                      placeholder="Ex: Minha Empresa / www.site.com"
-                      className="w-full bg-transparent border-b-2 border-white/15 pb-3 text-xl sm:text-3xl text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
+                      placeholder="Ex: Minha Empresa"
+                      className="w-full bg-transparent border-b-2 border-white/15 pb-4 text-3xl sm:text-5xl md:text-[4rem] text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
                       value={formData.company}
                       onChange={(e) => updateForm("company", e.target.value)}
                     />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-white/40 mb-2 block">
-                      Seu cargo atual
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Ex: CEO, Diretor de Marketing, Founder"
-                      className="w-full bg-transparent border-b-2 border-white/15 pb-3 text-xl sm:text-3xl text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
-                      value={formData.role}
-                      onChange={(e) => updateForm("role", e.target.value)}
-                    />
-                  </div>
+                  </motion.div>
+                  <AnimatePresence>
+                    {formData.company.trim().length > 2 && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, y: 20 }}
+                        animate={{ opacity: 1, height: "auto", y: 0 }}
+                        exit={{ opacity: 0, height: 0, y: -20 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                      >
+                        <div className="pt-4">
+                          <label className="text-sm sm:text-base font-bold uppercase tracking-wider text-white/40 mb-3 block">
+                            Seu cargo atual
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="Ex: CEO, Founder"
+                            className="w-full bg-transparent border-b-2 border-white/15 pb-4 text-3xl sm:text-5xl md:text-[4rem] text-white placeholder:text-white/20 focus:outline-none focus:border-white transition-colors"
+                            value={formData.role}
+                            onChange={(e) => updateForm("role", e.target.value)}
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             )}
@@ -270,10 +312,10 @@ export default function DiagnosticoPage() {
                 exit={{ opacity: 0, x: -20 }}
                 className="flex flex-col gap-6"
               >
-                <h1 className="text-3xl sm:text-5xl font-display font-semibold text-white tracking-tight">
+                <h1 className="text-4xl sm:text-6xl md:text-[5rem] lg:text-[6rem] font-display font-bold text-white tracking-tight leading-[0.9]">
                   Do que você precisa?
                 </h1>
-                <p className="text-white/70 text-lg sm:text-xl">
+                <p className="text-white/70 text-xl sm:text-3xl font-light mt-4">
                   Selecione o serviço que melhor atende sua necessidade hoje.
                 </p>
 
@@ -287,15 +329,15 @@ export default function DiagnosticoPage() {
                         updateForm("painPoint", "")
                         setTimeout(nextStep, 350)
                       }}
-                      className={`text-left px-6 py-5 rounded-xl border transition-all duration-200 flex flex-col justify-center ${formData.service === srv.title
-                          ? "bg-white text-black border-white shadow-lg"
+                      className={`text-left px-6 py-6 sm:px-8 sm:py-8 rounded-3xl border transition-all duration-300 flex flex-col justify-center ${formData.service === srv.title
+                          ? "bg-white text-black border-white shadow-2xl scale-[1.02]"
                           : "bg-white/[0.04] border-white/10 text-white hover:border-white/30 hover:bg-white/[0.07]"
                         }`}
                     >
-                      <div className="flex items-center justify-between w-full">
-                        <span className="text-lg font-bold">{srv.title}</span>
+                      <div className="flex items-center justify-between w-full mb-2">
+                        <span className="text-2xl sm:text-4xl md:text-5xl font-display font-medium tracking-tight">{srv.title}</span>
                         {formData.service === srv.title && (
-                          <CheckCircle2 className="size-6 text-black" />
+                          <CheckCircle2 className="size-8 md:size-10 text-black shrink-0 ml-4" />
                         )}
                       </div>
                       <span
@@ -320,10 +362,10 @@ export default function DiagnosticoPage() {
                 exit={{ opacity: 0, x: -20 }}
                 className="flex flex-col gap-6"
               >
-                <h1 className="text-3xl sm:text-5xl font-display font-semibold text-white tracking-tight">
+                <h1 className="text-4xl sm:text-6xl md:text-[5rem] lg:text-[6rem] font-display font-bold text-white tracking-tight leading-[0.9]">
                   Qual o seu maior desafio?
                 </h1>
-                <p className="text-white/70 text-lg sm:text-xl">
+                <p className="text-white/70 text-xl sm:text-3xl font-light mt-4">
                   O que te motivou a buscar essa solução?
                 </p>
 
@@ -336,14 +378,14 @@ export default function DiagnosticoPage() {
                         updateForm("painPoint", pain)
                         setTimeout(nextStep, 350)
                       }}
-                      className={`text-left px-6 py-5 rounded-xl border transition-all duration-200 flex items-center justify-between ${formData.painPoint === pain
-                          ? "bg-white text-black border-white shadow-lg"
+                      className={`text-left px-6 py-6 sm:px-8 sm:py-8 rounded-3xl border transition-all duration-300 flex items-center justify-between gap-4 ${formData.painPoint === pain
+                          ? "bg-white text-black border-white shadow-2xl scale-[1.02]"
                           : "bg-white/[0.04] border-white/10 text-white hover:border-white/30 hover:bg-white/[0.07]"
                         }`}
                     >
-                      <span className="text-lg font-medium">{pain}</span>
+                      <span className="text-2xl sm:text-4xl font-display font-medium tracking-tight leading-tight">{pain}</span>
                       {formData.painPoint === pain && (
-                        <CheckCircle2 className="size-6 text-black" />
+                        <CheckCircle2 className="size-8 md:size-10 text-black shrink-0" />
                       )}
                     </button>
                   ))}
@@ -359,10 +401,10 @@ export default function DiagnosticoPage() {
                 exit={{ opacity: 0, x: -20 }}
                 className="flex flex-col gap-6"
               >
-                <h1 className="text-3xl sm:text-5xl font-display font-semibold text-white tracking-tight">
+                <h1 className="text-4xl sm:text-6xl md:text-[5rem] lg:text-[6rem] font-display font-bold text-white tracking-tight leading-[0.9]">
                   Para finalizarmos
                 </h1>
-                <p className="text-white/70 text-lg sm:text-xl">
+                <p className="text-white/70 text-xl sm:text-3xl font-light mt-4">
                   Qual o orçamento previsto para esse projeto?
                 </p>
                 <p className="text-sm text-white/40 mt-[-1rem]">
@@ -375,14 +417,14 @@ export default function DiagnosticoPage() {
                       key={budget}
                       type="button"
                       onClick={() => updateForm("budget", budget)}
-                      className={`text-left px-6 py-5 rounded-xl border transition-all duration-200 flex items-center justify-between ${formData.budget === budget
-                          ? "bg-white text-black border-white shadow-lg"
+                      className={`text-left px-6 py-6 sm:px-8 sm:py-8 rounded-3xl border transition-all duration-300 flex items-center justify-between gap-4 ${formData.budget === budget
+                          ? "bg-white text-black border-white shadow-2xl scale-[1.02]"
                           : "bg-white/[0.04] border-white/10 text-white hover:border-white/30 hover:bg-white/[0.07]"
                         }`}
                     >
-                      <span className="text-lg font-medium">{budget}</span>
+                      <span className="text-2xl sm:text-4xl font-display font-medium tracking-tight leading-tight">{budget}</span>
                       {formData.budget === budget && (
-                        <CheckCircle2 className="size-6 text-black" />
+                        <CheckCircle2 className="size-8 md:size-10 text-black shrink-0" />
                       )}
                     </button>
                   ))}
@@ -397,13 +439,13 @@ export default function DiagnosticoPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center text-center gap-6 py-12"
               >
-                <div className="size-20 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-4">
-                  <CheckCircle2 className="size-10 text-emerald-400" />
+                <div className="size-32 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mb-6">
+                  <CheckCircle2 className="size-16 text-emerald-400" />
                 </div>
-                <h1 className="text-3xl sm:text-5xl font-display font-semibold text-white tracking-tight">
-                  Tudo certo, {formData.name.split(" ")[0]}!
+                <h1 className="text-5xl sm:text-7xl lg:text-[7rem] font-display font-bold text-white tracking-tight leading-none">
+                  Tudo certo!
                 </h1>
-                <p className="text-white/70 text-lg sm:text-xl max-w-lg mx-auto">
+                <p className="text-white/70 text-xl sm:text-3xl font-light mt-4 max-w-2xl mx-auto">
                   Recebi as informações do seu projeto. Vou analisar todos os detalhes e enviarei uma proposta personalizada em breve.
                 </p>
                 <div className="mt-8">

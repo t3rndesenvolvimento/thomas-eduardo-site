@@ -1,9 +1,9 @@
 "use client"
 
 import {
-  useCallback,
-  useRef,
-  useState,
+ useCallback,
+ useRef,
+ useState,
 } from "react"
 
 import Image from "next/image"
@@ -15,42 +15,42 @@ import { PROJECTS } from "@/lib/data"
 
 export function HighlightsCarousel() {
 
-  const trackRef = useRef<HTMLDivElement>(null)
+ const trackRef = useRef<HTMLDivElement>(null)
 
-  const [index,setIndex] = useState(0)
-
-
-
-  const move = useCallback((direction:number)=>{
-
-    const track = trackRef.current
-
-    if(!track) return
-
-
-    const card =
-      track.children[
-        index + direction
-      ] as HTMLElement
-
-
-    if(card){
-
-      track.scrollTo({
-        left: card.offsetLeft,
-        behavior:"smooth"
-      })
-
-      setIndex(index + direction)
-
-    }
-
-
-  },[index])
+ const [index,setIndex] = useState(0)
 
 
 
-  return (
+ const move = useCallback((direction:number)=>{
+
+ const track = trackRef.current
+
+ if(!track) return
+
+
+ const card =
+ track.children[
+ index + direction
+ ] as HTMLElement
+
+
+ if(card){
+
+ track.scrollTo({
+ left: card.offsetLeft,
+ behavior:"smooth"
+ })
+
+ setIndex(index + direction)
+
+ }
+
+
+ },[index])
+
+
+
+ return (
 
 <section>
 
@@ -336,6 +336,6 @@ Ver projeto
 
 </section>
 
-  )
+ )
 
 }

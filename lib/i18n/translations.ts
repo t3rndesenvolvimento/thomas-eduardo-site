@@ -194,8 +194,8 @@ export const translations = {
     // ─── Home CTA ─────────────────────────────────────────────────────────────
     homeCta: {
       kicker: "Vamos conversar?",
-      line1: "Pronto para escalar o seu",
-      line2: "projeto com tecnologia de ponta?",
+      line1: "Pronto para escalar o seu projeto",
+      line2: "com tecnologia de ponta?",
       body: "Faça um diagnóstico gratuito. Em menos de 24 horas envio um plano inicial com escopo, prazo e estimativa.",
       ctaPrimary: "Fazer Diagnóstico Grátis",
       ctaSecondary: "Ver Todos os Projetos",
