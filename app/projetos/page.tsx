@@ -1,203 +1,183 @@
-"use client"
-
+import type { Metadata } from "next"
 import Image from "next/image"
+import Link from "next/link"
 import { PROJECTS, CONTACT } from "@/lib/data"
-import { motion } from "framer-motion"
-
 import { PageAnimator } from "@/components/page-animator"
-import { PageHero } from "@/components/page-hero"
-import { TechIconRow } from "@/components/tech-icon"
-import { CtaLink } from "@/components/ui/cta"
-import { ExternalLink } from "lucide-react"
-import { Shape7, Shape1 } from "@/components/ui/abstract-shapes"
-import { ScrollRevealSection } from "@/components/ui/scroll-reveal-section"
-import { Coolshape } from "coolshapes-react"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
 
-
-
-function ProjectItem({
- project,
- index,
- isBlack,
-}: {
- project: (typeof PROJECTS)[0]
- index: number
- isBlack: boolean
-}) {
- const textColor = isBlack ? "text-white" : "text-black"
- const mutedColor = isBlack ? "text-white/65" : "text-black/65"
- const softColor = isBlack ? "text-white/45" : "text-black/45"
- const borderColor = isBlack ? "border-white/10" : "border-black/10"
-
- return (
- <motion.div
- initial={{ opacity: 0, y: 16 }}
- whileInView={{ opacity: 1, y: 0 }}
- viewport={{ once: true, margin: "-40px" }}
- transition={{ duration: 0.4 }}
- className="site-shell w-full py-16 sm:py-24 flex items-center min-h-[100svh]"
- >
- <div className="flex w-full flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
- <div className="relative aspect-[16/10] bg-black lg:aspect-auto lg:min-h-[500px] w-full overflow-hidden rounded-2xl shadow-2xl">
- <Image
- src={project.image}
- alt={project.title}
- fill
- className="object-cover transition-transform duration-700 group-hover:scale-105"
- sizes="(max-width: 1024px) 100vw, 50vw"
- />
- <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
- <div className="absolute left-4 top-4 flex flex-wrap gap-2">
- <span className="rounded-full border border-white/20 bg-black/50 px-3 py-1 font-mono text-xs uppercase tracking-wider text-white/90 backdrop-blur-md">
- {String(index + 1).padStart(2, "0")}
- </span>
- {project.year && (
- <span className="rounded-full border border-white/15 bg-black/70 px-2.5 py-1 font-mono text-[9px] text-white/70 backdrop-blur-sm">
- {project.year}
- </span>
- )}
- </div>
- </div>
-
-
-
- <div className="flex flex-col justify-center">
- <div>
- <p className={`label-kicker ${softColor}`}>{project.tag}</p>
- <h2 className={`mt-3 text-3xl font-display font-bold tracking-tight ${textColor} sm:text-5xl md:text-6xl`}>
- {project.title}
- </h2>
- <p className={`mt-4 text-xl font-medium ${mutedColor} sm:text-2xl`}>
- {project.subtitle}
- </p>
- <p className={`mt-5 text-lg leading-relaxed ${mutedColor} sm:text-xl`}>
- {project.description}
- </p>
- <div className="mt-6">
- <p className={`label-kicker mb-2 ${softColor}`}>Resultado</p>
- <p className={`text-lg leading-relaxed ${textColor} sm:text-xl font-medium`}>
- {project.result}
- </p>
- </div>
- </div>
-
- {project.gallery && project.gallery.length > 0 && (
- <div className={`mt-8 pt-6 border-t ${borderColor}`}>
- <p className={`label-kicker ${softColor} mb-2`}>Galeria</p>
- <h3 className={`text-base font-medium tracking-tight ${textColor} mb-4`}>
- Interface e arquitetura em profundidade.
- </h3>
- <div className="grid grid-cols-3 gap-3">
- {project.gallery.map((img, idx) => (
- <div key={img} className={`group/gallery relative aspect-video rounded-lg overflow-hidden bg-black/10`}>
- <Image
- src={img}
- alt={`${project.title} - Galeria ${idx + 1}`}
- fill
- className="object-cover opacity-80 transition-all duration-500 group-hover/gallery:scale-105 group-hover/gallery:opacity-100"
- sizes="(max-width: 640px) 33vw, 15vw"
- />
- </div>
- ))}
- </div>
- </div>
- )}
-
- <div className={`mt-8 flex flex-col gap-5 pt-6 border-t ${borderColor}`}>
- <TechIconRow stack={project.stack} max={6} theme={isBlack ? "dark" : "light"} />
- <div className="flex flex-wrap items-center gap-3">
- {project.href ? (
- <CtaLink href={project.href} variant="solid" size="sm" external className="w-fit">
- Ver projeto
- </CtaLink>
- ) : (
- <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-black/40">
- <ExternalLink className="size-3" /> Em breve
- </span>
- )}
- {project.github && (
- <CtaLink href={project.github} variant={isBlack ? "soft" : "ghost"} size="sm" external className="w-fit">
- GitHub
- </CtaLink>
- )}
- </div>
- </div>
-
- </div>
- </div>
- </motion.div>
- )
+export const metadata: Metadata = {
+  title: "Projetos",
+  description:
+    "Cases em produção — sistemas, produtos e interfaces. Stack, problema e resultado.",
+  alternates: { canonical: "/projetos" },
 }
 
+const ORDER = [
+  "TERON OS",
+  "Minuta Fácil",
+  "Áurea",
+  "Sleep House",
+  "Yázigi Swiss Park",
+  "Homma Design",
+  "Braservice",
+  "Hazap Workstation",
+  "SpinMove",
+  "Instituto Kell",
+  "Gerador de QR Code",
+  "TERON Workspace",
+]
+
+const list = ORDER.map((t) => PROJECTS.find((p) => p.title === t)).filter(
+  Boolean,
+) as (typeof PROJECTS)[0][]
+
+const remaining = PROJECTS.filter((p) => !ORDER.includes(p.title))
+const all = [...list, ...remaining]
+
 export default function ProjetosPage() {
- return (
- <main className="min-h-screen bg-background">
- <PageAnimator />
-
- <div className="relative z-10 flex flex-col space-y-[-2rem] sm:space-y-[-3rem]">
- <ScrollRevealSection index={0} className="bg-background flex flex-col justify-center relative overflow-hidden">
-  <motion.div
-  className="pointer-events-none absolute right-10 top-1/4 z-0 opacity-20 mix-blend-screen"
-  animate={{ rotate: 360, scale: [1, 1.05, 1] }}
-  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-  >
-  <div className="size-32 sm:size-48">
-  <Coolshape type="star" index={1} noise={true} />
-  </div>
-  </motion.div>
- <PageHero
- kicker="Portfólio · Casos Reais"
- lines={["Projetos."]}
- description="Soluções testadas no mercado. Veja como transformei gargalos de empresas reais em faturamento rápido, velocidade e conversão."
- light
- />
- </ScrollRevealSection>
-
-
-  {PROJECTS.map((project, i) => {
-  const isBlack = i % 2 === 0
   return (
-  <ScrollRevealSection key={project.title} index={2 + i} className={`${isBlack ? "bg-black text-white" : "bg-white text-black"} flex flex-col justify-center`}>
-  <ProjectItem project={project} index={i} isBlack={isBlack} />
-  </ScrollRevealSection>
-  )
-  })}
+    <main className="min-h-screen bg-black text-white">
+      <PageAnimator />
 
-  <ScrollRevealSection index={2 + PROJECTS.length} className="bg-black text-white flex flex-col justify-center min-h-[70svh] relative overflow-hidden">
-  <motion.div
-  className="pointer-events-none absolute left-0 top-1/4 z-0 w-32 opacity-20 sm:w-40 mix-blend-screen"
-  animate={{ rotate: 180, scale: [1, 1.1, 1] }}
-  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-  >
-  <Shape7 />
-  </motion.div>
-  <div className="site-shell py-16 sm:py-24">
-  <div className="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-  <div className="relative z-10">
-  <p className="label-kicker text-white/45 mb-2">Open Source</p>
-  <h3 className="text-2xl sm:text-3xl font-display font-semibold text-white tracking-tight mb-4">
-  Quer ver o código por trás dos projetos?
-  </h3>
-  <p className="text-white/70 leading-relaxed mb-8 max-w-md text-sm sm:text-base">
-  Arquitetura, padrões de código e decisões técnicas detalhadas nos repositórios. Um portfólio aberto de como construo software de qualidade.
-  </p>
-  <CtaLink href={CONTACT.github} variant="outline" size="md" className="border-white/20 hover:bg-white/10 text-white" external>
-  Acessar meu GitHub
-  </CtaLink>
-  </div>
-  <div className="relative z-10 aspect-[16/10] sm:aspect-video rounded-lg overflow-hidden shadow-lg bg-white/5 flex items-center justify-center">
-  <p className="text-white/30 text-xs absolute z-0">Salve a imagem em public/images/github-profile.png</p>
-  <Image
-  src="/images/github-profile.png"
-  alt="Thomas Eduardo GitHub Profile"
-  fill
-  className="object-cover object-top opacity-80 hover:opacity-100 transition-opacity duration-500 z-10"
-  />
-  </div>
-  </div>
-  </div>
-  </ScrollRevealSection>
- </div>
- </main>
- )
+      <header className="site-shell pt-28 pb-12 sm:pt-36 sm:pb-16">
+        <p className="text-xs font-mono uppercase tracking-widest text-white/45 mb-4">
+          Portfólio
+        </p>
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight max-w-2xl leading-[1.05]">
+          Projetos em produção
+        </h1>
+        <p className="mt-5 max-w-xl text-base sm:text-lg text-white/55 font-light leading-relaxed">
+          Sistemas, produtos e interfaces entregues. Cada card resume problema,
+          resultado e stack — o case completo do TERON está em detalhe.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            href="/projetos/teron-os"
+            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-black"
+          >
+            Case TERON OS <ArrowRight className="size-3.5" />
+          </Link>
+          <a
+            href={CONTACT.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white/85"
+          >
+            GitHub
+          </a>
+        </div>
+      </header>
+
+      <section className="site-shell pb-24 sm:pb-32">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {all.map((project, i) => {
+            const internal =
+              project.href?.startsWith("/") ? project.href : null
+            const isTeron = project.title === "TERON OS"
+            const href =
+              internal ||
+              (isTeron ? "/projetos/teron-os" : project.href) ||
+              undefined
+
+            return (
+              <article
+                key={project.title}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-colors hover:border-white/20 hover:bg-white/[0.05]"
+              >
+                <div className="relative aspect-[16/10] bg-black/40 overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div className="absolute left-3 top-3 flex gap-2">
+                    <span className="rounded-full border border-white/20 bg-black/60 px-2.5 py-0.5 font-mono text-[10px] text-white/80 backdrop-blur-sm">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {project.year && (
+                      <span className="rounded-full border border-white/15 bg-black/50 px-2.5 py-0.5 font-mono text-[10px] text-white/60 backdrop-blur-sm">
+                        {project.year}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-white/40">
+                    {project.tag}
+                  </p>
+                  <h2 className="mt-2 font-display text-xl font-semibold tracking-tight">
+                    {project.title}
+                  </h2>
+                  <p className="mt-1 text-sm text-white/50">{project.subtitle}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/60 line-clamp-3">
+                    {project.result}
+                  </p>
+
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {project.stack.slice(0, 4).map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-white/50"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto pt-5 flex flex-wrap gap-3">
+                    {href && (
+                      <Link
+                        href={href}
+                        {...(href.startsWith("http")
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-white hover:text-white/80"
+                      >
+                        {isTeron || internal ? "Case" : "Live"}{" "}
+                        <ArrowUpRight className="size-3.5" />
+                      </Link>
+                    )}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-white/45 hover:text-white"
+                      >
+                        GitHub
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      </section>
+
+      <section className="border-t border-white/10">
+        <div className="site-shell py-16 sm:py-20 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <div>
+            <h2 className="font-display text-2xl font-semibold tracking-tight">
+              Código aberto no GitHub
+            </h2>
+            <p className="mt-2 text-sm text-white/50 max-w-md">
+              Repositórios e histórico de commits para validar o trabalho.
+            </p>
+          </div>
+          <a
+            href={CONTACT.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-black"
+          >
+            Abrir GitHub <ArrowRight className="size-3.5" />
+          </a>
+        </div>
+      </section>
+    </main>
+  )
 }
