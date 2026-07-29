@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
 import connectToDatabase from "@/lib/db"
 import Config from "@/models/Config"
+import { requireAdmin } from "@/lib/api-auth"
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const denied = requireAdmin(req)
+  if (denied) return denied
+
   try {
     await connectToDatabase()
     let config = await Config.findOne({})
@@ -16,11 +20,17 @@ export async function GET() {
     }
     return NextResponse.json({ success: true, config })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Erro ao buscar configurações" }, { status: 500 })
+    return NextResponse.json(
+      { error: error.message || "Erro ao buscar configurações" },
+      { status: 500 },
+    )
   }
 }
 
 export async function PUT(req: NextRequest) {
+  const denied = requireAdmin(req)
+  if (denied) return denied
+
   try {
     await connectToDatabase()
     const body = await req.json()
@@ -32,7 +42,8 @@ export async function PUT(req: NextRequest) {
     }
 
     config.pixKey = pixKey ?? config.pixKey
-    config.hourlyRate = hourlyRate !== undefined ? Number(hourlyRate) : config.hourlyRate
+    config.hourlyRate =
+      hourlyRate !== undefined ? Number(hourlyRate) : config.hourlyRate
     config.whatsappPhone = whatsappPhone ?? config.whatsappPhone
     config.emailNotification = emailNotification ?? config.emailNotification
     config.updatedAt = new Date()
@@ -41,6 +52,9 @@ export async function PUT(req: NextRequest) {
 
     return NextResponse.json({ success: true, config })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Erro ao atualizar configurações" }, { status: 500 })
+    return NextResponse.json(
+      { error: error.message || "Erro ao atualizar configurações" },
+      { status: 500 },
+    )
   }
 }

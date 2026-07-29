@@ -1,76 +1,91 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import connectToDatabase from "@/lib/db"
 import Lead from "@/models/Lead"
 import { Resend } from "resend"
+import { requireAdmin } from "@/lib/api-auth"
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
+
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
 
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { name, email, phone, company, role, service, painPoint, budget } = body
+    const name = String(body.name || "").trim()
+    const email = String(body.email || "").trim().toLowerCase()
+    const phone = String(body.phone || "").trim()
+    const company = String(body.company || "").trim()
+    const role = String(body.role || "").trim()
+    const service = String(body.service || "").trim()
+    const painPoint = String(body.painPoint || "").trim()
+    const budget = String(body.budget || "").trim()
+
+    if (!name || name.length < 2) {
+      return NextResponse.json({ error: "Nome inválido" }, { status: 400 })
+    }
+    if (!email || !isValidEmail(email)) {
+      return NextResponse.json({ error: "E-mail inválido" }, { status: 400 })
+    }
+    if (!phone || phone.length < 8) {
+      return NextResponse.json({ error: "Telefone inválido" }, { status: 400 })
+    }
 
     await connectToDatabase()
 
     const lead = await Lead.create({
-      name: (name && String(name).trim()) || "Lead sem nome",
-      email: (email && String(email).trim()) || "contato@cliente.com",
-      phone: (phone && String(phone).trim()) || "Não informado",
-      company: (company && String(company).trim()) || "Não informada",
-      role: (role && String(role).trim()) || "Não informado",
-      service: (service && String(service).trim()) || "Geral",
-      painPoint: (painPoint && String(painPoint).trim()) || "Não especificado",
-      budget: (budget && String(budget).trim()) || "A combinar",
+      name,
+      email,
+      phone,
+      company: company || "Não informada",
+      role: role || "Não informado",
+      service: service || "Geral",
+      painPoint: painPoint || "Não especificado",
+      budget: budget || "A combinar",
     })
 
-    // Enviar e-mail de proposta com Resend
     if (resend) {
       try {
         await resend.emails.send({
           from: "Thomas Eduardo <contato@thomaseduardo.com.br>",
           to: email,
-          subject: `Sua proposta personalizada para ${service}`,
+          subject: `Recebi seu briefing${service ? ` — ${service}` : ""}`,
           html: `
             <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
               <h2 style="color: #000;">Olá ${name},</h2>
-              <p>Obrigado por realizar o diagnóstico da <strong>${company}</strong>!</p>
-              <p>Com base nas suas respostas, vejo que o seu principal foco agora é <strong>${service}</strong> para resolver o desafio: <em>"${painPoint}"</em>.</p>
-              
-              <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h3 style="margin-top: 0;">O próximo passo</h3>
-                <p>Nossa estimativa inicial para projetos de ${service} na faixa de orçamento de <strong>${budget}</strong> envolve as seguintes etapas:</p>
-                <ul>
-                  <li>Mapeamento detalhado e Arquitetura</li>
-                  <li>Desenvolvimento e Validação</li>
-                  <li>Implantação e Otimização</li>
-                </ul>
-                <p>Para montarmos um plano de ação exato, precisamos fazer uma rápida reunião de alinhamento.</p>
-              </div>
-
-              <a href="https://wa.me/5511977070209" style="display: inline-block; background: #000; color: #fff; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 6px;">Agendar Alinhamento via WhatsApp</a>
-              
+              <p>Obrigado pelo contato${company ? ` da <strong>${company}</strong>` : ""}.</p>
+              <p>Vou analisar o que você descreveu e retorno em até 24 horas úteis com os próximos passos.</p>
+              <p style="margin-top: 24px;">
+                <a href="https://wa.me/5511977070209" style="display: inline-block; background: #000; color: #fff; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 6px;">Falar no WhatsApp</a>
+              </p>
               <p style="margin-top: 30px; font-size: 14px; color: #666;">
                 Abraço,<br>
                 <strong>Thomas Eduardo</strong><br>
-                Software Engineer
+                Full Stack / Product Engineer
               </p>
             </div>
-          `
+          `,
         })
       } catch (emailError) {
         console.error("Erro ao enviar email:", emailError)
-        // Não falha a request se o email der erro
       }
     }
 
-    return NextResponse.json({ success: true, lead }, { status: 201 })
+    return NextResponse.json(
+      { success: true, id: lead._id?.toString?.() ?? true },
+      { status: 201 },
+    )
   } catch (error) {
     console.error("Error creating lead:", error)
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 })
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const denied = requireAdmin(req)
+  if (denied) return denied
+
   try {
     await connectToDatabase()
     const leads = await Lead.find({}).sort({ createdAt: -1 })
