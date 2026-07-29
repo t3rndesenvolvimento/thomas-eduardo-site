@@ -12,12 +12,14 @@ const FEATURED = ["TERON OS", "Minuta Fácil", "Áurea", "Yázigi Swiss Park"]
 
 export function FeaturedProjects() {
   return (
-    <section id="projects" className="bg-canvas text-white py-20 sm:py-28">
+    <section id="projects" className="bg-canvas text-white py-16 sm:py-28">
       <div className="site-shell max-w-4xl">
-        <div className="mb-12 flex items-end justify-between gap-4">
+        <div className="mb-10 sm:mb-12 flex items-end justify-between gap-4">
           <div>
-            <p className="font-mono text-sm text-brand mb-2">01. Projetos</p>
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight">
+            <p className="font-mono text-xs sm:text-sm text-brand mb-2">
+              01. Projetos
+            </p>
+            <h2 className="font-display text-2xl sm:text-4xl font-bold tracking-tight">
               Trabalhos em destaque
             </h2>
           </div>
@@ -29,30 +31,43 @@ export function FeaturedProjects() {
           </Link>
         </div>
 
-        <ol className="space-y-16 sm:space-y-20">
+        <ol className="space-y-14 sm:space-y-20">
           {FEATURED.map((project, i) => {
             const isTeron = project.title === "TERON OS"
-            const href =
-              isTeron
-                ? "/projetos/teron-os"
-                : project.href?.startsWith("/")
-                  ? project.href
-                  : project.href
+            const href = isTeron
+              ? "/projetos/teron-os"
+              : project.href?.startsWith("/")
+                ? project.href
+                : project.href
 
             return (
               <motion.li
                 key={project.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: i * 0.05 }}
-                className="grid gap-6 sm:grid-cols-[1fr_1.1fr] sm:gap-10 items-center"
+                viewport={{ once: true, margin: "-24px" }}
+                transition={{ delay: i * 0.04 }}
+                className="grid gap-4 sm:grid-cols-[1fr_1.1fr] sm:gap-10 sm:items-center"
               >
-                <div className={i % 2 === 1 ? "sm:order-2" : ""}>
-                  <p className="font-mono text-xs text-brand mb-2">
+                {/* Image first on mobile */}
+                <div
+                  className={`relative aspect-[16/10] overflow-hidden border border-white/10 bg-neutral-900 ${i % 2 === 1 ? "sm:order-1" : "sm:order-2"}`}
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    priority={i === 0}
+                  />
+                </div>
+
+                <div className={i % 2 === 1 ? "sm:order-2" : "sm:order-1"}>
+                  <p className="font-mono text-[11px] sm:text-xs text-brand mb-1.5">
                     Featured project
                   </p>
-                  <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight">
+                  <h3 className="font-display text-xl sm:text-3xl font-bold tracking-tight">
                     {href ? (
                       <Link
                         href={href}
@@ -67,24 +82,24 @@ export function FeaturedProjects() {
                       project.title
                     )}
                   </h3>
-                  <div className="mt-4 rounded border border-white/10 bg-surface p-5 sm:p-6">
-                    <p className="text-sm sm:text-[15px] leading-relaxed text-neutral-400">
+                  <div className="mt-3 sm:mt-4 border border-white/10 bg-surface p-4 sm:p-6">
+                    <p className="text-sm leading-relaxed text-neutral-400">
                       {project.result || project.description}
                     </p>
                   </div>
-                  <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs text-neutral-500">
+                  <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] sm:text-xs text-neutral-500">
                     {project.stack.slice(0, 5).map((s) => (
                       <li key={s}>{s}</li>
                     ))}
                   </ul>
-                  <div className="mt-4 flex gap-4">
+                  <div className="mt-3 flex gap-5">
                     {href && (
                       <Link
                         href={href}
                         {...(href.startsWith("http")
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
-                        className="text-neutral-400 hover:text-brand"
+                        className="inline-flex min-h-11 min-w-11 items-center justify-center text-neutral-400 hover:text-brand"
                         aria-label="Abrir projeto"
                       >
                         <ArrowUpRight className="size-5" />
@@ -95,7 +110,7 @@ export function FeaturedProjects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-neutral-400 hover:text-brand"
+                        className="inline-flex min-h-11 min-w-11 items-center justify-center text-neutral-400 hover:text-brand"
                         aria-label="GitHub"
                       >
                         <Github className="size-5" />
@@ -103,25 +118,16 @@ export function FeaturedProjects() {
                     )}
                   </div>
                 </div>
-
-                <div
-                  className={`relative aspect-[16/10] overflow-hidden border border-white/10 bg-neutral-900 ${i % 2 === 1 ? "sm:order-1" : ""}`}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover opacity-90 transition-opacity hover:opacity-100"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
-                </div>
               </motion.li>
             )
           })}
         </ol>
 
-        <div className="mt-12 sm:hidden">
-          <Link href="/projetos" className="text-sm text-brand">
+        <div className="mt-10 sm:hidden">
+          <Link
+            href="/projetos"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-brand"
+          >
             Ver todos os projetos →
           </Link>
         </div>

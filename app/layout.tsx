@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter, Syne, JetBrains_Mono } from "next/font/google"
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google"
 import localFont from "next/font/local"
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
@@ -8,16 +8,17 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LayoutShell } from "@/components/layout-shell"
 import "./globals.css"
 
-const inter = Inter({
+/** Geometric / squared sans — display + body */
+const grotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-geist",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 })
 
-const display = Syne({
+const display = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700", "800"],
+  weight: ["500", "600", "700"],
 })
 
 const mono = JetBrains_Mono({
@@ -116,8 +117,11 @@ const jsonLd = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#0a0a0a",
   colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 }
 
 export const icons = {
@@ -133,7 +137,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const fontVars = `${inter.variable} ${mono.variable} ${display.variable} ${signature.variable}`
+  const fontVars = `${grotesk.variable} ${mono.variable} ${display.variable} ${signature.variable}`
 
   return (
     <html
@@ -150,7 +154,7 @@ export default function RootLayout({
         </noscript>
       </head>
       <body
-        className="font-sans font-light antialiased overflow-x-hidden"
+        className="font-sans font-normal antialiased overflow-x-hidden"
         suppressHydrationWarning
       >
         <noscript>

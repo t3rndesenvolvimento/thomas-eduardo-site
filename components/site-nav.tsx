@@ -48,11 +48,13 @@ export function SiteNav() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors",
-        scrolled ? "bg-canvas/90 backdrop-blur-md border-b border-white/5" : "bg-transparent",
+        scrolled || open
+          ? "bg-canvas/95 backdrop-blur-md border-b border-white/5"
+          : "bg-transparent",
       )}
     >
-      <div className="site-shell flex items-center justify-between py-4 sm:py-5">
-        <Logo size={22} className="gap-2" />
+      <div className="site-shell flex items-center justify-between py-3.5 sm:py-5">
+        <Logo size={20} className="gap-2" />
 
         <nav className="hidden md:flex items-center gap-8">
           {LINKS.map((l) => {
@@ -92,8 +94,9 @@ export function SiteNav() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden text-white p-2"
+          className="md:hidden inline-flex size-11 items-center justify-center text-white"
           aria-label={open ? "Fechar" : "Menu"}
+          aria-expanded={open}
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -102,19 +105,20 @@ export function SiteNav() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 top-[57px] z-40 bg-canvas md:hidden px-6 py-8"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden border-t border-white/5 bg-canvas"
           >
-            <div className="flex flex-col gap-6">
+            <div className="site-shell flex flex-col gap-1 py-4 pb-8">
               {LINKS.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "text-2xl font-display font-bold",
+                    "flex min-h-12 items-center text-lg font-display font-semibold",
                     pathname === l.href ? "text-brand" : "text-white",
                   )}
                 >
@@ -126,10 +130,17 @@ export function SiteNav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="mt-4 inline-flex w-fit rounded border border-brand px-5 py-2.5 text-brand"
+                className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded border border-brand text-brand"
               >
                 LinkedIn
               </a>
+              <button
+                type="button"
+                onClick={toggleLocale}
+                className="mt-2 min-h-11 text-left text-sm font-mono text-neutral-500"
+              >
+                {locale === "pt-BR" ? "English" : "Português"}
+              </button>
             </div>
           </motion.div>
         )}
