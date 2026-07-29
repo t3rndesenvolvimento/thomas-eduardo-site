@@ -117,7 +117,7 @@ export default function DiagnosticoPage() {
           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
         >
           <div className="size-32 sm:size-48">
-            <Coolshape type="circle" index={2} noise={true} />
+            <Coolshape type="ellipse" index={2} noise={true} />
           </div>
         </motion.div>
         <CtaLink
