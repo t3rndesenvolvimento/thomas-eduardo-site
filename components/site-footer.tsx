@@ -17,11 +17,11 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-white/10 bg-canvas py-10">
-      <div className="site-shell flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="font-mono text-xs text-neutral-500">
-          © {new Date().getFullYear()} Thomas Eduardo
+      <div className="site-shell flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <p className="text-xs text-neutral-500">
+          (c) {new Date().getFullYear()} Thomas Eduardo
         </p>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5">
           <Link href="/projetos" className="text-xs text-neutral-500 hover:text-brand">
             Projetos
           </Link>
@@ -35,7 +35,7 @@ export function SiteFooter() {
             className="text-neutral-500 hover:text-brand"
             aria-label="GitHub"
           >
-            <GithubIcon className="size-4" />
+            <GithubIcon size={18} />
           </a>
           <a
             href={CONTACT.linkedin}
@@ -44,7 +44,7 @@ export function SiteFooter() {
             className="text-neutral-500 hover:text-brand"
             aria-label="LinkedIn"
           >
-            <LinkedinIcon className="size-4" />
+            <LinkedinIcon size={18} />
           </a>
         </div>
       </div>

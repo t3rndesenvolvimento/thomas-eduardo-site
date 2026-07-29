@@ -3,12 +3,12 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Menu, X } from "lucide-react"
 import { Logo } from "@/components/logo"
 import { cn } from "@/lib/utils"
 import { useI18n } from "@/lib/i18n/context"
 import { AnimatePresence, motion } from "framer-motion"
 import { CONTACT } from "@/lib/data"
+import { CloseIcon, MenuIcon } from "@/components/brand-icons"
 
 export function SiteNav() {
   const pathname = usePathname()
@@ -49,14 +49,14 @@ export function SiteNav() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors",
         scrolled || open
-          ? "bg-canvas/95 backdrop-blur-md border-b border-white/5"
+          ? "border-b border-white/5 bg-canvas/95 backdrop-blur-md"
           : "bg-transparent",
       )}
     >
       <div className="site-shell flex items-center justify-between py-3.5 sm:py-5">
         <Logo size={20} className="gap-2" />
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden items-center gap-7 md:flex">
           {LINKS.map((l) => {
             const active =
               pathname === l.href ||
@@ -78,7 +78,7 @@ export function SiteNav() {
             href={CONTACT.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded border border-brand px-4 py-1.5 text-sm text-brand hover:bg-brand/10"
+            className="rounded-2xl bg-brand px-4 py-1.5 text-sm font-semibold text-black hover:brightness-110"
           >
             LinkedIn
           </a>
@@ -94,11 +94,11 @@ export function SiteNav() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden inline-flex size-11 items-center justify-center text-white"
+          className="inline-flex size-11 items-center justify-center text-white md:hidden"
           aria-label={open ? "Fechar" : "Menu"}
           aria-expanded={open}
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          {open ? <CloseIcon size={22} /> : <MenuIcon size={22} />}
         </button>
       </div>
 
@@ -109,7 +109,7 @@ export function SiteNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-white/5 bg-canvas"
+            className="border-t border-white/5 bg-canvas md:hidden"
           >
             <div className="site-shell flex flex-col gap-1 py-4 pb-8">
               {LINKS.map((l) => (
@@ -130,17 +130,10 @@ export function SiteNav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded border border-brand text-brand"
+                className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-brand text-sm font-semibold text-black"
               >
                 LinkedIn
               </a>
-              <button
-                type="button"
-                onClick={toggleLocale}
-                className="mt-2 min-h-11 text-left text-sm font-mono text-neutral-500"
-              >
-                {locale === "pt-BR" ? "English" : "Português"}
-              </button>
             </div>
           </motion.div>
         )}
