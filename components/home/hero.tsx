@@ -23,7 +23,6 @@ export function Hero() {
       className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden bg-[#050505] text-white"
       data-hero-container
     >
-      {/* Subtle grid — product site, not generative art */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
@@ -38,14 +37,12 @@ export function Hero() {
         }}
       />
 
-      {/* Soft top vignette */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(255,255,255,0.06),transparent_55%)]"
       />
 
       <div className="site-shell relative z-10 flex w-full flex-col items-center px-4 pb-16 pt-28 text-center sm:px-6 sm:pb-20 sm:pt-32">
-        {/* Status pill */}
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,9 +61,7 @@ export function Hero() {
           transition={{ duration: 0.55, delay: 0.05, ease: EASE }}
           className="max-w-[15ch] font-display text-[2.35rem] font-bold leading-[1.05] tracking-[-0.03em] text-white sm:max-w-none sm:text-5xl md:text-6xl lg:text-[4.5rem]"
         >
-          Full Stack &amp;
-          <br className="sm:hidden" />{" "}
-          <span className="text-white/90">Product Engineer</span>
+          Full Stack & Product Engineer
         </motion.h1>
 
         <motion.p
@@ -107,7 +102,6 @@ export function Hero() {
           </a>
         </motion.div>
 
-        {/* Proof strip */}
         <motion.div
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
